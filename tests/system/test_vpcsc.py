@@ -19,7 +19,7 @@ import pytest
 
 from google.api_core import exceptions
 from google.cloud import translate_v3beta1
-from test_utils.vpcsc_config import vpcsc_config
+from test_utils.test_utils.vpcsc_config import vpcsc_config
 
 _VPCSC_PROHIBITED_MESSAGE = "Request is prohibited by organization's policy"
 
