@@ -2796,10 +2796,8 @@ TranslateTextGlossaryConfig = _reflection.GeneratedProtocolMessageType(
     dict(
         DESCRIPTOR=_TRANSLATETEXTGLOSSARYCONFIG,
         __module__="google.cloud.translation_v3.proto.translation_service_pb2",
-        __doc__="""Configures which glossary should be used for a specific
-  target language, and defines options for applying that glossary.
-  
-  
+        __doc__="""Configures which glossary should be used for a specific target
+  language, and defines options for applying that glossary.
   Attributes:
       glossary:
           Required. Specifies the glossary used for this translation.
@@ -2829,8 +2827,6 @@ TranslateTextRequest = _reflection.GeneratedProtocolMessageType(
         DESCRIPTOR=_TRANSLATETEXTREQUEST,
         __module__="google.cloud.translation_v3.proto.translation_service_pb2",
         __doc__="""The request message for synchronous translation.
-  
-  
   Attributes:
       contents:
           Required. The content of the input in string format. We
@@ -2925,8 +2921,6 @@ Translation = _reflection.GeneratedProtocolMessageType(
         DESCRIPTOR=_TRANSLATION,
         __module__="google.cloud.translation_v3.proto.translation_service_pb2",
         __doc__="""A single translation response.
-  
-  
   Attributes:
       translated_text:
           Text translated into the target language.
@@ -2968,8 +2962,6 @@ DetectLanguageRequest = _reflection.GeneratedProtocolMessageType(
         DESCRIPTOR=_DETECTLANGUAGEREQUEST,
         __module__="google.cloud.translation_v3.proto.translation_service_pb2",
         __doc__="""The request message for language detection.
-  
-  
   Attributes:
       parent:
           Required. Project or location to make a call. Must refer to a
@@ -3020,8 +3012,6 @@ DetectedLanguage = _reflection.GeneratedProtocolMessageType(
         DESCRIPTOR=_DETECTEDLANGUAGE,
         __module__="google.cloud.translation_v3.proto.translation_service_pb2",
         __doc__="""The response message for language detection.
-  
-  
   Attributes:
       language_code:
           The BCP-47 language code of source content in the request,
@@ -3041,8 +3031,6 @@ DetectLanguageResponse = _reflection.GeneratedProtocolMessageType(
         DESCRIPTOR=_DETECTLANGUAGERESPONSE,
         __module__="google.cloud.translation_v3.proto.translation_service_pb2",
         __doc__="""The response message for language detection.
-  
-  
   Attributes:
       languages:
           A list of detected languages sorted by detection confidence in
@@ -3060,8 +3048,6 @@ GetSupportedLanguagesRequest = _reflection.GeneratedProtocolMessageType(
         DESCRIPTOR=_GETSUPPORTEDLANGUAGESREQUEST,
         __module__="google.cloud.translation_v3.proto.translation_service_pb2",
         __doc__="""The request message for discovering supported languages.
-  
-  
   Attributes:
       parent:
           Required. Project or location to make a call. Must refer to a
@@ -3099,8 +3085,6 @@ SupportedLanguages = _reflection.GeneratedProtocolMessageType(
         DESCRIPTOR=_SUPPORTEDLANGUAGES,
         __module__="google.cloud.translation_v3.proto.translation_service_pb2",
         __doc__="""The response message for discovering supported languages.
-  
-  
   Attributes:
       languages:
           A list of supported language responses. This list contains an
@@ -3117,10 +3101,8 @@ SupportedLanguage = _reflection.GeneratedProtocolMessageType(
     dict(
         DESCRIPTOR=_SUPPORTEDLANGUAGE,
         __module__="google.cloud.translation_v3.proto.translation_service_pb2",
-        __doc__="""A single supported language response corresponds to
-  information related to one supported language.
-  
-  
+        __doc__="""A single supported language response corresponds to information
+  related to one supported language.
   Attributes:
       language_code:
           Supported language code, generally consisting of its ISO 639-1
@@ -3147,8 +3129,6 @@ GcsSource = _reflection.GeneratedProtocolMessageType(
         DESCRIPTOR=_GCSSOURCE,
         __module__="google.cloud.translation_v3.proto.translation_service_pb2",
         __doc__="""The Google Cloud Storage location for the input content.
-  
-  
   Attributes:
       input_uri:
           Required. Source data URI. For example,
@@ -3166,8 +3146,6 @@ InputConfig = _reflection.GeneratedProtocolMessageType(
         DESCRIPTOR=_INPUTCONFIG,
         __module__="google.cloud.translation_v3.proto.translation_service_pb2",
         __doc__="""Input configuration for BatchTranslateText request.
-  
-  
   Attributes:
       mime_type:
           Optional. Can be "text/plain" or "text/html". For ``.tsv``,
@@ -3206,8 +3184,6 @@ GcsDestination = _reflection.GeneratedProtocolMessageType(
         DESCRIPTOR=_GCSDESTINATION,
         __module__="google.cloud.translation_v3.proto.translation_service_pb2",
         __doc__="""The Google Cloud Storage location for the output content.
-  
-  
   Attributes:
       output_uri_prefix:
           Required. There must be no files under 'output\_uri\_prefix'.
@@ -3227,8 +3203,6 @@ OutputConfig = _reflection.GeneratedProtocolMessageType(
         DESCRIPTOR=_OUTPUTCONFIG,
         __module__="google.cloud.translation_v3.proto.translation_service_pb2",
         __doc__="""Output configuration for BatchTranslateText request.
-  
-  
   Attributes:
       destination:
           Required. The destination of output.
@@ -3328,8 +3302,6 @@ BatchTranslateTextRequest = _reflection.GeneratedProtocolMessageType(
         DESCRIPTOR=_BATCHTRANSLATETEXTREQUEST,
         __module__="google.cloud.translation_v3.proto.translation_service_pb2",
         __doc__="""The batch translation request.
-  
-  
   Attributes:
       parent:
           Required. Location to make a call. Must refer to a caller's
@@ -3392,8 +3364,6 @@ BatchTranslateMetadata = _reflection.GeneratedProtocolMessageType(
         DESCRIPTOR=_BATCHTRANSLATEMETADATA,
         __module__="google.cloud.translation_v3.proto.translation_service_pb2",
         __doc__="""State metadata for the batch translation operation.
-  
-  
   Attributes:
       state:
           The state of the operation.
@@ -3422,12 +3392,9 @@ BatchTranslateResponse = _reflection.GeneratedProtocolMessageType(
     dict(
         DESCRIPTOR=_BATCHTRANSLATERESPONSE,
         __module__="google.cloud.translation_v3.proto.translation_service_pb2",
-        __doc__="""Stored in the
-  [google.longrunning.Operation.response][google.longrunning.Operation.response]
-  field returned by BatchTranslateText if at least one sentence is
-  translated successfully.
-  
-  
+        __doc__="""Stored in the [google.longrunning.Operation.response][google.longrunni
+  ng.Operation.response] field returned by BatchTranslateText if at
+  least one sentence is translated successfully.
   Attributes:
       total_characters:
           Total number of characters (Unicode codepoints).
@@ -3456,8 +3423,6 @@ GlossaryInputConfig = _reflection.GeneratedProtocolMessageType(
         DESCRIPTOR=_GLOSSARYINPUTCONFIG,
         __module__="google.cloud.translation_v3.proto.translation_service_pb2",
         __doc__="""Input configuration for glossaries.
-  
-  
   Attributes:
       source:
           Required. Specify the input.
@@ -3495,8 +3460,6 @@ Glossary = _reflection.GeneratedProtocolMessageType(
                 DESCRIPTOR=_GLOSSARY_LANGUAGECODEPAIR,
                 __module__="google.cloud.translation_v3.proto.translation_service_pb2",
                 __doc__="""Used with unidirectional glossaries.
-    
-    
     Attributes:
         source_language_code:
             Required. The BCP-47 language code of the input text, for
@@ -3517,8 +3480,6 @@ Glossary = _reflection.GeneratedProtocolMessageType(
                 DESCRIPTOR=_GLOSSARY_LANGUAGECODESSET,
                 __module__="google.cloud.translation_v3.proto.translation_service_pb2",
                 __doc__="""Used with equivalent term set glossaries.
-    
-    
     Attributes:
         language_codes:
             The BCP-47 language code(s) for terms defined in the glossary.
@@ -3532,8 +3493,6 @@ Glossary = _reflection.GeneratedProtocolMessageType(
         DESCRIPTOR=_GLOSSARY,
         __module__="google.cloud.translation_v3.proto.translation_service_pb2",
         __doc__="""Represents a glossary built from user provided data.
-  
-  
   Attributes:
       name:
           Required. The resource name of the glossary. Glossary names
@@ -3569,8 +3528,6 @@ CreateGlossaryRequest = _reflection.GeneratedProtocolMessageType(
         DESCRIPTOR=_CREATEGLOSSARYREQUEST,
         __module__="google.cloud.translation_v3.proto.translation_service_pb2",
         __doc__="""Request message for CreateGlossary.
-  
-  
   Attributes:
       parent:
           Required. The project name.
@@ -3589,8 +3546,6 @@ GetGlossaryRequest = _reflection.GeneratedProtocolMessageType(
         DESCRIPTOR=_GETGLOSSARYREQUEST,
         __module__="google.cloud.translation_v3.proto.translation_service_pb2",
         __doc__="""Request message for GetGlossary.
-  
-  
   Attributes:
       name:
           Required. The name of the glossary to retrieve.
@@ -3607,8 +3562,6 @@ DeleteGlossaryRequest = _reflection.GeneratedProtocolMessageType(
         DESCRIPTOR=_DELETEGLOSSARYREQUEST,
         __module__="google.cloud.translation_v3.proto.translation_service_pb2",
         __doc__="""Request message for DeleteGlossary.
-  
-  
   Attributes:
       name:
           Required. The name of the glossary to delete.
@@ -3625,8 +3578,6 @@ ListGlossariesRequest = _reflection.GeneratedProtocolMessageType(
         DESCRIPTOR=_LISTGLOSSARIESREQUEST,
         __module__="google.cloud.translation_v3.proto.translation_service_pb2",
         __doc__="""Request message for ListGlossaries.
-  
-  
   Attributes:
       parent:
           Required. The name of the project from which to list all of
@@ -3658,8 +3609,6 @@ ListGlossariesResponse = _reflection.GeneratedProtocolMessageType(
         DESCRIPTOR=_LISTGLOSSARIESRESPONSE,
         __module__="google.cloud.translation_v3.proto.translation_service_pb2",
         __doc__="""Response message for ListGlossaries.
-  
-  
   Attributes:
       glossaries:
           The list of glossaries for a project.
@@ -3680,11 +3629,8 @@ CreateGlossaryMetadata = _reflection.GeneratedProtocolMessageType(
     dict(
         DESCRIPTOR=_CREATEGLOSSARYMETADATA,
         __module__="google.cloud.translation_v3.proto.translation_service_pb2",
-        __doc__="""Stored in the
-  [google.longrunning.Operation.metadata][google.longrunning.Operation.metadata]
-  field returned by CreateGlossary.
-  
-  
+        __doc__="""Stored in the [google.longrunning.Operation.metadata][google.longrunni
+  ng.Operation.metadata] field returned by CreateGlossary.
   Attributes:
       name:
           The name of the glossary that is being created.
@@ -3704,11 +3650,8 @@ DeleteGlossaryMetadata = _reflection.GeneratedProtocolMessageType(
     dict(
         DESCRIPTOR=_DELETEGLOSSARYMETADATA,
         __module__="google.cloud.translation_v3.proto.translation_service_pb2",
-        __doc__="""Stored in the
-  [google.longrunning.Operation.metadata][google.longrunning.Operation.metadata]
-  field returned by DeleteGlossary.
-  
-  
+        __doc__="""Stored in the [google.longrunning.Operation.metadata][google.longrunni
+  ng.Operation.metadata] field returned by DeleteGlossary.
   Attributes:
       name:
           The name of the glossary that is being deleted.
@@ -3728,11 +3671,8 @@ DeleteGlossaryResponse = _reflection.GeneratedProtocolMessageType(
     dict(
         DESCRIPTOR=_DELETEGLOSSARYRESPONSE,
         __module__="google.cloud.translation_v3.proto.translation_service_pb2",
-        __doc__="""Stored in the
-  [google.longrunning.Operation.response][google.longrunning.Operation.response]
-  field returned by DeleteGlossary.
-  
-  
+        __doc__="""Stored in the [google.longrunning.Operation.response][google.longrunni
+  ng.Operation.response] field returned by DeleteGlossary.
   Attributes:
       name:
           The name of the deleted glossary.
