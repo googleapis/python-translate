@@ -36,4 +36,7 @@ class TranslationServiceClient(translation_service_client.TranslationServiceClie
     __doc__ = translation_service_client.TranslationServiceClient.__doc__
 
 
-__all__ = ("types", "TranslationServiceClient")
+__all__ = (
+    "types",
+    "TranslationServiceClient",
+)
