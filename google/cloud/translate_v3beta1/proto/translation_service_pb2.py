@@ -3088,9 +3088,7 @@ TranslateTextResponse = _reflection.GeneratedProtocolMessageType(
     {
         "DESCRIPTOR": _TRANSLATETEXTRESPONSE,
         "__module__": "google.cloud.translate_v3beta1.proto.translation_service_pb2",
-        "__doc__": """
-
-  Attributes:
+        "__doc__": """Attributes:
       translations:
           Text translation responses with no glossary applied. This
           field has the same length as [``contents``][google.cloud.trans
