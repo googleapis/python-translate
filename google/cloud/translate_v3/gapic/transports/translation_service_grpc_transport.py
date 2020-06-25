@@ -121,6 +121,20 @@ class TranslationServiceGrpcTransport(object):
         return self._channel
 
     @property
+    def delete_glossary(self):
+        """Return the gRPC stub for :meth:`TranslationServiceClient.delete_glossary`.
+
+        Deletes a glossary, or cancels glossary construction if the glossary
+        isn't created yet. Returns NOT_FOUND, if the glossary doesn't exist.
+
+        Returns:
+            Callable: A callable which accepts the appropriate
+                deserialized request object and returns a
+                deserialized response object.
+        """
+        return self._stubs["translation_service_stub"].DeleteGlossary
+
+    @property
     def translate_text(self):
         """Return the gRPC stub for :meth:`TranslationServiceClient.translate_text`.
 
@@ -218,17 +232,3 @@ class TranslationServiceGrpcTransport(object):
                 deserialized response object.
         """
         return self._stubs["translation_service_stub"].GetGlossary
-
-    @property
-    def delete_glossary(self):
-        """Return the gRPC stub for :meth:`TranslationServiceClient.delete_glossary`.
-
-        Deletes a glossary, or cancels glossary construction if the glossary
-        isn't created yet. Returns NOT_FOUND, if the glossary doesn't exist.
-
-        Returns:
-            Callable: A callable which accepts the appropriate
-                deserialized request object and returns a
-                deserialized response object.
-        """
-        return self._stubs["translation_service_stub"].DeleteGlossary

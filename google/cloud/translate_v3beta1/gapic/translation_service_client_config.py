@@ -17,6 +17,11 @@ config = {
                 }
             },
             "methods": {
+                "DeleteGlossary": {
+                    "timeout_millis": 60000,
+                    "retry_codes_name": "idempotent",
+                    "retry_params_name": "default",
+                },
                 "TranslateText": {
                     "timeout_millis": 60000,
                     "retry_codes_name": "non_idempotent",
@@ -50,11 +55,6 @@ config = {
                 "GetGlossary": {
                     "timeout_millis": 60000,
                     "retry_codes_name": "idempotent",
-                    "retry_params_name": "default",
-                },
-                "DeleteGlossary": {
-                    "timeout_millis": 60000,
-                    "retry_codes_name": "non_idempotent",
                     "retry_params_name": "default",
                 },
             },

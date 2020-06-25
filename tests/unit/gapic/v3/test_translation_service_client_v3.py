@@ -63,6 +63,59 @@ class CustomException(Exception):
 
 
 class TestTranslationServiceClient(object):
+    def test_delete_glossary(self):
+        # Setup Expected Response
+        name_2 = "name2-1052831874"
+        expected_response = {"name": name_2}
+        expected_response = translation_service_pb2.DeleteGlossaryResponse(
+            **expected_response
+        )
+        operation = operations_pb2.Operation(
+            name="operations/test_delete_glossary", done=True
+        )
+        operation.response.Pack(expected_response)
+
+        # Mock the API response
+        channel = ChannelStub(responses=[operation])
+        patch = mock.patch("google.api_core.grpc_helpers.create_channel")
+        with patch as create_channel:
+            create_channel.return_value = channel
+            client = translate_v3.TranslationServiceClient()
+
+        # Setup Request
+        name = client.glossary_path("[PROJECT]", "[LOCATION]", "[GLOSSARY]")
+
+        response = client.delete_glossary(name)
+        result = response.result()
+        assert expected_response == result
+
+        assert len(channel.requests) == 1
+        expected_request = translation_service_pb2.DeleteGlossaryRequest(name=name)
+        actual_request = channel.requests[0][1]
+        assert expected_request == actual_request
+
+    def test_delete_glossary_exception(self):
+        # Setup Response
+        error = status_pb2.Status()
+        operation = operations_pb2.Operation(
+            name="operations/test_delete_glossary_exception", done=True
+        )
+        operation.error.CopyFrom(error)
+
+        # Mock the API response
+        channel = ChannelStub(responses=[operation])
+        patch = mock.patch("google.api_core.grpc_helpers.create_channel")
+        with patch as create_channel:
+            create_channel.return_value = channel
+            client = translate_v3.TranslationServiceClient()
+
+        # Setup Request
+        name = client.glossary_path("[PROJECT]", "[LOCATION]", "[GLOSSARY]")
+
+        response = client.delete_glossary(name)
+        exception = response.exception()
+        assert exception.errors[0] == error
+
     def test_translate_text(self):
         # Setup Expected Response
         expected_response = {}
@@ -415,56 +468,3 @@ class TestTranslationServiceClient(object):
 
         with pytest.raises(CustomException):
             client.get_glossary(name)
-
-    def test_delete_glossary(self):
-        # Setup Expected Response
-        name_2 = "name2-1052831874"
-        expected_response = {"name": name_2}
-        expected_response = translation_service_pb2.DeleteGlossaryResponse(
-            **expected_response
-        )
-        operation = operations_pb2.Operation(
-            name="operations/test_delete_glossary", done=True
-        )
-        operation.response.Pack(expected_response)
-
-        # Mock the API response
-        channel = ChannelStub(responses=[operation])
-        patch = mock.patch("google.api_core.grpc_helpers.create_channel")
-        with patch as create_channel:
-            create_channel.return_value = channel
-            client = translate_v3.TranslationServiceClient()
-
-        # Setup Request
-        name = client.glossary_path("[PROJECT]", "[LOCATION]", "[GLOSSARY]")
-
-        response = client.delete_glossary(name)
-        result = response.result()
-        assert expected_response == result
-
-        assert len(channel.requests) == 1
-        expected_request = translation_service_pb2.DeleteGlossaryRequest(name=name)
-        actual_request = channel.requests[0][1]
-        assert expected_request == actual_request
-
-    def test_delete_glossary_exception(self):
-        # Setup Response
-        error = status_pb2.Status()
-        operation = operations_pb2.Operation(
-            name="operations/test_delete_glossary_exception", done=True
-        )
-        operation.error.CopyFrom(error)
-
-        # Mock the API response
-        channel = ChannelStub(responses=[operation])
-        patch = mock.patch("google.api_core.grpc_helpers.create_channel")
-        with patch as create_channel:
-            create_channel.return_value = channel
-            client = translate_v3.TranslationServiceClient()
-
-        # Setup Request
-        name = client.glossary_path("[PROJECT]", "[LOCATION]", "[GLOSSARY]")
-
-        response = client.delete_glossary(name)
-        exception = response.exception()
-        assert exception.errors[0] == error
