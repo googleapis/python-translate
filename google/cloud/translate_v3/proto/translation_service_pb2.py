@@ -27,6 +27,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
     package="google.cloud.translation.v3",
     syntax="proto3",
     serialized_options=b"\n\035com.google.cloud.translate.v3B\027TranslationServiceProtoP\001ZBgoogle.golang.org/genproto/googleapis/cloud/translate/v3;translate\370\001\001\252\002\031Google.Cloud.Translate.V3\312\002\031Google\\Cloud\\Translate\\V3\352\002\034Google::Cloud::Translate::V3",
+    create_key=_descriptor._internal_create_key,
     serialized_pb=b'\n9google/cloud/translate_v3/proto/translation_service.proto\x12\x1bgoogle.cloud.translation.v3\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a#google/longrunning/operations.proto\x1a\x1fgoogle/protobuf/timestamp.proto"N\n\x1bTranslateTextGlossaryConfig\x12\x15\n\x08glossary\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x18\n\x0bignore_case\x18\x02 \x01(\x08\x42\x03\xe0\x41\x01"\xb5\x03\n\x14TranslateTextRequest\x12\x15\n\x08\x63ontents\x18\x01 \x03(\tB\x03\xe0\x41\x02\x12\x16\n\tmime_type\x18\x03 \x01(\tB\x03\xe0\x41\x01\x12!\n\x14source_language_code\x18\x04 \x01(\tB\x03\xe0\x41\x01\x12!\n\x14target_language_code\x18\x05 \x01(\tB\x03\xe0\x41\x02\x12\x39\n\x06parent\x18\x08 \x01(\tB)\xe0\x41\x02\xfa\x41#\n!locations.googleapis.com/Location\x12\x12\n\x05model\x18\x06 \x01(\tB\x03\xe0\x41\x01\x12V\n\x0fglossary_config\x18\x07 \x01(\x0b\x32\x38.google.cloud.translation.v3.TranslateTextGlossaryConfigB\x03\xe0\x41\x01\x12R\n\x06labels\x18\n \x03(\x0b\x32=.google.cloud.translation.v3.TranslateTextRequest.LabelsEntryB\x03\xe0\x41\x01\x1a-\n\x0bLabelsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01"\xa0\x01\n\x15TranslateTextResponse\x12>\n\x0ctranslations\x18\x01 \x03(\x0b\x32(.google.cloud.translation.v3.Translation\x12G\n\x15glossary_translations\x18\x03 \x03(\x0b\x32(.google.cloud.translation.v3.Translation"\xa8\x01\n\x0bTranslation\x12\x17\n\x0ftranslated_text\x18\x01 \x01(\t\x12\r\n\x05model\x18\x02 \x01(\t\x12\x1e\n\x16\x64\x65tected_language_code\x18\x04 \x01(\t\x12Q\n\x0fglossary_config\x18\x03 \x01(\x0b\x32\x38.google.cloud.translation.v3.TranslateTextGlossaryConfig"\x9f\x02\n\x15\x44\x65tectLanguageRequest\x12\x39\n\x06parent\x18\x05 \x01(\tB)\xe0\x41\x02\xfa\x41#\n!locations.googleapis.com/Location\x12\x12\n\x05model\x18\x04 \x01(\tB\x03\xe0\x41\x01\x12\x11\n\x07\x63ontent\x18\x01 \x01(\tH\x00\x12\x16\n\tmime_type\x18\x03 \x01(\tB\x03\xe0\x41\x01\x12S\n\x06labels\x18\x06 \x03(\x0b\x32>.google.cloud.translation.v3.DetectLanguageRequest.LabelsEntryB\x03\xe0\x41\x01\x1a-\n\x0bLabelsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x42\x08\n\x06source"=\n\x10\x44\x65tectedLanguage\x12\x15\n\rlanguage_code\x18\x01 \x01(\t\x12\x12\n\nconfidence\x18\x02 \x01(\x02"Z\n\x16\x44\x65tectLanguageResponse\x12@\n\tlanguages\x18\x01 \x03(\x0b\x32-.google.cloud.translation.v3.DetectedLanguage"\x91\x01\n\x1cGetSupportedLanguagesRequest\x12\x39\n\x06parent\x18\x03 \x01(\tB)\xe0\x41\x02\xfa\x41#\n!locations.googleapis.com/Location\x12"\n\x15\x64isplay_language_code\x18\x01 \x01(\tB\x03\xe0\x41\x01\x12\x12\n\x05model\x18\x02 \x01(\tB\x03\xe0\x41\x01"W\n\x12SupportedLanguages\x12\x41\n\tlanguages\x18\x01 \x03(\x0b\x32..google.cloud.translation.v3.SupportedLanguage"p\n\x11SupportedLanguage\x12\x15\n\rlanguage_code\x18\x01 \x01(\t\x12\x14\n\x0c\x64isplay_name\x18\x02 \x01(\t\x12\x16\n\x0esupport_source\x18\x03 \x01(\x08\x12\x16\n\x0esupport_target\x18\x04 \x01(\x08"\x1e\n\tGcsSource\x12\x11\n\tinput_uri\x18\x01 \x01(\t"m\n\x0bInputConfig\x12\x16\n\tmime_type\x18\x01 \x01(\tB\x03\xe0\x41\x01\x12<\n\ngcs_source\x18\x02 \x01(\x0b\x32&.google.cloud.translation.v3.GcsSourceH\x00\x42\x08\n\x06source"+\n\x0eGcsDestination\x12\x19\n\x11output_uri_prefix\x18\x01 \x01(\t"e\n\x0cOutputConfig\x12\x46\n\x0fgcs_destination\x18\x01 \x01(\x0b\x32+.google.cloud.translation.v3.GcsDestinationH\x00\x42\r\n\x0b\x64\x65stination"\x88\x06\n\x19\x42\x61tchTranslateTextRequest\x12\x39\n\x06parent\x18\x01 \x01(\tB)\xe0\x41\x02\xfa\x41#\n!locations.googleapis.com/Location\x12!\n\x14source_language_code\x18\x02 \x01(\tB\x03\xe0\x41\x02\x12"\n\x15target_language_codes\x18\x03 \x03(\tB\x03\xe0\x41\x02\x12W\n\x06models\x18\x04 \x03(\x0b\x32\x42.google.cloud.translation.v3.BatchTranslateTextRequest.ModelsEntryB\x03\xe0\x41\x01\x12\x44\n\rinput_configs\x18\x05 \x03(\x0b\x32(.google.cloud.translation.v3.InputConfigB\x03\xe0\x41\x02\x12\x45\n\routput_config\x18\x06 \x01(\x0b\x32).google.cloud.translation.v3.OutputConfigB\x03\xe0\x41\x02\x12_\n\nglossaries\x18\x07 \x03(\x0b\x32\x46.google.cloud.translation.v3.BatchTranslateTextRequest.GlossariesEntryB\x03\xe0\x41\x01\x12W\n\x06labels\x18\t \x03(\x0b\x32\x42.google.cloud.translation.v3.BatchTranslateTextRequest.LabelsEntryB\x03\xe0\x41\x01\x1a-\n\x0bModelsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x1ak\n\x0fGlossariesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12G\n\x05value\x18\x02 \x01(\x0b\x32\x38.google.cloud.translation.v3.TranslateTextGlossaryConfig:\x02\x38\x01\x1a-\n\x0bLabelsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01"\xce\x02\n\x16\x42\x61tchTranslateMetadata\x12H\n\x05state\x18\x01 \x01(\x0e\x32\x39.google.cloud.translation.v3.BatchTranslateMetadata.State\x12\x1d\n\x15translated_characters\x18\x02 \x01(\x03\x12\x19\n\x11\x66\x61iled_characters\x18\x03 \x01(\x03\x12\x18\n\x10total_characters\x18\x04 \x01(\x03\x12/\n\x0bsubmit_time\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp"e\n\x05State\x12\x15\n\x11STATE_UNSPECIFIED\x10\x00\x12\x0b\n\x07RUNNING\x10\x01\x12\r\n\tSUCCEEDED\x10\x02\x12\n\n\x06\x46\x41ILED\x10\x03\x12\x0e\n\nCANCELLING\x10\x04\x12\r\n\tCANCELLED\x10\x05"\xcb\x01\n\x16\x42\x61tchTranslateResponse\x12\x18\n\x10total_characters\x18\x01 \x01(\x03\x12\x1d\n\x15translated_characters\x18\x02 \x01(\x03\x12\x19\n\x11\x66\x61iled_characters\x18\x03 \x01(\x03\x12/\n\x0bsubmit_time\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12,\n\x08\x65nd_time\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp"]\n\x13GlossaryInputConfig\x12<\n\ngcs_source\x18\x01 \x01(\x0b\x32&.google.cloud.translation.v3.GcsSourceH\x00\x42\x08\n\x06source"\xfa\x04\n\x08Glossary\x12\x0c\n\x04name\x18\x01 \x01(\t\x12O\n\rlanguage_pair\x18\x03 \x01(\x0b\x32\x36.google.cloud.translation.v3.Glossary.LanguageCodePairH\x00\x12T\n\x12language_codes_set\x18\x04 \x01(\x0b\x32\x36.google.cloud.translation.v3.Glossary.LanguageCodesSetH\x00\x12\x46\n\x0cinput_config\x18\x05 \x01(\x0b\x32\x30.google.cloud.translation.v3.GlossaryInputConfig\x12\x18\n\x0b\x65ntry_count\x18\x06 \x01(\x05\x42\x03\xe0\x41\x03\x12\x34\n\x0bsubmit_time\x18\x07 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x03\xe0\x41\x03\x12\x31\n\x08\x65nd_time\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x03\xe0\x41\x03\x1aN\n\x10LanguageCodePair\x12\x1c\n\x14source_language_code\x18\x01 \x01(\t\x12\x1c\n\x14target_language_code\x18\x02 \x01(\t\x1a*\n\x10LanguageCodesSet\x12\x16\n\x0elanguage_codes\x18\x01 \x03(\t:e\xea\x41\x62\n!translate.googleapis.com/Glossary\x12=projects/{project}/locations/{location}/glossaries/{glossary}B\x0b\n\tlanguages"\x90\x01\n\x15\x43reateGlossaryRequest\x12\x39\n\x06parent\x18\x01 \x01(\tB)\xe0\x41\x02\xfa\x41#\n!locations.googleapis.com/Location\x12<\n\x08glossary\x18\x02 \x01(\x0b\x32%.google.cloud.translation.v3.GlossaryB\x03\xe0\x41\x02"M\n\x12GetGlossaryRequest\x12\x37\n\x04name\x18\x01 \x01(\tB)\xe0\x41\x02\xfa\x41#\n!translate.googleapis.com/Glossary"P\n\x15\x44\x65leteGlossaryRequest\x12\x37\n\x04name\x18\x01 \x01(\tB)\xe0\x41\x02\xfa\x41#\n!translate.googleapis.com/Glossary"\x98\x01\n\x15ListGlossariesRequest\x12\x39\n\x06parent\x18\x01 \x01(\tB)\xe0\x41\x02\xfa\x41#\n!locations.googleapis.com/Location\x12\x16\n\tpage_size\x18\x02 \x01(\x05\x42\x03\xe0\x41\x01\x12\x17\n\npage_token\x18\x03 \x01(\tB\x03\xe0\x41\x01\x12\x13\n\x06\x66ilter\x18\x04 \x01(\tB\x03\xe0\x41\x01"l\n\x16ListGlossariesResponse\x12\x39\n\nglossaries\x18\x01 \x03(\x0b\x32%.google.cloud.translation.v3.Glossary\x12\x17\n\x0fnext_page_token\x18\x02 \x01(\t"\x88\x02\n\x16\x43reateGlossaryMetadata\x12\x0c\n\x04name\x18\x01 \x01(\t\x12H\n\x05state\x18\x02 \x01(\x0e\x32\x39.google.cloud.translation.v3.CreateGlossaryMetadata.State\x12/\n\x0bsubmit_time\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp"e\n\x05State\x12\x15\n\x11STATE_UNSPECIFIED\x10\x00\x12\x0b\n\x07RUNNING\x10\x01\x12\r\n\tSUCCEEDED\x10\x02\x12\n\n\x06\x46\x41ILED\x10\x03\x12\x0e\n\nCANCELLING\x10\x04\x12\r\n\tCANCELLED\x10\x05"\x88\x02\n\x16\x44\x65leteGlossaryMetadata\x12\x0c\n\x04name\x18\x01 \x01(\t\x12H\n\x05state\x18\x02 \x01(\x0e\x32\x39.google.cloud.translation.v3.DeleteGlossaryMetadata.State\x12/\n\x0bsubmit_time\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp"e\n\x05State\x12\x15\n\x11STATE_UNSPECIFIED\x10\x00\x12\x0b\n\x07RUNNING\x10\x01\x12\r\n\tSUCCEEDED\x10\x02\x12\n\n\x06\x46\x41ILED\x10\x03\x12\x0e\n\nCANCELLING\x10\x04\x12\r\n\tCANCELLED\x10\x05"\x85\x01\n\x16\x44\x65leteGlossaryResponse\x12\x0c\n\x04name\x18\x01 \x01(\t\x12/\n\x0bsubmit_time\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12,\n\x08\x65nd_time\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp2\x8e\x10\n\x12TranslationService\x12\xd4\x02\n\rTranslateText\x12\x31.google.cloud.translation.v3.TranslateTextRequest\x1a\x32.google.cloud.translation.v3.TranslateTextResponse"\xdb\x01\x82\xd3\xe4\x93\x02\x62"1/v3/{parent=projects/*/locations/*}:translateText:\x01*Z*"%/v3/{parent=projects/*}:translateText:\x01*\xda\x41$parent,target_language_code,contents\xda\x41Iparent,model,mime_type,source_language_code,target_language_code,contents\x12\x87\x02\n\x0e\x44\x65tectLanguage\x12\x32.google.cloud.translation.v3.DetectLanguageRequest\x1a\x33.google.cloud.translation.v3.DetectLanguageResponse"\x8b\x01\x82\xd3\xe4\x93\x02\x64"2/v3/{parent=projects/*/locations/*}:detectLanguage:\x01*Z+"&/v3/{parent=projects/*}:detectLanguage:\x01*\xda\x41\x1eparent,model,mime_type,content\x12\x97\x02\n\x15GetSupportedLanguages\x12\x39.google.cloud.translation.v3.GetSupportedLanguagesRequest\x1a/.google.cloud.translation.v3.SupportedLanguages"\x91\x01\x82\xd3\xe4\x93\x02\x66\x12\x36/v3/{parent=projects/*/locations/*}/supportedLanguagesZ,\x12*/v3/{parent=projects/*}/supportedLanguages\xda\x41"parent,model,display_language_code\x12\xe1\x01\n\x12\x42\x61tchTranslateText\x12\x36.google.cloud.translation.v3.BatchTranslateTextRequest\x1a\x1d.google.longrunning.Operation"t\x82\xd3\xe4\x93\x02;"6/v3/{parent=projects/*/locations/*}:batchTranslateText:\x01*\xca\x41\x30\n\x16\x42\x61tchTranslateResponse\x12\x16\x42\x61tchTranslateMetadata\x12\xdc\x01\n\x0e\x43reateGlossary\x12\x32.google.cloud.translation.v3.CreateGlossaryRequest\x1a\x1d.google.longrunning.Operation"w\x82\xd3\xe4\x93\x02:"./v3/{parent=projects/*/locations/*}/glossaries:\x08glossary\xda\x41\x0fparent,glossary\xca\x41"\n\x08Glossary\x12\x16\x43reateGlossaryMetadata\x12\xba\x01\n\x0eListGlossaries\x12\x32.google.cloud.translation.v3.ListGlossariesRequest\x1a\x33.google.cloud.translation.v3.ListGlossariesResponse"?\x82\xd3\xe4\x93\x02\x30\x12./v3/{parent=projects/*/locations/*}/glossaries\xda\x41\x06parent\x12\xa4\x01\n\x0bGetGlossary\x12/.google.cloud.translation.v3.GetGlossaryRequest\x1a%.google.cloud.translation.v3.Glossary"=\x82\xd3\xe4\x93\x02\x30\x12./v3/{name=projects/*/locations/*/glossaries/*}\xda\x41\x04name\x12\xd5\x01\n\x0e\x44\x65leteGlossary\x12\x32.google.cloud.translation.v3.DeleteGlossaryRequest\x1a\x1d.google.longrunning.Operation"p\x82\xd3\xe4\x93\x02\x30*./v3/{name=projects/*/locations/*/glossaries/*}\xda\x41\x04name\xca\x41\x30\n\x16\x44\x65leteGlossaryResponse\x12\x16\x44\x65leteGlossaryMetadata\x1a~\xca\x41\x18translate.googleapis.com\xd2\x41`https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/cloud-translationB\xd8\x01\n\x1d\x63om.google.cloud.translate.v3B\x17TranslationServiceProtoP\x01ZBgoogle.golang.org/genproto/googleapis/cloud/translate/v3;translate\xf8\x01\x01\xaa\x02\x19Google.Cloud.Translate.V3\xca\x02\x19Google\\Cloud\\Translate\\V3\xea\x02\x1cGoogle::Cloud::Translate::V3b\x06proto3',
     dependencies=[
         google_dot_api_dot_annotations__pb2.DESCRIPTOR,
@@ -44,6 +45,7 @@ _BATCHTRANSLATEMETADATA_STATE = _descriptor.EnumDescriptor(
     full_name="google.cloud.translation.v3.BatchTranslateMetadata.State",
     filename=None,
     file=DESCRIPTOR,
+    create_key=_descriptor._internal_create_key,
     values=[
         _descriptor.EnumValueDescriptor(
             name="STATE_UNSPECIFIED",
@@ -51,21 +53,47 @@ _BATCHTRANSLATEMETADATA_STATE = _descriptor.EnumDescriptor(
             number=0,
             serialized_options=None,
             type=None,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.EnumValueDescriptor(
-            name="RUNNING", index=1, number=1, serialized_options=None, type=None
+            name="RUNNING",
+            index=1,
+            number=1,
+            serialized_options=None,
+            type=None,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.EnumValueDescriptor(
-            name="SUCCEEDED", index=2, number=2, serialized_options=None, type=None
+            name="SUCCEEDED",
+            index=2,
+            number=2,
+            serialized_options=None,
+            type=None,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.EnumValueDescriptor(
-            name="FAILED", index=3, number=3, serialized_options=None, type=None
+            name="FAILED",
+            index=3,
+            number=3,
+            serialized_options=None,
+            type=None,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.EnumValueDescriptor(
-            name="CANCELLING", index=4, number=4, serialized_options=None, type=None
+            name="CANCELLING",
+            index=4,
+            number=4,
+            serialized_options=None,
+            type=None,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.EnumValueDescriptor(
-            name="CANCELLED", index=5, number=5, serialized_options=None, type=None
+            name="CANCELLED",
+            index=5,
+            number=5,
+            serialized_options=None,
+            type=None,
+            create_key=_descriptor._internal_create_key,
         ),
     ],
     containing_type=None,
@@ -80,6 +108,7 @@ _CREATEGLOSSARYMETADATA_STATE = _descriptor.EnumDescriptor(
     full_name="google.cloud.translation.v3.CreateGlossaryMetadata.State",
     filename=None,
     file=DESCRIPTOR,
+    create_key=_descriptor._internal_create_key,
     values=[
         _descriptor.EnumValueDescriptor(
             name="STATE_UNSPECIFIED",
@@ -87,21 +116,47 @@ _CREATEGLOSSARYMETADATA_STATE = _descriptor.EnumDescriptor(
             number=0,
             serialized_options=None,
             type=None,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.EnumValueDescriptor(
-            name="RUNNING", index=1, number=1, serialized_options=None, type=None
+            name="RUNNING",
+            index=1,
+            number=1,
+            serialized_options=None,
+            type=None,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.EnumValueDescriptor(
-            name="SUCCEEDED", index=2, number=2, serialized_options=None, type=None
+            name="SUCCEEDED",
+            index=2,
+            number=2,
+            serialized_options=None,
+            type=None,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.EnumValueDescriptor(
-            name="FAILED", index=3, number=3, serialized_options=None, type=None
+            name="FAILED",
+            index=3,
+            number=3,
+            serialized_options=None,
+            type=None,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.EnumValueDescriptor(
-            name="CANCELLING", index=4, number=4, serialized_options=None, type=None
+            name="CANCELLING",
+            index=4,
+            number=4,
+            serialized_options=None,
+            type=None,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.EnumValueDescriptor(
-            name="CANCELLED", index=5, number=5, serialized_options=None, type=None
+            name="CANCELLED",
+            index=5,
+            number=5,
+            serialized_options=None,
+            type=None,
+            create_key=_descriptor._internal_create_key,
         ),
     ],
     containing_type=None,
@@ -116,6 +171,7 @@ _DELETEGLOSSARYMETADATA_STATE = _descriptor.EnumDescriptor(
     full_name="google.cloud.translation.v3.DeleteGlossaryMetadata.State",
     filename=None,
     file=DESCRIPTOR,
+    create_key=_descriptor._internal_create_key,
     values=[
         _descriptor.EnumValueDescriptor(
             name="STATE_UNSPECIFIED",
@@ -123,21 +179,47 @@ _DELETEGLOSSARYMETADATA_STATE = _descriptor.EnumDescriptor(
             number=0,
             serialized_options=None,
             type=None,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.EnumValueDescriptor(
-            name="RUNNING", index=1, number=1, serialized_options=None, type=None
+            name="RUNNING",
+            index=1,
+            number=1,
+            serialized_options=None,
+            type=None,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.EnumValueDescriptor(
-            name="SUCCEEDED", index=2, number=2, serialized_options=None, type=None
+            name="SUCCEEDED",
+            index=2,
+            number=2,
+            serialized_options=None,
+            type=None,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.EnumValueDescriptor(
-            name="FAILED", index=3, number=3, serialized_options=None, type=None
+            name="FAILED",
+            index=3,
+            number=3,
+            serialized_options=None,
+            type=None,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.EnumValueDescriptor(
-            name="CANCELLING", index=4, number=4, serialized_options=None, type=None
+            name="CANCELLING",
+            index=4,
+            number=4,
+            serialized_options=None,
+            type=None,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.EnumValueDescriptor(
-            name="CANCELLED", index=5, number=5, serialized_options=None, type=None
+            name="CANCELLED",
+            index=5,
+            number=5,
+            serialized_options=None,
+            type=None,
+            create_key=_descriptor._internal_create_key,
         ),
     ],
     containing_type=None,
@@ -154,6 +236,7 @@ _TRANSLATETEXTGLOSSARYCONFIG = _descriptor.Descriptor(
     filename=None,
     file=DESCRIPTOR,
     containing_type=None,
+    create_key=_descriptor._internal_create_key,
     fields=[
         _descriptor.FieldDescriptor(
             name="glossary",
@@ -172,6 +255,7 @@ _TRANSLATETEXTGLOSSARYCONFIG = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=b"\340A\002",
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="ignore_case",
@@ -190,6 +274,7 @@ _TRANSLATETEXTGLOSSARYCONFIG = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=b"\340A\001",
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
     ],
     extensions=[],
@@ -211,6 +296,7 @@ _TRANSLATETEXTREQUEST_LABELSENTRY = _descriptor.Descriptor(
     filename=None,
     file=DESCRIPTOR,
     containing_type=None,
+    create_key=_descriptor._internal_create_key,
     fields=[
         _descriptor.FieldDescriptor(
             name="key",
@@ -229,6 +315,7 @@ _TRANSLATETEXTREQUEST_LABELSENTRY = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="value",
@@ -247,6 +334,7 @@ _TRANSLATETEXTREQUEST_LABELSENTRY = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
     ],
     extensions=[],
@@ -267,6 +355,7 @@ _TRANSLATETEXTREQUEST = _descriptor.Descriptor(
     filename=None,
     file=DESCRIPTOR,
     containing_type=None,
+    create_key=_descriptor._internal_create_key,
     fields=[
         _descriptor.FieldDescriptor(
             name="contents",
@@ -285,6 +374,7 @@ _TRANSLATETEXTREQUEST = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=b"\340A\002",
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="mime_type",
@@ -303,6 +393,7 @@ _TRANSLATETEXTREQUEST = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=b"\340A\001",
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="source_language_code",
@@ -321,6 +412,7 @@ _TRANSLATETEXTREQUEST = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=b"\340A\001",
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="target_language_code",
@@ -339,6 +431,7 @@ _TRANSLATETEXTREQUEST = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=b"\340A\002",
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="parent",
@@ -357,6 +450,7 @@ _TRANSLATETEXTREQUEST = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=b"\340A\002\372A#\n!locations.googleapis.com/Location",
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="model",
@@ -375,6 +469,7 @@ _TRANSLATETEXTREQUEST = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=b"\340A\001",
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="glossary_config",
@@ -393,6 +488,7 @@ _TRANSLATETEXTREQUEST = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=b"\340A\001",
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="labels",
@@ -411,6 +507,7 @@ _TRANSLATETEXTREQUEST = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=b"\340A\001",
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
     ],
     extensions=[],
@@ -432,6 +529,7 @@ _TRANSLATETEXTRESPONSE = _descriptor.Descriptor(
     filename=None,
     file=DESCRIPTOR,
     containing_type=None,
+    create_key=_descriptor._internal_create_key,
     fields=[
         _descriptor.FieldDescriptor(
             name="translations",
@@ -450,6 +548,7 @@ _TRANSLATETEXTRESPONSE = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="glossary_translations",
@@ -468,6 +567,7 @@ _TRANSLATETEXTRESPONSE = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
     ],
     extensions=[],
@@ -489,6 +589,7 @@ _TRANSLATION = _descriptor.Descriptor(
     filename=None,
     file=DESCRIPTOR,
     containing_type=None,
+    create_key=_descriptor._internal_create_key,
     fields=[
         _descriptor.FieldDescriptor(
             name="translated_text",
@@ -507,6 +608,7 @@ _TRANSLATION = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="model",
@@ -525,6 +627,7 @@ _TRANSLATION = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="detected_language_code",
@@ -543,6 +646,7 @@ _TRANSLATION = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="glossary_config",
@@ -561,6 +665,7 @@ _TRANSLATION = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
     ],
     extensions=[],
@@ -582,6 +687,7 @@ _DETECTLANGUAGEREQUEST_LABELSENTRY = _descriptor.Descriptor(
     filename=None,
     file=DESCRIPTOR,
     containing_type=None,
+    create_key=_descriptor._internal_create_key,
     fields=[
         _descriptor.FieldDescriptor(
             name="key",
@@ -600,6 +706,7 @@ _DETECTLANGUAGEREQUEST_LABELSENTRY = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="value",
@@ -618,6 +725,7 @@ _DETECTLANGUAGEREQUEST_LABELSENTRY = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
     ],
     extensions=[],
@@ -638,6 +746,7 @@ _DETECTLANGUAGEREQUEST = _descriptor.Descriptor(
     filename=None,
     file=DESCRIPTOR,
     containing_type=None,
+    create_key=_descriptor._internal_create_key,
     fields=[
         _descriptor.FieldDescriptor(
             name="parent",
@@ -656,6 +765,7 @@ _DETECTLANGUAGEREQUEST = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=b"\340A\002\372A#\n!locations.googleapis.com/Location",
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="model",
@@ -674,6 +784,7 @@ _DETECTLANGUAGEREQUEST = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=b"\340A\001",
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="content",
@@ -692,6 +803,7 @@ _DETECTLANGUAGEREQUEST = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="mime_type",
@@ -710,6 +822,7 @@ _DETECTLANGUAGEREQUEST = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=b"\340A\001",
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="labels",
@@ -728,6 +841,7 @@ _DETECTLANGUAGEREQUEST = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=b"\340A\001",
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
     ],
     extensions=[],
@@ -743,6 +857,7 @@ _DETECTLANGUAGEREQUEST = _descriptor.Descriptor(
             full_name="google.cloud.translation.v3.DetectLanguageRequest.source",
             index=0,
             containing_type=None,
+            create_key=_descriptor._internal_create_key,
             fields=[],
         ),
     ],
@@ -757,6 +872,7 @@ _DETECTEDLANGUAGE = _descriptor.Descriptor(
     filename=None,
     file=DESCRIPTOR,
     containing_type=None,
+    create_key=_descriptor._internal_create_key,
     fields=[
         _descriptor.FieldDescriptor(
             name="language_code",
@@ -775,6 +891,7 @@ _DETECTEDLANGUAGE = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="confidence",
@@ -793,6 +910,7 @@ _DETECTEDLANGUAGE = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
     ],
     extensions=[],
@@ -814,6 +932,7 @@ _DETECTLANGUAGERESPONSE = _descriptor.Descriptor(
     filename=None,
     file=DESCRIPTOR,
     containing_type=None,
+    create_key=_descriptor._internal_create_key,
     fields=[
         _descriptor.FieldDescriptor(
             name="languages",
@@ -832,6 +951,7 @@ _DETECTLANGUAGERESPONSE = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
     ],
     extensions=[],
@@ -853,6 +973,7 @@ _GETSUPPORTEDLANGUAGESREQUEST = _descriptor.Descriptor(
     filename=None,
     file=DESCRIPTOR,
     containing_type=None,
+    create_key=_descriptor._internal_create_key,
     fields=[
         _descriptor.FieldDescriptor(
             name="parent",
@@ -871,6 +992,7 @@ _GETSUPPORTEDLANGUAGESREQUEST = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=b"\340A\002\372A#\n!locations.googleapis.com/Location",
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="display_language_code",
@@ -889,6 +1011,7 @@ _GETSUPPORTEDLANGUAGESREQUEST = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=b"\340A\001",
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="model",
@@ -907,6 +1030,7 @@ _GETSUPPORTEDLANGUAGESREQUEST = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=b"\340A\001",
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
     ],
     extensions=[],
@@ -928,6 +1052,7 @@ _SUPPORTEDLANGUAGES = _descriptor.Descriptor(
     filename=None,
     file=DESCRIPTOR,
     containing_type=None,
+    create_key=_descriptor._internal_create_key,
     fields=[
         _descriptor.FieldDescriptor(
             name="languages",
@@ -946,6 +1071,7 @@ _SUPPORTEDLANGUAGES = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
     ],
     extensions=[],
@@ -967,6 +1093,7 @@ _SUPPORTEDLANGUAGE = _descriptor.Descriptor(
     filename=None,
     file=DESCRIPTOR,
     containing_type=None,
+    create_key=_descriptor._internal_create_key,
     fields=[
         _descriptor.FieldDescriptor(
             name="language_code",
@@ -985,6 +1112,7 @@ _SUPPORTEDLANGUAGE = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="display_name",
@@ -1003,6 +1131,7 @@ _SUPPORTEDLANGUAGE = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="support_source",
@@ -1021,6 +1150,7 @@ _SUPPORTEDLANGUAGE = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="support_target",
@@ -1039,6 +1169,7 @@ _SUPPORTEDLANGUAGE = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
     ],
     extensions=[],
@@ -1060,6 +1191,7 @@ _GCSSOURCE = _descriptor.Descriptor(
     filename=None,
     file=DESCRIPTOR,
     containing_type=None,
+    create_key=_descriptor._internal_create_key,
     fields=[
         _descriptor.FieldDescriptor(
             name="input_uri",
@@ -1078,6 +1210,7 @@ _GCSSOURCE = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
     ],
     extensions=[],
@@ -1099,6 +1232,7 @@ _INPUTCONFIG = _descriptor.Descriptor(
     filename=None,
     file=DESCRIPTOR,
     containing_type=None,
+    create_key=_descriptor._internal_create_key,
     fields=[
         _descriptor.FieldDescriptor(
             name="mime_type",
@@ -1117,6 +1251,7 @@ _INPUTCONFIG = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=b"\340A\001",
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="gcs_source",
@@ -1135,6 +1270,7 @@ _INPUTCONFIG = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
     ],
     extensions=[],
@@ -1150,6 +1286,7 @@ _INPUTCONFIG = _descriptor.Descriptor(
             full_name="google.cloud.translation.v3.InputConfig.source",
             index=0,
             containing_type=None,
+            create_key=_descriptor._internal_create_key,
             fields=[],
         ),
     ],
@@ -1164,6 +1301,7 @@ _GCSDESTINATION = _descriptor.Descriptor(
     filename=None,
     file=DESCRIPTOR,
     containing_type=None,
+    create_key=_descriptor._internal_create_key,
     fields=[
         _descriptor.FieldDescriptor(
             name="output_uri_prefix",
@@ -1182,6 +1320,7 @@ _GCSDESTINATION = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
     ],
     extensions=[],
@@ -1203,6 +1342,7 @@ _OUTPUTCONFIG = _descriptor.Descriptor(
     filename=None,
     file=DESCRIPTOR,
     containing_type=None,
+    create_key=_descriptor._internal_create_key,
     fields=[
         _descriptor.FieldDescriptor(
             name="gcs_destination",
@@ -1221,6 +1361,7 @@ _OUTPUTCONFIG = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
     ],
     extensions=[],
@@ -1236,6 +1377,7 @@ _OUTPUTCONFIG = _descriptor.Descriptor(
             full_name="google.cloud.translation.v3.OutputConfig.destination",
             index=0,
             containing_type=None,
+            create_key=_descriptor._internal_create_key,
             fields=[],
         ),
     ],
@@ -1250,6 +1392,7 @@ _BATCHTRANSLATETEXTREQUEST_MODELSENTRY = _descriptor.Descriptor(
     filename=None,
     file=DESCRIPTOR,
     containing_type=None,
+    create_key=_descriptor._internal_create_key,
     fields=[
         _descriptor.FieldDescriptor(
             name="key",
@@ -1268,6 +1411,7 @@ _BATCHTRANSLATETEXTREQUEST_MODELSENTRY = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="value",
@@ -1286,6 +1430,7 @@ _BATCHTRANSLATETEXTREQUEST_MODELSENTRY = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
     ],
     extensions=[],
@@ -1306,6 +1451,7 @@ _BATCHTRANSLATETEXTREQUEST_GLOSSARIESENTRY = _descriptor.Descriptor(
     filename=None,
     file=DESCRIPTOR,
     containing_type=None,
+    create_key=_descriptor._internal_create_key,
     fields=[
         _descriptor.FieldDescriptor(
             name="key",
@@ -1324,6 +1470,7 @@ _BATCHTRANSLATETEXTREQUEST_GLOSSARIESENTRY = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="value",
@@ -1342,6 +1489,7 @@ _BATCHTRANSLATETEXTREQUEST_GLOSSARIESENTRY = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
     ],
     extensions=[],
@@ -1362,6 +1510,7 @@ _BATCHTRANSLATETEXTREQUEST_LABELSENTRY = _descriptor.Descriptor(
     filename=None,
     file=DESCRIPTOR,
     containing_type=None,
+    create_key=_descriptor._internal_create_key,
     fields=[
         _descriptor.FieldDescriptor(
             name="key",
@@ -1380,6 +1529,7 @@ _BATCHTRANSLATETEXTREQUEST_LABELSENTRY = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="value",
@@ -1398,6 +1548,7 @@ _BATCHTRANSLATETEXTREQUEST_LABELSENTRY = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
     ],
     extensions=[],
@@ -1418,6 +1569,7 @@ _BATCHTRANSLATETEXTREQUEST = _descriptor.Descriptor(
     filename=None,
     file=DESCRIPTOR,
     containing_type=None,
+    create_key=_descriptor._internal_create_key,
     fields=[
         _descriptor.FieldDescriptor(
             name="parent",
@@ -1436,6 +1588,7 @@ _BATCHTRANSLATETEXTREQUEST = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=b"\340A\002\372A#\n!locations.googleapis.com/Location",
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="source_language_code",
@@ -1454,6 +1607,7 @@ _BATCHTRANSLATETEXTREQUEST = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=b"\340A\002",
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="target_language_codes",
@@ -1472,6 +1626,7 @@ _BATCHTRANSLATETEXTREQUEST = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=b"\340A\002",
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="models",
@@ -1490,6 +1645,7 @@ _BATCHTRANSLATETEXTREQUEST = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=b"\340A\001",
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="input_configs",
@@ -1508,6 +1664,7 @@ _BATCHTRANSLATETEXTREQUEST = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=b"\340A\002",
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="output_config",
@@ -1526,6 +1683,7 @@ _BATCHTRANSLATETEXTREQUEST = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=b"\340A\002",
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="glossaries",
@@ -1544,6 +1702,7 @@ _BATCHTRANSLATETEXTREQUEST = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=b"\340A\001",
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="labels",
@@ -1562,6 +1721,7 @@ _BATCHTRANSLATETEXTREQUEST = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=b"\340A\001",
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
     ],
     extensions=[],
@@ -1587,6 +1747,7 @@ _BATCHTRANSLATEMETADATA = _descriptor.Descriptor(
     filename=None,
     file=DESCRIPTOR,
     containing_type=None,
+    create_key=_descriptor._internal_create_key,
     fields=[
         _descriptor.FieldDescriptor(
             name="state",
@@ -1605,6 +1766,7 @@ _BATCHTRANSLATEMETADATA = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="translated_characters",
@@ -1623,6 +1785,7 @@ _BATCHTRANSLATEMETADATA = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="failed_characters",
@@ -1641,6 +1804,7 @@ _BATCHTRANSLATEMETADATA = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="total_characters",
@@ -1659,6 +1823,7 @@ _BATCHTRANSLATEMETADATA = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="submit_time",
@@ -1677,6 +1842,7 @@ _BATCHTRANSLATEMETADATA = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
     ],
     extensions=[],
@@ -1698,6 +1864,7 @@ _BATCHTRANSLATERESPONSE = _descriptor.Descriptor(
     filename=None,
     file=DESCRIPTOR,
     containing_type=None,
+    create_key=_descriptor._internal_create_key,
     fields=[
         _descriptor.FieldDescriptor(
             name="total_characters",
@@ -1716,6 +1883,7 @@ _BATCHTRANSLATERESPONSE = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="translated_characters",
@@ -1734,6 +1902,7 @@ _BATCHTRANSLATERESPONSE = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="failed_characters",
@@ -1752,6 +1921,7 @@ _BATCHTRANSLATERESPONSE = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="submit_time",
@@ -1770,6 +1940,7 @@ _BATCHTRANSLATERESPONSE = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="end_time",
@@ -1788,6 +1959,7 @@ _BATCHTRANSLATERESPONSE = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
     ],
     extensions=[],
@@ -1809,6 +1981,7 @@ _GLOSSARYINPUTCONFIG = _descriptor.Descriptor(
     filename=None,
     file=DESCRIPTOR,
     containing_type=None,
+    create_key=_descriptor._internal_create_key,
     fields=[
         _descriptor.FieldDescriptor(
             name="gcs_source",
@@ -1827,6 +2000,7 @@ _GLOSSARYINPUTCONFIG = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
     ],
     extensions=[],
@@ -1842,6 +2016,7 @@ _GLOSSARYINPUTCONFIG = _descriptor.Descriptor(
             full_name="google.cloud.translation.v3.GlossaryInputConfig.source",
             index=0,
             containing_type=None,
+            create_key=_descriptor._internal_create_key,
             fields=[],
         ),
     ],
@@ -1856,6 +2031,7 @@ _GLOSSARY_LANGUAGECODEPAIR = _descriptor.Descriptor(
     filename=None,
     file=DESCRIPTOR,
     containing_type=None,
+    create_key=_descriptor._internal_create_key,
     fields=[
         _descriptor.FieldDescriptor(
             name="source_language_code",
@@ -1874,6 +2050,7 @@ _GLOSSARY_LANGUAGECODEPAIR = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="target_language_code",
@@ -1892,6 +2069,7 @@ _GLOSSARY_LANGUAGECODEPAIR = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
     ],
     extensions=[],
@@ -1912,6 +2090,7 @@ _GLOSSARY_LANGUAGECODESSET = _descriptor.Descriptor(
     filename=None,
     file=DESCRIPTOR,
     containing_type=None,
+    create_key=_descriptor._internal_create_key,
     fields=[
         _descriptor.FieldDescriptor(
             name="language_codes",
@@ -1930,6 +2109,7 @@ _GLOSSARY_LANGUAGECODESSET = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
     ],
     extensions=[],
@@ -1950,6 +2130,7 @@ _GLOSSARY = _descriptor.Descriptor(
     filename=None,
     file=DESCRIPTOR,
     containing_type=None,
+    create_key=_descriptor._internal_create_key,
     fields=[
         _descriptor.FieldDescriptor(
             name="name",
@@ -1968,6 +2149,7 @@ _GLOSSARY = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="language_pair",
@@ -1986,6 +2168,7 @@ _GLOSSARY = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="language_codes_set",
@@ -2004,6 +2187,7 @@ _GLOSSARY = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="input_config",
@@ -2022,6 +2206,7 @@ _GLOSSARY = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="entry_count",
@@ -2040,6 +2225,7 @@ _GLOSSARY = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=b"\340A\003",
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="submit_time",
@@ -2058,6 +2244,7 @@ _GLOSSARY = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=b"\340A\003",
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="end_time",
@@ -2076,6 +2263,7 @@ _GLOSSARY = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=b"\340A\003",
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
     ],
     extensions=[],
@@ -2091,6 +2279,7 @@ _GLOSSARY = _descriptor.Descriptor(
             full_name="google.cloud.translation.v3.Glossary.languages",
             index=0,
             containing_type=None,
+            create_key=_descriptor._internal_create_key,
             fields=[],
         ),
     ],
@@ -2105,6 +2294,7 @@ _CREATEGLOSSARYREQUEST = _descriptor.Descriptor(
     filename=None,
     file=DESCRIPTOR,
     containing_type=None,
+    create_key=_descriptor._internal_create_key,
     fields=[
         _descriptor.FieldDescriptor(
             name="parent",
@@ -2123,6 +2313,7 @@ _CREATEGLOSSARYREQUEST = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=b"\340A\002\372A#\n!locations.googleapis.com/Location",
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="glossary",
@@ -2141,6 +2332,7 @@ _CREATEGLOSSARYREQUEST = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=b"\340A\002",
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
     ],
     extensions=[],
@@ -2162,6 +2354,7 @@ _GETGLOSSARYREQUEST = _descriptor.Descriptor(
     filename=None,
     file=DESCRIPTOR,
     containing_type=None,
+    create_key=_descriptor._internal_create_key,
     fields=[
         _descriptor.FieldDescriptor(
             name="name",
@@ -2180,6 +2373,7 @@ _GETGLOSSARYREQUEST = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=b"\340A\002\372A#\n!translate.googleapis.com/Glossary",
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
     ],
     extensions=[],
@@ -2201,6 +2395,7 @@ _DELETEGLOSSARYREQUEST = _descriptor.Descriptor(
     filename=None,
     file=DESCRIPTOR,
     containing_type=None,
+    create_key=_descriptor._internal_create_key,
     fields=[
         _descriptor.FieldDescriptor(
             name="name",
@@ -2219,6 +2414,7 @@ _DELETEGLOSSARYREQUEST = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=b"\340A\002\372A#\n!translate.googleapis.com/Glossary",
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
     ],
     extensions=[],
@@ -2240,6 +2436,7 @@ _LISTGLOSSARIESREQUEST = _descriptor.Descriptor(
     filename=None,
     file=DESCRIPTOR,
     containing_type=None,
+    create_key=_descriptor._internal_create_key,
     fields=[
         _descriptor.FieldDescriptor(
             name="parent",
@@ -2258,6 +2455,7 @@ _LISTGLOSSARIESREQUEST = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=b"\340A\002\372A#\n!locations.googleapis.com/Location",
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="page_size",
@@ -2276,6 +2474,7 @@ _LISTGLOSSARIESREQUEST = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=b"\340A\001",
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="page_token",
@@ -2294,6 +2493,7 @@ _LISTGLOSSARIESREQUEST = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=b"\340A\001",
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="filter",
@@ -2312,6 +2512,7 @@ _LISTGLOSSARIESREQUEST = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=b"\340A\001",
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
     ],
     extensions=[],
@@ -2333,6 +2534,7 @@ _LISTGLOSSARIESRESPONSE = _descriptor.Descriptor(
     filename=None,
     file=DESCRIPTOR,
     containing_type=None,
+    create_key=_descriptor._internal_create_key,
     fields=[
         _descriptor.FieldDescriptor(
             name="glossaries",
@@ -2351,6 +2553,7 @@ _LISTGLOSSARIESRESPONSE = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="next_page_token",
@@ -2369,6 +2572,7 @@ _LISTGLOSSARIESRESPONSE = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
     ],
     extensions=[],
@@ -2390,6 +2594,7 @@ _CREATEGLOSSARYMETADATA = _descriptor.Descriptor(
     filename=None,
     file=DESCRIPTOR,
     containing_type=None,
+    create_key=_descriptor._internal_create_key,
     fields=[
         _descriptor.FieldDescriptor(
             name="name",
@@ -2408,6 +2613,7 @@ _CREATEGLOSSARYMETADATA = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="state",
@@ -2426,6 +2632,7 @@ _CREATEGLOSSARYMETADATA = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="submit_time",
@@ -2444,6 +2651,7 @@ _CREATEGLOSSARYMETADATA = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
     ],
     extensions=[],
@@ -2465,6 +2673,7 @@ _DELETEGLOSSARYMETADATA = _descriptor.Descriptor(
     filename=None,
     file=DESCRIPTOR,
     containing_type=None,
+    create_key=_descriptor._internal_create_key,
     fields=[
         _descriptor.FieldDescriptor(
             name="name",
@@ -2483,6 +2692,7 @@ _DELETEGLOSSARYMETADATA = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="state",
@@ -2501,6 +2711,7 @@ _DELETEGLOSSARYMETADATA = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="submit_time",
@@ -2519,6 +2730,7 @@ _DELETEGLOSSARYMETADATA = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
     ],
     extensions=[],
@@ -2540,6 +2752,7 @@ _DELETEGLOSSARYRESPONSE = _descriptor.Descriptor(
     filename=None,
     file=DESCRIPTOR,
     containing_type=None,
+    create_key=_descriptor._internal_create_key,
     fields=[
         _descriptor.FieldDescriptor(
             name="name",
@@ -2558,6 +2771,7 @@ _DELETEGLOSSARYRESPONSE = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="submit_time",
@@ -2576,6 +2790,7 @@ _DELETEGLOSSARYRESPONSE = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.FieldDescriptor(
             name="end_time",
@@ -2594,6 +2809,7 @@ _DELETEGLOSSARYRESPONSE = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
         ),
     ],
     extensions=[],
@@ -3712,6 +3928,7 @@ _TRANSLATIONSERVICE = _descriptor.ServiceDescriptor(
     file=DESCRIPTOR,
     index=0,
     serialized_options=b"\312A\030translate.googleapis.com\322A`https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/cloud-translation",
+    create_key=_descriptor._internal_create_key,
     serialized_start=5514,
     serialized_end=7576,
     methods=[
@@ -3723,6 +3940,7 @@ _TRANSLATIONSERVICE = _descriptor.ServiceDescriptor(
             input_type=_TRANSLATETEXTREQUEST,
             output_type=_TRANSLATETEXTRESPONSE,
             serialized_options=b'\202\323\344\223\002b"1/v3/{parent=projects/*/locations/*}:translateText:\001*Z*"%/v3/{parent=projects/*}:translateText:\001*\332A$parent,target_language_code,contents\332AIparent,model,mime_type,source_language_code,target_language_code,contents',
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.MethodDescriptor(
             name="DetectLanguage",
@@ -3732,6 +3950,7 @@ _TRANSLATIONSERVICE = _descriptor.ServiceDescriptor(
             input_type=_DETECTLANGUAGEREQUEST,
             output_type=_DETECTLANGUAGERESPONSE,
             serialized_options=b'\202\323\344\223\002d"2/v3/{parent=projects/*/locations/*}:detectLanguage:\001*Z+"&/v3/{parent=projects/*}:detectLanguage:\001*\332A\036parent,model,mime_type,content',
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.MethodDescriptor(
             name="GetSupportedLanguages",
@@ -3741,6 +3960,7 @@ _TRANSLATIONSERVICE = _descriptor.ServiceDescriptor(
             input_type=_GETSUPPORTEDLANGUAGESREQUEST,
             output_type=_SUPPORTEDLANGUAGES,
             serialized_options=b'\202\323\344\223\002f\0226/v3/{parent=projects/*/locations/*}/supportedLanguagesZ,\022*/v3/{parent=projects/*}/supportedLanguages\332A"parent,model,display_language_code',
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.MethodDescriptor(
             name="BatchTranslateText",
@@ -3750,6 +3970,7 @@ _TRANSLATIONSERVICE = _descriptor.ServiceDescriptor(
             input_type=_BATCHTRANSLATETEXTREQUEST,
             output_type=google_dot_longrunning_dot_operations__pb2._OPERATION,
             serialized_options=b'\202\323\344\223\002;"6/v3/{parent=projects/*/locations/*}:batchTranslateText:\001*\312A0\n\026BatchTranslateResponse\022\026BatchTranslateMetadata',
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.MethodDescriptor(
             name="CreateGlossary",
@@ -3759,6 +3980,7 @@ _TRANSLATIONSERVICE = _descriptor.ServiceDescriptor(
             input_type=_CREATEGLOSSARYREQUEST,
             output_type=google_dot_longrunning_dot_operations__pb2._OPERATION,
             serialized_options=b'\202\323\344\223\002:"./v3/{parent=projects/*/locations/*}/glossaries:\010glossary\332A\017parent,glossary\312A"\n\010Glossary\022\026CreateGlossaryMetadata',
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.MethodDescriptor(
             name="ListGlossaries",
@@ -3768,6 +3990,7 @@ _TRANSLATIONSERVICE = _descriptor.ServiceDescriptor(
             input_type=_LISTGLOSSARIESREQUEST,
             output_type=_LISTGLOSSARIESRESPONSE,
             serialized_options=b"\202\323\344\223\0020\022./v3/{parent=projects/*/locations/*}/glossaries\332A\006parent",
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.MethodDescriptor(
             name="GetGlossary",
@@ -3777,6 +4000,7 @@ _TRANSLATIONSERVICE = _descriptor.ServiceDescriptor(
             input_type=_GETGLOSSARYREQUEST,
             output_type=_GLOSSARY,
             serialized_options=b"\202\323\344\223\0020\022./v3/{name=projects/*/locations/*/glossaries/*}\332A\004name",
+            create_key=_descriptor._internal_create_key,
         ),
         _descriptor.MethodDescriptor(
             name="DeleteGlossary",
@@ -3786,6 +4010,7 @@ _TRANSLATIONSERVICE = _descriptor.ServiceDescriptor(
             input_type=_DELETEGLOSSARYREQUEST,
             output_type=google_dot_longrunning_dot_operations__pb2._OPERATION,
             serialized_options=b"\202\323\344\223\0020*./v3/{name=projects/*/locations/*/glossaries/*}\332A\004name\312A0\n\026DeleteGlossaryResponse\022\026DeleteGlossaryMetadata",
+            create_key=_descriptor._internal_create_key,
         ),
     ],
 )
