@@ -2771,8 +2771,8 @@ TranslateTextGlossaryConfig = _reflection.GeneratedProtocolMessageType(
     {
         "DESCRIPTOR": _TRANSLATETEXTGLOSSARYCONFIG,
         "__module__": "google.cloud.translate_v3beta1.proto.translation_service_pb2",
-        "__doc__": """Configures which glossary should be used for a specific target language,
-  and defines options for applying that glossary.
+        "__doc__": """Configures which glossary should be used for a specific
+  target language, and defines options for applying that glossary.
   
   
   Attributes:
