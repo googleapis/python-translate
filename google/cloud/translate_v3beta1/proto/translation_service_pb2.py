@@ -2989,6 +2989,7 @@ TranslateTextGlossaryConfig = _reflection.GeneratedProtocolMessageType(
         "__module__": "google.cloud.translate_v3beta1.proto.translation_service_pb2",
         "__doc__": """Configures which glossary should be used for a specific target
   language, and defines options for applying that glossary.
+
   
   Attributes:
       glossary:
@@ -3019,6 +3020,7 @@ TranslateTextRequest = _reflection.GeneratedProtocolMessageType(
         "DESCRIPTOR": _TRANSLATETEXTREQUEST,
         "__module__": "google.cloud.translate_v3beta1.proto.translation_service_pb2",
         "__doc__": """The request message for synchronous translation.
+
   
   Attributes:
       contents:
@@ -3111,6 +3113,7 @@ Translation = _reflection.GeneratedProtocolMessageType(
         "DESCRIPTOR": _TRANSLATION,
         "__module__": "google.cloud.translate_v3beta1.proto.translation_service_pb2",
         "__doc__": """A single translation response.
+
   
   Attributes:
       translated_text:
@@ -3148,6 +3151,7 @@ DetectLanguageRequest = _reflection.GeneratedProtocolMessageType(
         "DESCRIPTOR": _DETECTLANGUAGEREQUEST,
         "__module__": "google.cloud.translate_v3beta1.proto.translation_service_pb2",
         "__doc__": """The request message for language detection.
+
   
   Attributes:
       parent:
@@ -3198,6 +3202,7 @@ DetectedLanguage = _reflection.GeneratedProtocolMessageType(
         "DESCRIPTOR": _DETECTEDLANGUAGE,
         "__module__": "google.cloud.translate_v3beta1.proto.translation_service_pb2",
         "__doc__": """The response message for language detection.
+
   
   Attributes:
       language_code:
@@ -3218,6 +3223,7 @@ DetectLanguageResponse = _reflection.GeneratedProtocolMessageType(
         "DESCRIPTOR": _DETECTLANGUAGERESPONSE,
         "__module__": "google.cloud.translate_v3beta1.proto.translation_service_pb2",
         "__doc__": """The response message for language detection.
+
   
   Attributes:
       languages:
@@ -3236,6 +3242,7 @@ GetSupportedLanguagesRequest = _reflection.GeneratedProtocolMessageType(
         "DESCRIPTOR": _GETSUPPORTEDLANGUAGESREQUEST,
         "__module__": "google.cloud.translate_v3beta1.proto.translation_service_pb2",
         "__doc__": """The request message for discovering supported languages.
+
   
   Attributes:
       parent:
@@ -3274,6 +3281,7 @@ SupportedLanguages = _reflection.GeneratedProtocolMessageType(
         "DESCRIPTOR": _SUPPORTEDLANGUAGES,
         "__module__": "google.cloud.translate_v3beta1.proto.translation_service_pb2",
         "__doc__": """The response message for discovering supported languages.
+
   
   Attributes:
       languages:
@@ -3293,6 +3301,7 @@ SupportedLanguage = _reflection.GeneratedProtocolMessageType(
         "__module__": "google.cloud.translate_v3beta1.proto.translation_service_pb2",
         "__doc__": """A single supported language response corresponds to information
   related to one supported language.
+
   
   Attributes:
       language_code:
@@ -3320,6 +3329,7 @@ GcsSource = _reflection.GeneratedProtocolMessageType(
         "DESCRIPTOR": _GCSSOURCE,
         "__module__": "google.cloud.translate_v3beta1.proto.translation_service_pb2",
         "__doc__": """The Google Cloud Storage location for the input content.
+
   
   Attributes:
       input_uri:
@@ -3338,6 +3348,7 @@ InputConfig = _reflection.GeneratedProtocolMessageType(
         "DESCRIPTOR": _INPUTCONFIG,
         "__module__": "google.cloud.translate_v3beta1.proto.translation_service_pb2",
         "__doc__": """Input configuration for BatchTranslateText request.
+
   
   Attributes:
       mime_type:
@@ -3377,6 +3388,7 @@ GcsDestination = _reflection.GeneratedProtocolMessageType(
         "DESCRIPTOR": _GCSDESTINATION,
         "__module__": "google.cloud.translate_v3beta1.proto.translation_service_pb2",
         "__doc__": """The Google Cloud Storage location for the output content.
+
   
   Attributes:
       output_uri_prefix:
@@ -3396,6 +3408,7 @@ OutputConfig = _reflection.GeneratedProtocolMessageType(
         "DESCRIPTOR": _OUTPUTCONFIG,
         "__module__": "google.cloud.translate_v3beta1.proto.translation_service_pb2",
         "__doc__": """Output configuration for BatchTranslateText request.
+
   
   Attributes:
       destination:
@@ -3495,6 +3508,7 @@ BatchTranslateTextRequest = _reflection.GeneratedProtocolMessageType(
         "DESCRIPTOR": _BATCHTRANSLATETEXTREQUEST,
         "__module__": "google.cloud.translate_v3beta1.proto.translation_service_pb2",
         "__doc__": """The batch translation request.
+
   
   Attributes:
       parent:
@@ -3556,6 +3570,7 @@ BatchTranslateMetadata = _reflection.GeneratedProtocolMessageType(
         "DESCRIPTOR": _BATCHTRANSLATEMETADATA,
         "__module__": "google.cloud.translate_v3beta1.proto.translation_service_pb2",
         "__doc__": """State metadata for the batch translation operation.
+
   
   Attributes:
       state:
@@ -3588,6 +3603,7 @@ BatchTranslateResponse = _reflection.GeneratedProtocolMessageType(
         "__doc__": """Stored in the [google.longrunning.Operation.response][google.longrunni
   ng.Operation.response] field returned by BatchTranslateText if at
   least one sentence is translated successfully.
+
   
   Attributes:
       total_characters:
@@ -3617,6 +3633,7 @@ GlossaryInputConfig = _reflection.GeneratedProtocolMessageType(
         "DESCRIPTOR": _GLOSSARYINPUTCONFIG,
         "__module__": "google.cloud.translate_v3beta1.proto.translation_service_pb2",
         "__doc__": """Input configuration for glossaries.
+
   
   Attributes:
       source:
@@ -3655,6 +3672,7 @@ Glossary = _reflection.GeneratedProtocolMessageType(
                 "DESCRIPTOR": _GLOSSARY_LANGUAGECODEPAIR,
                 "__module__": "google.cloud.translate_v3beta1.proto.translation_service_pb2",
                 "__doc__": """Used with unidirectional glossaries.
+
     
     Attributes:
         source_language_code:
@@ -3676,6 +3694,7 @@ Glossary = _reflection.GeneratedProtocolMessageType(
                 "DESCRIPTOR": _GLOSSARY_LANGUAGECODESSET,
                 "__module__": "google.cloud.translate_v3beta1.proto.translation_service_pb2",
                 "__doc__": """Used with equivalent term set glossaries.
+
     
     Attributes:
         language_codes:
@@ -3690,6 +3709,7 @@ Glossary = _reflection.GeneratedProtocolMessageType(
         "DESCRIPTOR": _GLOSSARY,
         "__module__": "google.cloud.translate_v3beta1.proto.translation_service_pb2",
         "__doc__": """Represents a glossary built from user provided data.
+
   
   Attributes:
       name:
@@ -3726,6 +3746,7 @@ CreateGlossaryRequest = _reflection.GeneratedProtocolMessageType(
         "DESCRIPTOR": _CREATEGLOSSARYREQUEST,
         "__module__": "google.cloud.translate_v3beta1.proto.translation_service_pb2",
         "__doc__": """Request message for CreateGlossary.
+
   
   Attributes:
       parent:
@@ -3745,6 +3766,7 @@ GetGlossaryRequest = _reflection.GeneratedProtocolMessageType(
         "DESCRIPTOR": _GETGLOSSARYREQUEST,
         "__module__": "google.cloud.translate_v3beta1.proto.translation_service_pb2",
         "__doc__": """Request message for GetGlossary.
+
   
   Attributes:
       name:
@@ -3762,6 +3784,7 @@ DeleteGlossaryRequest = _reflection.GeneratedProtocolMessageType(
         "DESCRIPTOR": _DELETEGLOSSARYREQUEST,
         "__module__": "google.cloud.translate_v3beta1.proto.translation_service_pb2",
         "__doc__": """Request message for DeleteGlossary.
+
   
   Attributes:
       name:
@@ -3779,6 +3802,7 @@ ListGlossariesRequest = _reflection.GeneratedProtocolMessageType(
         "DESCRIPTOR": _LISTGLOSSARIESREQUEST,
         "__module__": "google.cloud.translate_v3beta1.proto.translation_service_pb2",
         "__doc__": """Request message for ListGlossaries.
+
   
   Attributes:
       parent:
@@ -3811,6 +3835,7 @@ ListGlossariesResponse = _reflection.GeneratedProtocolMessageType(
         "DESCRIPTOR": _LISTGLOSSARIESRESPONSE,
         "__module__": "google.cloud.translate_v3beta1.proto.translation_service_pb2",
         "__doc__": """Response message for ListGlossaries.
+
   
   Attributes:
       glossaries:
@@ -3834,6 +3859,7 @@ CreateGlossaryMetadata = _reflection.GeneratedProtocolMessageType(
         "__module__": "google.cloud.translate_v3beta1.proto.translation_service_pb2",
         "__doc__": """Stored in the [google.longrunning.Operation.metadata][google.longrunni
   ng.Operation.metadata] field returned by CreateGlossary.
+
   
   Attributes:
       name:
@@ -3856,6 +3882,7 @@ DeleteGlossaryMetadata = _reflection.GeneratedProtocolMessageType(
         "__module__": "google.cloud.translate_v3beta1.proto.translation_service_pb2",
         "__doc__": """Stored in the [google.longrunning.Operation.metadata][google.longrunni
   ng.Operation.metadata] field returned by DeleteGlossary.
+
   
   Attributes:
       name:
@@ -3878,6 +3905,7 @@ DeleteGlossaryResponse = _reflection.GeneratedProtocolMessageType(
         "__module__": "google.cloud.translate_v3beta1.proto.translation_service_pb2",
         "__doc__": """Stored in the [google.longrunning.Operation.response][google.longrunni
   ng.Operation.response] field returned by DeleteGlossary.
+
   
   Attributes:
       name:
