@@ -105,7 +105,7 @@ s.replace("noxfile.py", '''["']sphinx["']''', '"sphinx<3.0.0"')
 s.replace(
     "google/**/*_pb2.py",
     "(\s+)Attributes:",
-    "\n\g<1>Attributes:"
+    "\n\n\g<1>Attributes:"
 )
 
 s.shell.run(["nox", "-s", "blacken"], hide_output=False)
