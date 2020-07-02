@@ -3,16 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/python-translate.git",
-        "sha": "1ce4f7c7fb6befb5905ce02fbbcd9c1b7ecd916f"
+        "remote": "git@github.com:googleapis/python-translate",
+        "sha": "39077510cb7a367049156134d5f43552318708a8"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "b882b8e6bfcd708042ff00f7adc67ce750817dd0",
-        "internalRef": "318028816"
+        "sha": "76905ffe7e3b0605f64ef889fb88913634f9f836",
+        "internalRef": "319332818"
       }
     },
     {
