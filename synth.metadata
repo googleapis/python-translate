@@ -3,23 +3,30 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/python-translate",
-        "sha": "39077510cb7a367049156134d5f43552318708a8"
+        "remote": "git@github.com:googleapis/python-translate.git",
+        "sha": "0f9c7550afa7341d0b83b47a2ba9be57dde02209"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "76905ffe7e3b0605f64ef889fb88913634f9f836",
-        "internalRef": "319332818"
+        "sha": "e26e1839a45445d13cd45b1be3b1523defb72fee",
+        "internalRef": "322867095"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "303271797a360f8a439203413f13a160f2f5b3b4"
+        "sha": "2686d7075fa456972bf4d08680d99617f5eb32b1"
+      }
+    },
+    {
+      "git": {
+        "name": "synthtool",
+        "remote": "https://github.com/googleapis/synthtool.git",
+        "sha": "2686d7075fa456972bf4d08680d99617f5eb32b1"
       }
     }
   ],
