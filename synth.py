@@ -18,7 +18,7 @@ import synthtool as s
 from synthtool import gcp
 from synthtool.languages import python
 
-gapic = gcp.GAPICBazel()
+gapic = gcp.GAPICMicrogenerator()
 common = gcp.CommonTemplates()
 versions = ["v3beta1", "v3"]
 
@@ -37,69 +37,36 @@ excludes = [
 for version in versions:
     library = gapic.py_library(
         service="translate",
-        version=version,
-        bazel_target=f"//google/cloud/translate/{version}:translation-{version}-py",
-        include_protos=True,
+        version=version
     )
 
-    # s.move(library / f'google/cloud/translation_{version}', f'google/cloud/translate_{version}', excludes=excludes)
-    s.move(library / f"google/cloud/translate_{version}", excludes=excludes)
-    s.move(library / "tests")
-    s.move(library / f"docs/gapic/{version}")
+    s.move(library / "google/cloud/translation", "google/cloud/translate")
+    s.move(library / f"google/cloud/translation_{version}", f"google/cloud/translate_{version}")
+    s.move(library / f"docs/translation_{version}", f"docs/translate_{version}")
+    s.move(library / "tests", f"tests/unit/gapic/translate_{version}")
 
-    # translation -> translate
-    s.replace(
-        "google/**/translation_service_pb2_grpc.py",
-        f"google.cloud.translation_{version}.proto",
-        f"google.cloud.translate_{version}.proto",
-    )
-    s.replace(
-        f"google/cloud/translate_{version}/gapic/translation_service_client.py",
-        "google-cloud-translation",
-        "google-cloud-translate",
-    )
-
-# Use the highest version library to generate documentation import alias.
-s.move(library / "google/cloud/translate.py")
-
+# Escape underscores in gs:\\ URLs
 s.replace(
-    "google/cloud/**/translation_service_pb2.py",
-    r"""record delimiters are ‘:raw-latex:`\\n`’ instead of
-          ‘:raw-latex:`\\r`:raw-latex:`\\n`’.""",
-    r"""record delimiters are ``\\\\\\\\n`` instead of
-          ``\\\\\\\\r\\\\\\\\n``.""",
+    "google/cloud/translate_v3*/types/translation_service.py",
+    r"""a_b_c_""",
+    """a_b_c\_"""
 )
 
-# Fix docstring issue for classes with no summary line
+# google.cloud.translation -> google.cloud.translate
 s.replace(
-    "google/cloud/**/proto/*_pb2.py",
-    ''''__doc__': """Attributes:''',
-    ''''__doc__': """
-    Attributes:''',
-)
-
-# Fix wrapping for literal string
-s.replace(
-    "google/cloud/**/translation_service_pb2.py",
-    r"""This field has the same length as \[``contents`
-\s+`\]\[google\.cloud\.translation\.v3beta1\.TranslateTextRequest\.conte
-\s+nts\]\.""",
-    """This field has the same length as [``contents``][google.cloud.translation.v3beta1.TranslateTextRequest.contents].""",
+    ["google/cloud/translate*/**/*.py", "tests/**/*.py", "docs/translate_v*/*"],
+    "google.cloud.translation",
+    "google.cloud.translate"
 )
 
 # ----------------------------------------------------------------------------
 # Add templated files
 # ----------------------------------------------------------------------------
-# templated_files = gcp.CommonTemplates().py_library(unit_cov_level=100, cov_level=100)
-# Pass dependencies to system tests
 templated_files = common.py_library(
-    unit_cov_level=95, cov_level=95, samples=True,
-    system_test_dependencies=['test_utils']
+    samples=True,
+    microgenerator=True,
 )
-s.move(templated_files)
-
-# TODO(busunkim): Use latest sphinx after microgenerator transition
-s.replace("noxfile.py", '''["']sphinx["']''', '"sphinx<3.0.0"')
+s.move(templated_files, excludes=[".coveragerc"])  # microgenerator has a good .coveragerc file
 
 # ----------------------------------------------------------------------------
 # Samples templates

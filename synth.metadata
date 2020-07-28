@@ -3,30 +3,30 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/python-translate.git",
-        "sha": "0f9c7550afa7341d0b83b47a2ba9be57dde02209"
+        "remote": "git@github.com:danoscarmike/python-translate",
+        "sha": "0714f6de6f8574d519719324e0a6b1f2b75f8482"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "e26e1839a45445d13cd45b1be3b1523defb72fee",
-        "internalRef": "322867095"
+        "sha": "6a813acf535e4746fa4a135ce23547bb6425c26d",
+        "internalRef": "323472217"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "2686d7075fa456972bf4d08680d99617f5eb32b1"
+        "sha": "5506723fef367557d83cf072d0c18020c049fcb8"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "2686d7075fa456972bf4d08680d99617f5eb32b1"
+        "sha": "5506723fef367557d83cf072d0c18020c049fcb8"
       }
     }
   ],
@@ -37,7 +37,7 @@
         "apiName": "translate",
         "apiVersion": "v3beta1",
         "language": "python",
-        "generator": "bazel"
+        "generator": "gapic-generator-python"
       }
     },
     {
@@ -46,7 +46,7 @@
         "apiName": "translate",
         "apiVersion": "v3",
         "language": "python",
-        "generator": "bazel"
+        "generator": "gapic-generator-python"
       }
     }
   ]
