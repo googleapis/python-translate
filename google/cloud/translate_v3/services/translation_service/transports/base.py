@@ -22,6 +22,7 @@ import pkg_resources
 from google import auth
 from google.api_core import exceptions  # type: ignore
 from google.api_core import gapic_v1  # type: ignore
+from google.api_core import retry as retries  # type: ignore
 from google.api_core import operations_v1  # type: ignore
 from google.auth import credentials  # type: ignore
 
@@ -31,7 +32,9 @@ from google.longrunning import operations_pb2 as operations  # type: ignore
 
 try:
     _client_info = gapic_v1.client_info.ClientInfo(
-        gapic_version=pkg_resources.get_distribution("google.cloud.translate",).version,
+        gapic_version=pkg_resources.get_distribution(
+            "google-cloud-translation",
+        ).version,
     )
 except pkg_resources.DistributionNotFound:
     _client_info = gapic_v1.client_info.ClientInfo()

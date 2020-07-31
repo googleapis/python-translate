@@ -149,9 +149,34 @@ response = client.translate_text(
 
 
 
-## Enums
+## Enums and types
 
 
 > **WARNING**: Breaking change
 
-The submodules `enums` (containing enum classes for long running operation State) has been removed.
+The submodule `enums` (containing enum classes for long running operation State) has been removed.
+
+The submodule `types` is still present. When using the primary version module alias (`translate`)
+it is possible to access the types classes directly.
+
+```py
+from google.cloud import translate  # the primary version is imported by default
+
+client = translate.TranslationServiceClient()
+
+glossary_config = client.TranslateTextGlossaryConfig(
+    glossary=glossary_path
+)
+```
+
+When a specific version is imported, the full module name must be specified to access types classes.
+
+```py
+from google.cloud import translate_v3beta1 as translate
+
+client = translate.TranslationServiceClient()
+
+glossary_config = client.types.TranslateTextGlossaryConfig(
+    glossary=glossary_path
+)
+```

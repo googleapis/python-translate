@@ -4,29 +4,29 @@
       "git": {
         "name": ".",
         "remote": "git@github.com:danoscarmike/python-translate",
-        "sha": "0714f6de6f8574d519719324e0a6b1f2b75f8482"
+        "sha": "3e7b19c784c3cdcf0b6cf1d099f78643e8fd54ef"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "6a813acf535e4746fa4a135ce23547bb6425c26d",
-        "internalRef": "323472217"
+        "sha": "fbf9396664b766a08d92da9d4f31be019a847c39",
+        "internalRef": "324209019"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "5506723fef367557d83cf072d0c18020c049fcb8"
+        "sha": "39b527a39f5cd56d4882b3874fc08eed4756cebe"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "5506723fef367557d83cf072d0c18020c049fcb8"
+        "sha": "39b527a39f5cd56d4882b3874fc08eed4756cebe"
       }
     }
   ],

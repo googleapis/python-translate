@@ -22,7 +22,7 @@ from google.protobuf import timestamp_pb2 as timestamp  # type: ignore
 
 
 __protobuf__ = proto.module(
-    package="google.cloud.translate.v3beta1",
+    package="google.cloud.translation.v3beta1",
     manifest={
         "TranslateTextGlossaryConfig",
         "TranslateTextRequest",
@@ -178,13 +178,13 @@ class TranslateTextResponse(proto.Message):
         translations (Sequence[~.translation_service.Translation]):
             Text translation responses with no glossary applied. This
             field has the same length as
-            [``contents``][google.cloud.translate.v3beta1.TranslateTextRequest.contents].
+            [``contents``][google.cloud.translation.v3beta1.TranslateTextRequest.contents].
         glossary_translations (Sequence[~.translation_service.Translation]):
             Text translation responses if a glossary is provided in the
             request. This can be the same as
-            [``translations``][google.cloud.translate.v3beta1.TranslateTextResponse.translations]
+            [``translations``][google.cloud.translation.v3beta1.TranslateTextResponse.translations]
             if no terms apply. This field has the same length as
-            [``contents``][google.cloud.translate.v3beta1.TranslateTextRequest.contents].
+            [``contents``][google.cloud.translation.v3beta1.TranslateTextRequest.contents].
     """
 
     translations = proto.RepeatedField(proto.MESSAGE, number=1, message="Translation",)
@@ -514,7 +514,7 @@ class OutputConfig(proto.Message):
 
             The format of translations_file (for target language code
             'trg') is:
-            gs://translation_test/a_b_c\_'trg'_translations.[extension]
+            ``gs://translation_test/a_b_c_'trg'_translations.[extension]``
 
             If the input file extension is tsv, the output has the
             following columns: Column 1: ID of the request provided in
@@ -531,10 +531,10 @@ class OutputConfig(proto.Message):
             directly written to the output file. If glossary is
             requested, a separate glossary_translations_file has format
             of
-            gs://translation_test/a_b_c\_'trg'_glossary_translations.[extension]
+            ``gs://translation_test/a_b_c_'trg'_glossary_translations.[extension]``
 
             The format of errors file (for target language code 'trg')
-            is: gs://translation_test/a_b_c\_'trg'_errors.[extension]
+            is: ``gs://translation_test/a_b_c_'trg'_errors.[extension]``
 
             If the input file extension is tsv, errors_file contains the
             following: Column 1: ID of the request provided in the
@@ -547,7 +547,7 @@ class OutputConfig(proto.Message):
             If the input file extension is txt or html,
             glossary_error_file will be generated that contains error
             details. glossary_error_file has format of
-            gs://translation_test/a_b_c\_'trg'_glossary_errors.[extension]
+            ``gs://translation_test/a_b_c_'trg'_glossary_errors.[extension]``
     """
 
     gcs_destination = proto.Field(

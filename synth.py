@@ -43,20 +43,23 @@ for version in versions:
     s.move(library / "google/cloud/translation", "google/cloud/translate")
     s.move(library / f"google/cloud/translation_{version}", f"google/cloud/translate_{version}")
     s.move(library / f"docs/translation_{version}", f"docs/translate_{version}")
-    s.move(library / "tests", f"tests/unit/gapic/translate_{version}")
+    s.move(library / f"tests/unit/gapic/translation_{version}", f"tests/unit/gapic/translate_{version}")
+    s.move(library / "scripts")
 
+# google.cloud.translation -> google.cloud.translate
+s.replace(
+    ["google/cloud/translate*/**/*.py", "docs/translate_v*/*"],
+    " google.cloud.translation",
+    " google.cloud.translate"
+)
+s.replace("tests/**/*.py", "google.cloud.translation", "google.cloud.translate")
+
+# TODO(danoscarmike): remove once upstream protos have been fixed
 # Escape underscores in gs:\\ URLs
 s.replace(
     "google/cloud/translate_v3*/types/translation_service.py",
     r"""a_b_c_""",
     """a_b_c\_"""
-)
-
-# google.cloud.translation -> google.cloud.translate
-s.replace(
-    ["google/cloud/translate*/**/*.py", "tests/**/*.py", "docs/translate_v*/*"],
-    "google.cloud.translation",
-    "google.cloud.translate"
 )
 
 # ----------------------------------------------------------------------------
@@ -67,6 +70,9 @@ templated_files = common.py_library(
     microgenerator=True,
 )
 s.move(templated_files, excludes=[".coveragerc"])  # microgenerator has a good .coveragerc file
+
+# Correct namespace in noxfile
+s.replace("noxfile.py", "google.cloud.translation", "google.cloud.translate")
 
 # ----------------------------------------------------------------------------
 # Samples templates

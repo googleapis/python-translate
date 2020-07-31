@@ -351,7 +351,7 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        if request is not None and any(
+        has_flattened_params = any(
             [
                 parent,
                 target_language_code,
@@ -360,29 +360,35 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
                 mime_type,
                 source_language_code,
             ]
-        ):
+        )
+        if request is not None and has_flattened_params:
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
             )
 
-        request = translation_service.TranslateTextRequest(request)
+        # Minor optimization to avoid making a copy if the user passes
+        # in a translation_service.TranslateTextRequest.
+        # There's no risk of modifying the input as we've already verified
+        # there are no flattened fields.
+        if not isinstance(request, translation_service.TranslateTextRequest):
+            request = translation_service.TranslateTextRequest(request)
 
-        # If we have keyword arguments corresponding to fields on the
-        # request, apply these.
+            # If we have keyword arguments corresponding to fields on the
+            # request, apply these.
 
-        if parent is not None:
-            request.parent = parent
-        if target_language_code is not None:
-            request.target_language_code = target_language_code
-        if contents is not None:
-            request.contents = contents
-        if model is not None:
-            request.model = model
-        if mime_type is not None:
-            request.mime_type = mime_type
-        if source_language_code is not None:
-            request.source_language_code = source_language_code
+            if parent is not None:
+                request.parent = parent
+            if target_language_code is not None:
+                request.target_language_code = target_language_code
+            if contents is not None:
+                request.contents = contents
+            if model is not None:
+                request.model = model
+            if mime_type is not None:
+                request.mime_type = mime_type
+            if source_language_code is not None:
+                request.source_language_code = source_language_code
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
@@ -480,25 +486,31 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        if request is not None and any([parent, model, mime_type, content]):
+        has_flattened_params = any([parent, model, mime_type, content])
+        if request is not None and has_flattened_params:
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
             )
 
-        request = translation_service.DetectLanguageRequest(request)
+        # Minor optimization to avoid making a copy if the user passes
+        # in a translation_service.DetectLanguageRequest.
+        # There's no risk of modifying the input as we've already verified
+        # there are no flattened fields.
+        if not isinstance(request, translation_service.DetectLanguageRequest):
+            request = translation_service.DetectLanguageRequest(request)
 
-        # If we have keyword arguments corresponding to fields on the
-        # request, apply these.
+            # If we have keyword arguments corresponding to fields on the
+            # request, apply these.
 
-        if parent is not None:
-            request.parent = parent
-        if model is not None:
-            request.model = model
-        if mime_type is not None:
-            request.mime_type = mime_type
-        if content is not None:
-            request.content = content
+            if parent is not None:
+                request.parent = parent
+            if model is not None:
+                request.model = model
+            if mime_type is not None:
+                request.mime_type = mime_type
+            if content is not None:
+                request.content = content
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
@@ -596,23 +608,29 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        if request is not None and any([parent, model, display_language_code]):
+        has_flattened_params = any([parent, model, display_language_code])
+        if request is not None and has_flattened_params:
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
             )
 
-        request = translation_service.GetSupportedLanguagesRequest(request)
+        # Minor optimization to avoid making a copy if the user passes
+        # in a translation_service.GetSupportedLanguagesRequest.
+        # There's no risk of modifying the input as we've already verified
+        # there are no flattened fields.
+        if not isinstance(request, translation_service.GetSupportedLanguagesRequest):
+            request = translation_service.GetSupportedLanguagesRequest(request)
 
-        # If we have keyword arguments corresponding to fields on the
-        # request, apply these.
+            # If we have keyword arguments corresponding to fields on the
+            # request, apply these.
 
-        if parent is not None:
-            request.parent = parent
-        if model is not None:
-            request.model = model
-        if display_language_code is not None:
-            request.display_language_code = display_language_code
+            if parent is not None:
+                request.parent = parent
+            if model is not None:
+                request.model = model
+            if display_language_code is not None:
+                request.display_language_code = display_language_code
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
@@ -672,7 +690,12 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
         """
         # Create or coerce a protobuf request object.
 
-        request = translation_service.BatchTranslateTextRequest(request)
+        # Minor optimization to avoid making a copy if the user passes
+        # in a translation_service.BatchTranslateTextRequest.
+        # There's no risk of modifying the input as we've already verified
+        # there are no flattened fields.
+        if not isinstance(request, translation_service.BatchTranslateTextRequest):
+            request = translation_service.BatchTranslateTextRequest(request)
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
@@ -743,21 +766,27 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        if request is not None and any([parent, glossary]):
+        has_flattened_params = any([parent, glossary])
+        if request is not None and has_flattened_params:
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
             )
 
-        request = translation_service.CreateGlossaryRequest(request)
+        # Minor optimization to avoid making a copy if the user passes
+        # in a translation_service.CreateGlossaryRequest.
+        # There's no risk of modifying the input as we've already verified
+        # there are no flattened fields.
+        if not isinstance(request, translation_service.CreateGlossaryRequest):
+            request = translation_service.CreateGlossaryRequest(request)
 
-        # If we have keyword arguments corresponding to fields on the
-        # request, apply these.
+            # If we have keyword arguments corresponding to fields on the
+            # request, apply these.
 
-        if parent is not None:
-            request.parent = parent
-        if glossary is not None:
-            request.glossary = glossary
+            if parent is not None:
+                request.parent = parent
+            if glossary is not None:
+                request.glossary = glossary
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
@@ -823,19 +852,25 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        if request is not None and any([parent]):
+        has_flattened_params = any([parent])
+        if request is not None and has_flattened_params:
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
             )
 
-        request = translation_service.ListGlossariesRequest(request)
+        # Minor optimization to avoid making a copy if the user passes
+        # in a translation_service.ListGlossariesRequest.
+        # There's no risk of modifying the input as we've already verified
+        # there are no flattened fields.
+        if not isinstance(request, translation_service.ListGlossariesRequest):
+            request = translation_service.ListGlossariesRequest(request)
 
-        # If we have keyword arguments corresponding to fields on the
-        # request, apply these.
+            # If we have keyword arguments corresponding to fields on the
+            # request, apply these.
 
-        if parent is not None:
-            request.parent = parent
+            if parent is not None:
+                request.parent = parent
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
@@ -896,19 +931,25 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        if request is not None and any([name]):
+        has_flattened_params = any([name])
+        if request is not None and has_flattened_params:
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
             )
 
-        request = translation_service.GetGlossaryRequest(request)
+        # Minor optimization to avoid making a copy if the user passes
+        # in a translation_service.GetGlossaryRequest.
+        # There's no risk of modifying the input as we've already verified
+        # there are no flattened fields.
+        if not isinstance(request, translation_service.GetGlossaryRequest):
+            request = translation_service.GetGlossaryRequest(request)
 
-        # If we have keyword arguments corresponding to fields on the
-        # request, apply these.
+            # If we have keyword arguments corresponding to fields on the
+            # request, apply these.
 
-        if name is not None:
-            request.name = name
+            if name is not None:
+                request.name = name
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
@@ -969,19 +1010,25 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        if request is not None and any([name]):
+        has_flattened_params = any([name])
+        if request is not None and has_flattened_params:
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
             )
 
-        request = translation_service.DeleteGlossaryRequest(request)
+        # Minor optimization to avoid making a copy if the user passes
+        # in a translation_service.DeleteGlossaryRequest.
+        # There's no risk of modifying the input as we've already verified
+        # there are no flattened fields.
+        if not isinstance(request, translation_service.DeleteGlossaryRequest):
+            request = translation_service.DeleteGlossaryRequest(request)
 
-        # If we have keyword arguments corresponding to fields on the
-        # request, apply these.
+            # If we have keyword arguments corresponding to fields on the
+            # request, apply these.
 
-        if name is not None:
-            request.name = name
+            if name is not None:
+                request.name = name
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
@@ -1010,7 +1057,9 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
 
 try:
     _client_info = gapic_v1.client_info.ClientInfo(
-        gapic_version=pkg_resources.get_distribution("google.cloud.translate",).version,
+        gapic_version=pkg_resources.get_distribution(
+            "google-cloud-translation",
+        ).version,
     )
 except pkg_resources.DistributionNotFound:
     _client_info = gapic_v1.client_info.ClientInfo()

@@ -244,7 +244,7 @@ class TranslationServiceGrpcTransport(TranslationServiceTransport):
         # to pass in the functions for each.
         if "translate_text" not in self._stubs:
             self._stubs["translate_text"] = self.grpc_channel.unary_unary(
-                "/google.cloud.translate.v3beta1.TranslationService/TranslateText",
+                "/google.cloud.translation.v3beta1.TranslationService/TranslateText",
                 request_serializer=translation_service.TranslateTextRequest.serialize,
                 response_deserializer=translation_service.TranslateTextResponse.deserialize,
             )
@@ -273,7 +273,7 @@ class TranslationServiceGrpcTransport(TranslationServiceTransport):
         # to pass in the functions for each.
         if "detect_language" not in self._stubs:
             self._stubs["detect_language"] = self.grpc_channel.unary_unary(
-                "/google.cloud.translate.v3beta1.TranslationService/DetectLanguage",
+                "/google.cloud.translation.v3beta1.TranslationService/DetectLanguage",
                 request_serializer=translation_service.DetectLanguageRequest.serialize,
                 response_deserializer=translation_service.DetectLanguageResponse.deserialize,
             )
@@ -303,7 +303,7 @@ class TranslationServiceGrpcTransport(TranslationServiceTransport):
         # to pass in the functions for each.
         if "get_supported_languages" not in self._stubs:
             self._stubs["get_supported_languages"] = self.grpc_channel.unary_unary(
-                "/google.cloud.translate.v3beta1.TranslationService/GetSupportedLanguages",
+                "/google.cloud.translation.v3beta1.TranslationService/GetSupportedLanguages",
                 request_serializer=translation_service.GetSupportedLanguagesRequest.serialize,
                 response_deserializer=translation_service.SupportedLanguages.deserialize,
             )
@@ -339,7 +339,7 @@ class TranslationServiceGrpcTransport(TranslationServiceTransport):
         # to pass in the functions for each.
         if "batch_translate_text" not in self._stubs:
             self._stubs["batch_translate_text"] = self.grpc_channel.unary_unary(
-                "/google.cloud.translate.v3beta1.TranslationService/BatchTranslateText",
+                "/google.cloud.translation.v3beta1.TranslationService/BatchTranslateText",
                 request_serializer=translation_service.BatchTranslateTextRequest.serialize,
                 response_deserializer=operations.Operation.FromString,
             )
@@ -366,7 +366,7 @@ class TranslationServiceGrpcTransport(TranslationServiceTransport):
         # to pass in the functions for each.
         if "create_glossary" not in self._stubs:
             self._stubs["create_glossary"] = self.grpc_channel.unary_unary(
-                "/google.cloud.translate.v3beta1.TranslationService/CreateGlossary",
+                "/google.cloud.translation.v3beta1.TranslationService/CreateGlossary",
                 request_serializer=translation_service.CreateGlossaryRequest.serialize,
                 response_deserializer=operations.Operation.FromString,
             )
@@ -396,7 +396,7 @@ class TranslationServiceGrpcTransport(TranslationServiceTransport):
         # to pass in the functions for each.
         if "list_glossaries" not in self._stubs:
             self._stubs["list_glossaries"] = self.grpc_channel.unary_unary(
-                "/google.cloud.translate.v3beta1.TranslationService/ListGlossaries",
+                "/google.cloud.translation.v3beta1.TranslationService/ListGlossaries",
                 request_serializer=translation_service.ListGlossariesRequest.serialize,
                 response_deserializer=translation_service.ListGlossariesResponse.deserialize,
             )
@@ -425,7 +425,7 @@ class TranslationServiceGrpcTransport(TranslationServiceTransport):
         # to pass in the functions for each.
         if "get_glossary" not in self._stubs:
             self._stubs["get_glossary"] = self.grpc_channel.unary_unary(
-                "/google.cloud.translate.v3beta1.TranslationService/GetGlossary",
+                "/google.cloud.translation.v3beta1.TranslationService/GetGlossary",
                 request_serializer=translation_service.GetGlossaryRequest.serialize,
                 response_deserializer=translation_service.Glossary.deserialize,
             )
@@ -453,7 +453,7 @@ class TranslationServiceGrpcTransport(TranslationServiceTransport):
         # to pass in the functions for each.
         if "delete_glossary" not in self._stubs:
             self._stubs["delete_glossary"] = self.grpc_channel.unary_unary(
-                "/google.cloud.translate.v3beta1.TranslationService/DeleteGlossary",
+                "/google.cloud.translation.v3beta1.TranslationService/DeleteGlossary",
                 request_serializer=translation_service.DeleteGlossaryRequest.serialize,
                 response_deserializer=operations.Operation.FromString,
             )
