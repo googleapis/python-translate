@@ -35,28 +35,28 @@ import google.api_core.protobuf_helpers
 import grpc
 
 from google.cloud.translate_v3beta1.gapic import translation_service_client_config
-from google.cloud.translate_v3beta1.gapic.transports import translation_service_grpc_transport
+from google.cloud.translate_v3beta1.gapic.transports import (
+    translation_service_grpc_transport,
+)
 from google.cloud.translate_v3beta1.proto import translation_service_pb2
 from google.cloud.translate_v3beta1.proto import translation_service_pb2_grpc
 from google.longrunning import operations_pb2
 
 
-
 _GAPIC_LIBRARY_VERSION = pkg_resources.get_distribution(
-    'google-cloud-translate',
+    "google-cloud-translate",
 ).version
 
 
 class TranslationServiceClient(object):
     """Provides natural language translation operations."""
 
-    SERVICE_ADDRESS = 'translate.googleapis.com:443'
+    SERVICE_ADDRESS = "translate.googleapis.com:443"
     """The default address of the service."""
 
     # The name of the interface for this client. This is the key used to
     # find the method configuration in the client_config dictionary.
-    _INTERFACE_NAME = 'google.cloud.translation.v3beta1.TranslationService'
-
+    _INTERFACE_NAME = "google.cloud.translation.v3beta1.TranslationService"
 
     @classmethod
     def from_service_account_file(cls, filename, *args, **kwargs):
@@ -72,19 +72,17 @@ class TranslationServiceClient(object):
         Returns:
             TranslationServiceClient: The constructed client.
         """
-        credentials = service_account.Credentials.from_service_account_file(
-            filename)
-        kwargs['credentials'] = credentials
+        credentials = service_account.Credentials.from_service_account_file(filename)
+        kwargs["credentials"] = credentials
         return cls(*args, **kwargs)
 
     from_service_account_json = from_service_account_file
-
 
     @classmethod
     def glossary_path(cls, project, location, glossary):
         """Return a fully-qualified glossary string."""
         return google.api_core.path_template.expand(
-            'projects/{project}/locations/{location}/glossaries/{glossary}',
+            "projects/{project}/locations/{location}/glossaries/{glossary}",
             project=project,
             location=location,
             glossary=glossary,
@@ -94,13 +92,20 @@ class TranslationServiceClient(object):
     def location_path(cls, project, location):
         """Return a fully-qualified location string."""
         return google.api_core.path_template.expand(
-            'projects/{project}/locations/{location}',
+            "projects/{project}/locations/{location}",
             project=project,
             location=location,
         )
 
-    def __init__(self, transport=None, channel=None, credentials=None,
-            client_config=None, client_info=None, client_options=None):
+    def __init__(
+        self,
+        transport=None,
+        channel=None,
+        credentials=None,
+        client_config=None,
+        client_info=None,
+        client_options=None,
+    ):
         """Constructor.
 
         Args:
@@ -136,20 +141,27 @@ class TranslationServiceClient(object):
         """
         # Raise deprecation warnings for things we want to go away.
         if client_config is not None:
-            warnings.warn('The `client_config` argument is deprecated.',
-                          PendingDeprecationWarning, stacklevel=2)
+            warnings.warn(
+                "The `client_config` argument is deprecated.",
+                PendingDeprecationWarning,
+                stacklevel=2,
+            )
         else:
             client_config = translation_service_client_config.config
 
         if channel:
-            warnings.warn('The `channel` argument is deprecated; use '
-                          '`transport` instead.',
-                          PendingDeprecationWarning, stacklevel=2)
+            warnings.warn(
+                "The `channel` argument is deprecated; use " "`transport` instead.",
+                PendingDeprecationWarning,
+                stacklevel=2,
+            )
 
         api_endpoint = self.SERVICE_ADDRESS
         if client_options:
             if type(client_options) == dict:
-                client_options = google.api_core.client_options.from_dict(client_options)
+                client_options = google.api_core.client_options.from_dict(
+                    client_options
+                )
             if client_options.api_endpoint:
                 api_endpoint = client_options.api_endpoint
 
@@ -166,15 +178,13 @@ class TranslationServiceClient(object):
             else:
                 if credentials:
                     raise ValueError(
-                        'Received both a transport instance and '
-                        'credentials; these are mutually exclusive.'
+                        "Received both a transport instance and "
+                        "credentials; these are mutually exclusive."
                     )
                 self.transport = transport
         else:
             self.transport = translation_service_grpc_transport.TranslationServiceGrpcTransport(
-                address=api_endpoint,
-                channel=channel,
-                credentials=credentials,
+                address=api_endpoint, channel=channel, credentials=credentials,
             )
 
         if client_info is None:
@@ -190,7 +200,7 @@ class TranslationServiceClient(object):
         # (Ordinarily, these are the defaults specified in the `*_config.py`
         # file next to this one.)
         self._method_configs = google.api_core.gapic_v1.config.parse_method_configs(
-            client_config['interfaces'][self._INTERFACE_NAME],
+            client_config["interfaces"][self._INTERFACE_NAME],
         )
 
         # Save a dictionary of cached API call functions.
@@ -201,18 +211,19 @@ class TranslationServiceClient(object):
 
     # Service calls
     def translate_text(
-            self,
-            contents,
-            target_language_code,
-            parent,
-            mime_type=None,
-            source_language_code=None,
-            model=None,
-            glossary_config=None,
-            labels=None,
-            retry=google.api_core.gapic_v1.method.DEFAULT,
-            timeout=google.api_core.gapic_v1.method.DEFAULT,
-            metadata=None):
+        self,
+        contents,
+        target_language_code,
+        parent,
+        mime_type=None,
+        source_language_code=None,
+        model=None,
+        glossary_config=None,
+        labels=None,
+        retry=google.api_core.gapic_v1.method.DEFAULT,
+        timeout=google.api_core.gapic_v1.method.DEFAULT,
+        metadata=None,
+    ):
         """
         Translates input text and returns translated text.
 
@@ -307,11 +318,13 @@ class TranslationServiceClient(object):
             ValueError: If the parameters are invalid.
         """
         # Wrap the transport method to add retry and timeout logic.
-        if 'translate_text' not in self._inner_api_calls:
-            self._inner_api_calls['translate_text'] = google.api_core.gapic_v1.method.wrap_method(
+        if "translate_text" not in self._inner_api_calls:
+            self._inner_api_calls[
+                "translate_text"
+            ] = google.api_core.gapic_v1.method.wrap_method(
                 self.transport.translate_text,
-                default_retry=self._method_configs['TranslateText'].retry,
-                default_timeout=self._method_configs['TranslateText'].timeout,
+                default_retry=self._method_configs["TranslateText"].retry,
+                default_timeout=self._method_configs["TranslateText"].timeout,
                 client_info=self._client_info,
             )
 
@@ -329,25 +342,30 @@ class TranslationServiceClient(object):
             metadata = []
         metadata = list(metadata)
         try:
-            routing_header = [('parent', parent)]
+            routing_header = [("parent", parent)]
         except AttributeError:
             pass
         else:
-            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(routing_header)
+            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
+                routing_header
+            )
             metadata.append(routing_metadata)
 
-        return self._inner_api_calls['translate_text'](request, retry=retry, timeout=timeout, metadata=metadata)
+        return self._inner_api_calls["translate_text"](
+            request, retry=retry, timeout=timeout, metadata=metadata
+        )
 
     def detect_language(
-            self,
-            parent,
-            model=None,
-            content=None,
-            mime_type=None,
-            labels=None,
-            retry=google.api_core.gapic_v1.method.DEFAULT,
-            timeout=google.api_core.gapic_v1.method.DEFAULT,
-            metadata=None):
+        self,
+        parent,
+        model=None,
+        content=None,
+        mime_type=None,
+        labels=None,
+        retry=google.api_core.gapic_v1.method.DEFAULT,
+        timeout=google.api_core.gapic_v1.method.DEFAULT,
+        metadata=None,
+    ):
         """
         Detects the language of text within a request.
 
@@ -412,19 +430,19 @@ class TranslationServiceClient(object):
             ValueError: If the parameters are invalid.
         """
         # Wrap the transport method to add retry and timeout logic.
-        if 'detect_language' not in self._inner_api_calls:
-            self._inner_api_calls['detect_language'] = google.api_core.gapic_v1.method.wrap_method(
+        if "detect_language" not in self._inner_api_calls:
+            self._inner_api_calls[
+                "detect_language"
+            ] = google.api_core.gapic_v1.method.wrap_method(
                 self.transport.detect_language,
-                default_retry=self._method_configs['DetectLanguage'].retry,
-                default_timeout=self._method_configs['DetectLanguage'].timeout,
+                default_retry=self._method_configs["DetectLanguage"].retry,
+                default_timeout=self._method_configs["DetectLanguage"].timeout,
                 client_info=self._client_info,
             )
 
         # Sanity check: We have some fields which are mutually exclusive;
         # raise ValueError if more than one is sent.
-        google.api_core.protobuf_helpers.check_oneof(
-            content=content,
-        )
+        google.api_core.protobuf_helpers.check_oneof(content=content,)
 
         request = translation_service_pb2.DetectLanguageRequest(
             parent=parent,
@@ -437,23 +455,28 @@ class TranslationServiceClient(object):
             metadata = []
         metadata = list(metadata)
         try:
-            routing_header = [('parent', parent)]
+            routing_header = [("parent", parent)]
         except AttributeError:
             pass
         else:
-            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(routing_header)
+            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
+                routing_header
+            )
             metadata.append(routing_metadata)
 
-        return self._inner_api_calls['detect_language'](request, retry=retry, timeout=timeout, metadata=metadata)
+        return self._inner_api_calls["detect_language"](
+            request, retry=retry, timeout=timeout, metadata=metadata
+        )
 
     def get_supported_languages(
-            self,
-            parent,
-            display_language_code=None,
-            model=None,
-            retry=google.api_core.gapic_v1.method.DEFAULT,
-            timeout=google.api_core.gapic_v1.method.DEFAULT,
-            metadata=None):
+        self,
+        parent,
+        display_language_code=None,
+        model=None,
+        retry=google.api_core.gapic_v1.method.DEFAULT,
+        timeout=google.api_core.gapic_v1.method.DEFAULT,
+        metadata=None,
+    ):
         """
         Returns a list of supported languages for translation.
 
@@ -516,45 +539,50 @@ class TranslationServiceClient(object):
             ValueError: If the parameters are invalid.
         """
         # Wrap the transport method to add retry and timeout logic.
-        if 'get_supported_languages' not in self._inner_api_calls:
-            self._inner_api_calls['get_supported_languages'] = google.api_core.gapic_v1.method.wrap_method(
+        if "get_supported_languages" not in self._inner_api_calls:
+            self._inner_api_calls[
+                "get_supported_languages"
+            ] = google.api_core.gapic_v1.method.wrap_method(
                 self.transport.get_supported_languages,
-                default_retry=self._method_configs['GetSupportedLanguages'].retry,
-                default_timeout=self._method_configs['GetSupportedLanguages'].timeout,
+                default_retry=self._method_configs["GetSupportedLanguages"].retry,
+                default_timeout=self._method_configs["GetSupportedLanguages"].timeout,
                 client_info=self._client_info,
             )
 
         request = translation_service_pb2.GetSupportedLanguagesRequest(
-            parent=parent,
-            display_language_code=display_language_code,
-            model=model,
+            parent=parent, display_language_code=display_language_code, model=model,
         )
         if metadata is None:
             metadata = []
         metadata = list(metadata)
         try:
-            routing_header = [('parent', parent)]
+            routing_header = [("parent", parent)]
         except AttributeError:
             pass
         else:
-            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(routing_header)
+            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
+                routing_header
+            )
             metadata.append(routing_metadata)
 
-        return self._inner_api_calls['get_supported_languages'](request, retry=retry, timeout=timeout, metadata=metadata)
+        return self._inner_api_calls["get_supported_languages"](
+            request, retry=retry, timeout=timeout, metadata=metadata
+        )
 
     def batch_translate_text(
-            self,
-            parent,
-            source_language_code,
-            target_language_codes,
-            input_configs,
-            output_config,
-            models=None,
-            glossaries=None,
-            labels=None,
-            retry=google.api_core.gapic_v1.method.DEFAULT,
-            timeout=google.api_core.gapic_v1.method.DEFAULT,
-            metadata=None):
+        self,
+        parent,
+        source_language_code,
+        target_language_codes,
+        input_configs,
+        output_config,
+        models=None,
+        glossaries=None,
+        labels=None,
+        retry=google.api_core.gapic_v1.method.DEFAULT,
+        timeout=google.api_core.gapic_v1.method.DEFAULT,
+        metadata=None,
+    ):
         """
         Translates a large volume of text in asynchronous batch mode.
         This function provides real-time output as the inputs are being processed.
@@ -667,11 +695,13 @@ class TranslationServiceClient(object):
             ValueError: If the parameters are invalid.
         """
         # Wrap the transport method to add retry and timeout logic.
-        if 'batch_translate_text' not in self._inner_api_calls:
-            self._inner_api_calls['batch_translate_text'] = google.api_core.gapic_v1.method.wrap_method(
+        if "batch_translate_text" not in self._inner_api_calls:
+            self._inner_api_calls[
+                "batch_translate_text"
+            ] = google.api_core.gapic_v1.method.wrap_method(
                 self.transport.batch_translate_text,
-                default_retry=self._method_configs['BatchTranslateText'].retry,
-                default_timeout=self._method_configs['BatchTranslateText'].timeout,
+                default_retry=self._method_configs["BatchTranslateText"].retry,
+                default_timeout=self._method_configs["BatchTranslateText"].timeout,
                 client_info=self._client_info,
             )
 
@@ -689,14 +719,18 @@ class TranslationServiceClient(object):
             metadata = []
         metadata = list(metadata)
         try:
-            routing_header = [('parent', parent)]
+            routing_header = [("parent", parent)]
         except AttributeError:
             pass
         else:
-            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(routing_header)
+            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
+                routing_header
+            )
             metadata.append(routing_metadata)
 
-        operation = self._inner_api_calls['batch_translate_text'](request, retry=retry, timeout=timeout, metadata=metadata)
+        operation = self._inner_api_calls["batch_translate_text"](
+            request, retry=retry, timeout=timeout, metadata=metadata
+        )
         return google.api_core.operation.from_gapic(
             operation,
             self.transport._operations_client,
@@ -705,12 +739,13 @@ class TranslationServiceClient(object):
         )
 
     def create_glossary(
-            self,
-            parent,
-            glossary,
-            retry=google.api_core.gapic_v1.method.DEFAULT,
-            timeout=google.api_core.gapic_v1.method.DEFAULT,
-            metadata=None):
+        self,
+        parent,
+        glossary,
+        retry=google.api_core.gapic_v1.method.DEFAULT,
+        timeout=google.api_core.gapic_v1.method.DEFAULT,
+        metadata=None,
+    ):
         """
         Creates a glossary and returns the long-running operation. Returns
         NOT_FOUND, if the project doesn't exist.
@@ -762,30 +797,35 @@ class TranslationServiceClient(object):
             ValueError: If the parameters are invalid.
         """
         # Wrap the transport method to add retry and timeout logic.
-        if 'create_glossary' not in self._inner_api_calls:
-            self._inner_api_calls['create_glossary'] = google.api_core.gapic_v1.method.wrap_method(
+        if "create_glossary" not in self._inner_api_calls:
+            self._inner_api_calls[
+                "create_glossary"
+            ] = google.api_core.gapic_v1.method.wrap_method(
                 self.transport.create_glossary,
-                default_retry=self._method_configs['CreateGlossary'].retry,
-                default_timeout=self._method_configs['CreateGlossary'].timeout,
+                default_retry=self._method_configs["CreateGlossary"].retry,
+                default_timeout=self._method_configs["CreateGlossary"].timeout,
                 client_info=self._client_info,
             )
 
         request = translation_service_pb2.CreateGlossaryRequest(
-            parent=parent,
-            glossary=glossary,
+            parent=parent, glossary=glossary,
         )
         if metadata is None:
             metadata = []
         metadata = list(metadata)
         try:
-            routing_header = [('parent', parent)]
+            routing_header = [("parent", parent)]
         except AttributeError:
             pass
         else:
-            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(routing_header)
+            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
+                routing_header
+            )
             metadata.append(routing_metadata)
 
-        operation = self._inner_api_calls['create_glossary'](request, retry=retry, timeout=timeout, metadata=metadata)
+        operation = self._inner_api_calls["create_glossary"](
+            request, retry=retry, timeout=timeout, metadata=metadata
+        )
         return google.api_core.operation.from_gapic(
             operation,
             self.transport._operations_client,
@@ -794,13 +834,14 @@ class TranslationServiceClient(object):
         )
 
     def list_glossaries(
-            self,
-            parent,
-            page_size=None,
-            filter_=None,
-            retry=google.api_core.gapic_v1.method.DEFAULT,
-            timeout=google.api_core.gapic_v1.method.DEFAULT,
-            metadata=None):
+        self,
+        parent,
+        page_size=None,
+        filter_=None,
+        retry=google.api_core.gapic_v1.method.DEFAULT,
+        timeout=google.api_core.gapic_v1.method.DEFAULT,
+        metadata=None,
+    ):
         """
         Lists glossaries in a project. Returns NOT_FOUND, if the project
         doesn't exist.
@@ -859,46 +900,54 @@ class TranslationServiceClient(object):
             ValueError: If the parameters are invalid.
         """
         # Wrap the transport method to add retry and timeout logic.
-        if 'list_glossaries' not in self._inner_api_calls:
-            self._inner_api_calls['list_glossaries'] = google.api_core.gapic_v1.method.wrap_method(
+        if "list_glossaries" not in self._inner_api_calls:
+            self._inner_api_calls[
+                "list_glossaries"
+            ] = google.api_core.gapic_v1.method.wrap_method(
                 self.transport.list_glossaries,
-                default_retry=self._method_configs['ListGlossaries'].retry,
-                default_timeout=self._method_configs['ListGlossaries'].timeout,
+                default_retry=self._method_configs["ListGlossaries"].retry,
+                default_timeout=self._method_configs["ListGlossaries"].timeout,
                 client_info=self._client_info,
             )
 
         request = translation_service_pb2.ListGlossariesRequest(
-            parent=parent,
-            page_size=page_size,
-            filter=filter_,
+            parent=parent, page_size=page_size, filter=filter_,
         )
         if metadata is None:
             metadata = []
         metadata = list(metadata)
         try:
-            routing_header = [('parent', parent)]
+            routing_header = [("parent", parent)]
         except AttributeError:
             pass
         else:
-            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(routing_header)
+            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
+                routing_header
+            )
             metadata.append(routing_metadata)
 
         iterator = google.api_core.page_iterator.GRPCIterator(
             client=None,
-            method=functools.partial(self._inner_api_calls['list_glossaries'], retry=retry, timeout=timeout, metadata=metadata),
+            method=functools.partial(
+                self._inner_api_calls["list_glossaries"],
+                retry=retry,
+                timeout=timeout,
+                metadata=metadata,
+            ),
             request=request,
-            items_field='glossaries',
-            request_token_field='page_token',
-            response_token_field='next_page_token',
+            items_field="glossaries",
+            request_token_field="page_token",
+            response_token_field="next_page_token",
         )
         return iterator
 
     def get_glossary(
-            self,
-            name,
-            retry=google.api_core.gapic_v1.method.DEFAULT,
-            timeout=google.api_core.gapic_v1.method.DEFAULT,
-            metadata=None):
+        self,
+        name,
+        retry=google.api_core.gapic_v1.method.DEFAULT,
+        timeout=google.api_core.gapic_v1.method.DEFAULT,
+        metadata=None,
+    ):
         """
         Gets a glossary. Returns NOT_FOUND, if the glossary doesn't exist.
 
@@ -933,36 +982,41 @@ class TranslationServiceClient(object):
             ValueError: If the parameters are invalid.
         """
         # Wrap the transport method to add retry and timeout logic.
-        if 'get_glossary' not in self._inner_api_calls:
-            self._inner_api_calls['get_glossary'] = google.api_core.gapic_v1.method.wrap_method(
+        if "get_glossary" not in self._inner_api_calls:
+            self._inner_api_calls[
+                "get_glossary"
+            ] = google.api_core.gapic_v1.method.wrap_method(
                 self.transport.get_glossary,
-                default_retry=self._method_configs['GetGlossary'].retry,
-                default_timeout=self._method_configs['GetGlossary'].timeout,
+                default_retry=self._method_configs["GetGlossary"].retry,
+                default_timeout=self._method_configs["GetGlossary"].timeout,
                 client_info=self._client_info,
             )
 
-        request = translation_service_pb2.GetGlossaryRequest(
-            name=name,
-        )
+        request = translation_service_pb2.GetGlossaryRequest(name=name,)
         if metadata is None:
             metadata = []
         metadata = list(metadata)
         try:
-            routing_header = [('name', name)]
+            routing_header = [("name", name)]
         except AttributeError:
             pass
         else:
-            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(routing_header)
+            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
+                routing_header
+            )
             metadata.append(routing_metadata)
 
-        return self._inner_api_calls['get_glossary'](request, retry=retry, timeout=timeout, metadata=metadata)
+        return self._inner_api_calls["get_glossary"](
+            request, retry=retry, timeout=timeout, metadata=metadata
+        )
 
     def delete_glossary(
-            self,
-            name,
-            retry=google.api_core.gapic_v1.method.DEFAULT,
-            timeout=google.api_core.gapic_v1.method.DEFAULT,
-            metadata=None):
+        self,
+        name,
+        retry=google.api_core.gapic_v1.method.DEFAULT,
+        timeout=google.api_core.gapic_v1.method.DEFAULT,
+        metadata=None,
+    ):
         """
         Deletes a glossary, or cancels glossary construction if the glossary
         isn't created yet. Returns NOT_FOUND, if the glossary doesn't exist.
@@ -1007,29 +1061,33 @@ class TranslationServiceClient(object):
             ValueError: If the parameters are invalid.
         """
         # Wrap the transport method to add retry and timeout logic.
-        if 'delete_glossary' not in self._inner_api_calls:
-            self._inner_api_calls['delete_glossary'] = google.api_core.gapic_v1.method.wrap_method(
+        if "delete_glossary" not in self._inner_api_calls:
+            self._inner_api_calls[
+                "delete_glossary"
+            ] = google.api_core.gapic_v1.method.wrap_method(
                 self.transport.delete_glossary,
-                default_retry=self._method_configs['DeleteGlossary'].retry,
-                default_timeout=self._method_configs['DeleteGlossary'].timeout,
+                default_retry=self._method_configs["DeleteGlossary"].retry,
+                default_timeout=self._method_configs["DeleteGlossary"].timeout,
                 client_info=self._client_info,
             )
 
-        request = translation_service_pb2.DeleteGlossaryRequest(
-            name=name,
-        )
+        request = translation_service_pb2.DeleteGlossaryRequest(name=name,)
         if metadata is None:
             metadata = []
         metadata = list(metadata)
         try:
-            routing_header = [('name', name)]
+            routing_header = [("name", name)]
         except AttributeError:
             pass
         else:
-            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(routing_header)
+            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
+                routing_header
+            )
             metadata.append(routing_metadata)
 
-        operation = self._inner_api_calls['delete_glossary'](request, retry=retry, timeout=timeout, metadata=metadata)
+        operation = self._inner_api_calls["delete_glossary"](
+            request, retry=retry, timeout=timeout, metadata=metadata
+        )
         return google.api_core.operation.from_gapic(
             operation,
             self.transport._operations_client,
