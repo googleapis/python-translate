@@ -31,7 +31,7 @@ class Config(object):
     CLIENT_V2 = None
     CLIENT_V3 = None
     location = "global"
-    project_id = os.environ["GOOGLE_CLOUD_PROJECT"]
+    project_id = os.environ["PROJECT_ID"]
 
 
 def setUpModule():
