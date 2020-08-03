@@ -37,7 +37,8 @@ excludes = [
 for version in versions:
     library = gapic.py_library(
         service="translate",
-        version=version
+        version=version,
+        proto_path=f"google/cloud/translate/{version}"
     )
 
     s.move(library / "google/cloud/translation", "google/cloud/translate")
@@ -73,6 +74,12 @@ s.move(templated_files, excludes=[".coveragerc"])  # microgenerator has a good .
 
 # Correct namespace in noxfile
 s.replace("noxfile.py", "google.cloud.translation", "google.cloud.translate")
+
+# ----------------------------------------------------------------------------
+# Samples templates
+# ----------------------------------------------------------------------------
+
+python.py_samples()
 
 # ----------------------------------------------------------------------------
 # Samples templates
