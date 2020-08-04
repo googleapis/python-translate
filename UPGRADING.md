@@ -35,7 +35,8 @@ $ fixup_translation_v3_keywords.py --input-directory .samples/ --output-director
 from google.cloud import translate
 
 client = translate.TranslationServiceClient()
-parent = client.location_path(<PROJECT_ID>, <LOCATION>)
+parent = client.location_path("<PROJECT_ID>", "<LOCATION>")
+text = "Good morning!"
 
 response = client.translate_text(
     parent=parent,
