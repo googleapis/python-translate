@@ -362,14 +362,16 @@ def test_translation_service_client_client_options_from_dict():
         )
 
 
-def test_translate_text(transport: str = "grpc"):
+def test_translate_text(
+    transport: str = "grpc", request_type=translation_service.TranslateTextRequest
+):
     client = TranslationServiceClient(
         credentials=credentials.AnonymousCredentials(), transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
     # and we are mocking out the actual API, so just send an empty request.
-    request = translation_service.TranslateTextRequest()
+    request = request_type()
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client._transport.translate_text), "__call__") as call:
@@ -382,10 +384,14 @@ def test_translate_text(transport: str = "grpc"):
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
 
-        assert args[0] == request
+        assert args[0] == translation_service.TranslateTextRequest()
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, translation_service.TranslateTextResponse)
+
+
+def test_translate_text_from_dict():
+    test_translate_text(request_type=dict)
 
 
 @pytest.mark.asyncio
@@ -593,14 +599,16 @@ async def test_translate_text_flattened_error_async():
         )
 
 
-def test_detect_language(transport: str = "grpc"):
+def test_detect_language(
+    transport: str = "grpc", request_type=translation_service.DetectLanguageRequest
+):
     client = TranslationServiceClient(
         credentials=credentials.AnonymousCredentials(), transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
     # and we are mocking out the actual API, so just send an empty request.
-    request = translation_service.DetectLanguageRequest()
+    request = request_type()
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client._transport.detect_language), "__call__") as call:
@@ -613,10 +621,14 @@ def test_detect_language(transport: str = "grpc"):
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
 
-        assert args[0] == request
+        assert args[0] == translation_service.DetectLanguageRequest()
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, translation_service.DetectLanguageResponse)
+
+
+def test_detect_language_from_dict():
+    test_detect_language(request_type=dict)
 
 
 @pytest.mark.asyncio
@@ -808,14 +820,17 @@ async def test_detect_language_flattened_error_async():
         )
 
 
-def test_get_supported_languages(transport: str = "grpc"):
+def test_get_supported_languages(
+    transport: str = "grpc",
+    request_type=translation_service.GetSupportedLanguagesRequest,
+):
     client = TranslationServiceClient(
         credentials=credentials.AnonymousCredentials(), transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
     # and we are mocking out the actual API, so just send an empty request.
-    request = translation_service.GetSupportedLanguagesRequest()
+    request = request_type()
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -830,10 +845,14 @@ def test_get_supported_languages(transport: str = "grpc"):
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
 
-        assert args[0] == request
+        assert args[0] == translation_service.GetSupportedLanguagesRequest()
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, translation_service.SupportedLanguages)
+
+
+def test_get_supported_languages_from_dict():
+    test_get_supported_languages(request_type=dict)
 
 
 @pytest.mark.asyncio
@@ -1021,14 +1040,16 @@ async def test_get_supported_languages_flattened_error_async():
         )
 
 
-def test_batch_translate_text(transport: str = "grpc"):
+def test_batch_translate_text(
+    transport: str = "grpc", request_type=translation_service.BatchTranslateTextRequest
+):
     client = TranslationServiceClient(
         credentials=credentials.AnonymousCredentials(), transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
     # and we are mocking out the actual API, so just send an empty request.
-    request = translation_service.BatchTranslateTextRequest()
+    request = request_type()
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
@@ -1043,10 +1064,14 @@ def test_batch_translate_text(transport: str = "grpc"):
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
 
-        assert args[0] == request
+        assert args[0] == translation_service.BatchTranslateTextRequest()
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, future.Future)
+
+
+def test_batch_translate_text_from_dict():
+    test_batch_translate_text(request_type=dict)
 
 
 @pytest.mark.asyncio
@@ -1137,14 +1162,16 @@ async def test_batch_translate_text_field_headers_async():
     assert ("x-goog-request-params", "parent=parent/value",) in kw["metadata"]
 
 
-def test_create_glossary(transport: str = "grpc"):
+def test_create_glossary(
+    transport: str = "grpc", request_type=translation_service.CreateGlossaryRequest
+):
     client = TranslationServiceClient(
         credentials=credentials.AnonymousCredentials(), transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
     # and we are mocking out the actual API, so just send an empty request.
-    request = translation_service.CreateGlossaryRequest()
+    request = request_type()
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client._transport.create_glossary), "__call__") as call:
@@ -1157,10 +1184,14 @@ def test_create_glossary(transport: str = "grpc"):
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
 
-        assert args[0] == request
+        assert args[0] == translation_service.CreateGlossaryRequest()
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, future.Future)
+
+
+def test_create_glossary_from_dict():
+    test_create_glossary(request_type=dict)
 
 
 @pytest.mark.asyncio
@@ -1336,14 +1367,16 @@ async def test_create_glossary_flattened_error_async():
         )
 
 
-def test_list_glossaries(transport: str = "grpc"):
+def test_list_glossaries(
+    transport: str = "grpc", request_type=translation_service.ListGlossariesRequest
+):
     client = TranslationServiceClient(
         credentials=credentials.AnonymousCredentials(), transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
     # and we are mocking out the actual API, so just send an empty request.
-    request = translation_service.ListGlossariesRequest()
+    request = request_type()
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client._transport.list_glossaries), "__call__") as call:
@@ -1358,12 +1391,16 @@ def test_list_glossaries(transport: str = "grpc"):
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
 
-        assert args[0] == request
+        assert args[0] == translation_service.ListGlossariesRequest()
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, pagers.ListGlossariesPager)
 
     assert response.next_page_token == "next_page_token_value"
+
+
+def test_list_glossaries_from_dict():
+    test_list_glossaries(request_type=dict)
 
 
 @pytest.mark.asyncio
@@ -1695,14 +1732,16 @@ async def test_list_glossaries_async_pages():
             assert page.raw_page.next_page_token == token
 
 
-def test_get_glossary(transport: str = "grpc"):
+def test_get_glossary(
+    transport: str = "grpc", request_type=translation_service.GetGlossaryRequest
+):
     client = TranslationServiceClient(
         credentials=credentials.AnonymousCredentials(), transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
     # and we are mocking out the actual API, so just send an empty request.
-    request = translation_service.GetGlossaryRequest()
+    request = request_type()
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client._transport.get_glossary), "__call__") as call:
@@ -1721,7 +1760,7 @@ def test_get_glossary(transport: str = "grpc"):
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
 
-        assert args[0] == request
+        assert args[0] == translation_service.GetGlossaryRequest()
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, translation_service.Glossary)
@@ -1729,6 +1768,10 @@ def test_get_glossary(transport: str = "grpc"):
     assert response.name == "name_value"
 
     assert response.entry_count == 1210
+
+
+def test_get_glossary_from_dict():
+    test_get_glossary(request_type=dict)
 
 
 @pytest.mark.asyncio
@@ -1894,14 +1937,16 @@ async def test_get_glossary_flattened_error_async():
         )
 
 
-def test_delete_glossary(transport: str = "grpc"):
+def test_delete_glossary(
+    transport: str = "grpc", request_type=translation_service.DeleteGlossaryRequest
+):
     client = TranslationServiceClient(
         credentials=credentials.AnonymousCredentials(), transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
     # and we are mocking out the actual API, so just send an empty request.
-    request = translation_service.DeleteGlossaryRequest()
+    request = request_type()
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client._transport.delete_glossary), "__call__") as call:
@@ -1914,10 +1959,14 @@ def test_delete_glossary(transport: str = "grpc"):
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
 
-        assert args[0] == request
+        assert args[0] == translation_service.DeleteGlossaryRequest()
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, future.Future)
+
+
+def test_delete_glossary_from_dict():
+    test_delete_glossary(request_type=dict)
 
 
 @pytest.mark.asyncio
