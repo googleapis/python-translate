@@ -54,6 +54,7 @@ from google.cloud import translate
 
 client = translate.TranslationServiceClient()
 parent = "projects/<PROJECT_ID>/locations/<LOCATION>"
+text = "Good morning!"
 
 response = client.translate_text(
     request={
