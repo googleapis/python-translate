@@ -3,8 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:danoscarmike/python-translate",
-        "sha": "2a80f87c6ff441fb81161db8cda1049aa6851cc4"
+        "remote": "https://github.com/googleapis/python-translate.git",
+        "sha": "a334317bc34b8927adfbc4a2559dbb71ee22c78d"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "3b11146ac64df40186e7f6e009dd3a13057b22cb",
+        "internalRef": "325531256"
       }
     },
     {
