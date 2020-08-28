@@ -16,7 +16,7 @@ import os
 import re
 import sys
 import uuid
-import pytest
+
 from hybrid_tutorial import create_glossary
 from hybrid_tutorial import pic_to_text
 from hybrid_tutorial import text_to_speech
