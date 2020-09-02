@@ -12,23 +12,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START translate_v3_batch_translate_text]
+
+# [START translate_v3_batch_translate_text_with_model]
 from google.cloud import translate
 
 
-def batch_translate_text(
+def batch_translate_text_with_model(
     input_uri="gs://YOUR_BUCKET_ID/path/to/your/file.txt",
     output_uri="gs://YOUR_BUCKET_ID/path/to/save/results/",
     project_id="YOUR_PROJECT_ID",
-    timeout=180,
+    model_id="YOUR_MODEL_ID",
 ):
-    """Translates a batch of texts on GCS and stores the result in a GCS location."""
+    """Batch translate text using Translation model.
+     Model can be AutoML or General[built-in] model. """
 
     client = translate.TranslationServiceClient()
 
-    location = "us-central1"
     # Supported file types: https://cloud.google.com/translate/docs/supported-formats
     gcs_source = {"input_uri": input_uri}
+    location = "us-central1"
 
     input_configs_element = {
         "gcs_source": gcs_source,
@@ -38,7 +40,13 @@ def batch_translate_text(
     output_config = {"gcs_destination": gcs_destination}
     parent = f"projects/{project_id}/locations/{location}"
 
-    # Supported language codes: https://cloud.google.com/translate/docs/language
+    model_path = "projects/{}/locations/{}/models/{}".format(
+        project_id, location, model_id  # The location of AutoML model.
+    )
+
+    # Supported language codes: https://cloud.google.com/translate/docs/languages
+    models = {"ja": model_path}  # takes a target lang as key.
+
     operation = client.batch_translate_text(
         request={
             "parent": parent,
@@ -46,14 +54,16 @@ def batch_translate_text(
             "target_language_codes": ["ja"],  # Up to 10 language codes here.
             "input_configs": [input_configs_element],
             "output_config": output_config,
+            "models": models,
         }
     )
 
     print("Waiting for operation to complete...")
-    response = operation.result(timeout)
+    response = operation.result()
 
+    # Display the translation for each input text provided.
     print("Total Characters: {}".format(response.total_characters))
     print("Translated Characters: {}".format(response.translated_characters))
 
 
-# [END translate_v3_batch_translate_text]
+# [END translate_v3_batch_translate_text_with_model]

@@ -1,10 +1,10 @@
-# Copyright 2020 Google LLC
+# Copyright 2019 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#    http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,49 +15,38 @@
 import os
 import uuid
 
-import backoff
-from google.api_core.exceptions import DeadlineExceeded, GoogleAPICallError
 from google.cloud import storage
-from google.cloud.exceptions import NotFound
 import pytest
 
-import translate_v3_batch_translate_text_with_glossary
+import translate_v3_batch_translate_text_with_glossary_and_model
 import translate_v3_create_glossary
 import translate_v3_delete_glossary
 
-
 PROJECT_ID = os.environ["GOOGLE_CLOUD_PROJECT"]
 GLOSSARY_INPUT_URI = "gs://cloud-samples-data/translation/glossary_ja.csv"
+MODEL_ID = "TRL3128559826197068699"
 
 
 @pytest.fixture(scope="session")
 def glossary():
     """Get the ID of a glossary available to session (do not mutate/delete)."""
-    glossary_id = "test-{}".format(uuid.uuid4())
+    glossary_id = "must-start-with-letters-" + str(uuid.uuid1())
     translate_v3_create_glossary.create_glossary(
-        PROJECT_ID, GLOSSARY_INPUT_URI, glossary_id
+        project_id=PROJECT_ID, input_uri=GLOSSARY_INPUT_URI, glossary_id=glossary_id
     )
 
     yield glossary_id
 
-    # cleanup
-    @backoff.on_exception(
-        backoff.expo, (DeadlineExceeded, GoogleAPICallError), max_time=60
-    )
-    def delete_glossary():
-        try:
-            translate_v3_delete_glossary.delete_glossary(PROJECT_ID, glossary_id)
-        except NotFound as e:
-            # Ignoring this case.
-            print("Got NotFound, detail: {}".format(str(e)))
-
-    delete_glossary()
+    try:
+        translate_v3_delete_glossary.sample_delete_glossary(PROJECT_ID, glossary_id)
+    except Exception:
+        pass
 
 
 @pytest.fixture(scope="function")
 def bucket():
     """Create a temporary bucket to store annotation output."""
-    bucket_name = f"tmp-{uuid.uuid4().hex}"
+    bucket_name = "mike-test-delete-" + str(uuid.uuid1())
     storage_client = storage.Client()
     bucket = storage_client.create_bucket(bucket_name)
 
@@ -66,15 +55,17 @@ def bucket():
     bucket.delete(force=True)
 
 
-@pytest.mark.flaky(max_runs=3, min_passes=1)
-def test_batch_translate_text_with_glossary(capsys, bucket, glossary):
-    translate_v3_batch_translate_text_with_glossary.batch_translate_text_with_glossary(
-        "gs://cloud-samples-data/translation/text_with_glossary.txt",
+def test_batch_translate_text_with_glossary_and_model(capsys, bucket, glossary):
+    translate_v3_batch_translate_text_with_glossary_and_model.sample_batch_translate_text_with_glossary_and_model(
+        "gs://cloud-samples-data/translation/text_with_custom_model_and_glossary.txt",
         "gs://{}/translation/BATCH_TRANSLATION_OUTPUT/".format(bucket.name),
         PROJECT_ID,
+        "us-central1",
+        "ja",
+        "en",
+        MODEL_ID,
         glossary,
-        240,
     )
 
     out, _ = capsys.readouterr()
-    assert "Total Characters: 9" in out
+    assert "Total Characters: 25" in out

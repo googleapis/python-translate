@@ -18,16 +18,17 @@ import uuid
 from google.cloud import storage
 import pytest
 
-import translate_v3_batch_translate_text
+import translate_v3_batch_translate_text_with_model
 
 
 PROJECT_ID = os.environ["GOOGLE_CLOUD_PROJECT"]
+MODEL_ID = "TRL3128559826197068699"
 
 
 @pytest.fixture(scope="function")
 def bucket():
     """Create a temporary bucket to store annotation output."""
-    bucket_name = "test-{}".format(uuid.uuid4())
+    bucket_name = f"tmp-{uuid.uuid4().hex}"
     storage_client = storage.Client()
     bucket = storage_client.create_bucket(bucket_name)
 
@@ -36,13 +37,13 @@ def bucket():
     bucket.delete(force=True)
 
 
-@pytest.mark.flaky(max_runs=3, min_passes=1)
-def test_batch_translate_text(capsys, bucket):
-    translate_v3_batch_translate_text.batch_translate_text(
-        "gs://cloud-samples-data/translation/text.txt",
+def test_batch_translate_text_with_model(capsys, bucket):
+    translate_v3_batch_translate_text_with_model.batch_translate_text_with_model(
+        "gs://cloud-samples-data/translation/custom_model_text.txt",
         "gs://{}/translation/BATCH_TRANSLATION_OUTPUT/".format(bucket.name),
         PROJECT_ID,
-        timeout=240,
+        MODEL_ID,
     )
     out, _ = capsys.readouterr()
-    assert "Total Characters" in out
+    assert "Total Characters: 15" in out
+    assert "Translated Characters: 15" in out
