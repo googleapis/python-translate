@@ -36,8 +36,7 @@ class TestConnection(unittest.TestCase):
         scheme, netloc, path, qs, _ = urlsplit(uri)
         self.assertEqual("%s://%s" % (scheme, netloc), conn.API_BASE_URL)
         self.assertEqual(
-            path,
-            "/".join(["", "language", "translate", conn.API_VERSION, "foo"])
+            path, "/".join(["", "language", "translate", conn.API_VERSION, "foo"])
         )
         parms = dict(parse_qsl(qs))
         pretty_print = parms.pop("prettyPrint", "false")
@@ -54,8 +53,7 @@ class TestConnection(unittest.TestCase):
         scheme, netloc, path, qs, _ = urlsplit(uri)
         self.assertEqual("%s://%s" % (scheme, netloc), custom_endpoint)
         self.assertEqual(
-            path,
-            "/".join(["", "language", "translate", conn.API_VERSION, "foo"])
+            path, "/".join(["", "language", "translate", conn.API_VERSION, "foo"])
         )
         parms = dict(parse_qsl(qs))
         pretty_print = parms.pop("prettyPrint", "false")
@@ -71,8 +69,7 @@ class TestConnection(unittest.TestCase):
         scheme, netloc, path, qs, _ = urlsplit(uri)
         self.assertEqual("%s://%s" % (scheme, netloc), conn.API_BASE_URL)
         self.assertEqual(
-            path,
-            "/".join(["", "language", "translate", conn.API_VERSION, "foo"])
+            path, "/".join(["", "language", "translate", conn.API_VERSION, "foo"])
         )
         parms = dict(parse_qsl(qs))
         self.assertEqual(parms["bar"], "baz")
@@ -88,7 +85,9 @@ class TestConnection(unittest.TestCase):
         self.assertEqual("%s://%s" % (scheme, netloc), conn.API_BASE_URL)
         expected_path = "/".join(["", "language", "translate", conn.API_VERSION, "foo"])
         self.assertEqual(path, expected_path)
-        params = list(sorted(param for param in parse_qsl(qs) if param[0] != "prettyPrint"))
+        params = list(
+            sorted(param for param in parse_qsl(qs) if param[0] != "prettyPrint")
+        )
         expected_params = [("q", "val1"), ("q", "val2")]
         self.assertEqual(params, expected_params)
 
