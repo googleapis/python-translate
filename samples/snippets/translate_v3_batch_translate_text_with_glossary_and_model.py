@@ -31,8 +31,8 @@ def batch_translate_text_with_glossary_and_model(
 
     # Supported language codes: https://cloud.google.com/translate/docs/languages
     location = "us-central1"
-    
-    target_language_codes = ['ja']
+
+    target_language_codes = ["ja"]
     gcs_source = {"input_uri": input_uri}
 
     # Optional. Can be "text/plain" or "text/html".
@@ -45,7 +45,7 @@ def batch_translate_text_with_glossary_and_model(
     model_path = "projects/{}/locations/{}/models/{}".format(
         project_id, "us-central1", model_id
     )
-    models = {'ja': model_path}
+    models = {"ja": model_path}
 
     glossary_path = client.glossary_path(
         project_id, "us-central1", glossary_id  # The location of the glossary
