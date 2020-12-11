@@ -7,15 +7,6 @@
 ### [3.0.2](https://www.github.com/googleapis/python-translate/compare/v3.0.1...v3.0.2) (2020-12-09)
 
 
-### Bug Fixes
-
-* adjusts flaky test; deletes unneeded test ([#66](https://www.github.com/googleapis/python-translate/issues/66)) ([56a8beb](https://www.github.com/googleapis/python-translate/commit/56a8beb95b373b49e161aebdaa3e7afce56be247))
-* fix package name ([df71788](https://www.github.com/googleapis/python-translate/commit/df7178883022c1e49a85b02fb6841141036cd933))
-* moves import six inside of region tags ([#83](https://www.github.com/googleapis/python-translate/issues/83)) ([1399cf0](https://www.github.com/googleapis/python-translate/commit/1399cf0affcff48ebc078503822cdcb49a1e4b14))
-* re-generated v3 client and fix system.py ([#76](https://www.github.com/googleapis/python-translate/issues/76)) ([37e3826](https://www.github.com/googleapis/python-translate/commit/37e382605e37640f936ed49778f54e00be332d6d))
-* **translate:** fix a broken test [([#4360](https://www.github.com/googleapis/python-translate/issues/4360))](https://github.com/GoogleCloudPlatform/python-docs-samples/issues/4360) ([e6647a6](https://www.github.com/googleapis/python-translate/commit/e6647a6af6d1589cb0653b1e1a563653efc67300)), closes [#4353](https://www.github.com/googleapis/python-translate/issues/4353)
-
-
 ### Documentation
 
 * add w/ glossary and model ([1e030d4](https://www.github.com/googleapis/python-translate/commit/1e030d4557ee1f67bad5e5b4759d0200efd27afd))
