@@ -79,6 +79,7 @@ class TranslationServiceAsyncClient:
         TranslationServiceClient.parse_common_location_path
     )
 
+    from_service_account_info = TranslationServiceClient.from_service_account_info
     from_service_account_file = TranslationServiceClient.from_service_account_file
     from_service_account_json = from_service_account_file
 
@@ -155,7 +156,7 @@ class TranslationServiceAsyncClient:
         r"""Translates input text and returns translated text.
 
         Args:
-            request (:class:`~.translation_service.TranslateTextRequest`):
+            request (:class:`google.cloud.translate_v3beta1.types.TranslateTextRequest`):
                 The request object. The request message for synchronous
                 translation.
 
@@ -166,7 +167,7 @@ class TranslationServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.translation_service.TranslateTextResponse:
+            google.cloud.translate_v3beta1.types.TranslateTextResponse:
 
         """
         # Create or coerce a protobuf request object.
@@ -207,7 +208,7 @@ class TranslationServiceAsyncClient:
         r"""Detects the language of text within a request.
 
         Args:
-            request (:class:`~.translation_service.DetectLanguageRequest`):
+            request (:class:`google.cloud.translate_v3beta1.types.DetectLanguageRequest`):
                 The request object. The request message for language
                 detection.
             parent (:class:`str`):
@@ -225,6 +226,7 @@ class TranslationServiceAsyncClient:
                 Only models within the same region (has same
                 location-id) can be used. Otherwise an INVALID_ARGUMENT
                 (400) error is returned.
+
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -239,6 +241,7 @@ class TranslationServiceAsyncClient:
                 ``projects/{project-id}/locations/{location-id}/models/language-detection/default``.
 
                 If not specified, the default model is used.
+
                 This corresponds to the ``model`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -247,6 +250,7 @@ class TranslationServiceAsyncClient:
                 text, for example, "text/html",
                 "text/plain". If left blank, the MIME
                 type defaults to "text/html".
+
                 This corresponds to the ``mime_type`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -258,7 +262,7 @@ class TranslationServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.translation_service.DetectLanguageResponse:
+            google.cloud.translate_v3beta1.types.DetectLanguageResponse:
                 The response message for language
                 detection.
 
@@ -320,7 +324,7 @@ class TranslationServiceAsyncClient:
         translation.
 
         Args:
-            request (:class:`~.translation_service.GetSupportedLanguagesRequest`):
+            request (:class:`google.cloud.translate_v3beta1.types.GetSupportedLanguagesRequest`):
                 The request object. The request message for discovering
                 supported languages.
             parent (:class:`str`):
@@ -339,6 +343,7 @@ class TranslationServiceAsyncClient:
                 Only models within the same region (have same
                 location-id) can be used, otherwise an INVALID_ARGUMENT
                 (400) error is returned.
+
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -348,6 +353,7 @@ class TranslationServiceAsyncClient:
                 of supported languages. If missing, then
                 display names are not returned in a
                 response.
+
                 This corresponds to the ``display_language_code`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -366,6 +372,7 @@ class TranslationServiceAsyncClient:
                 Returns languages supported by the specified model. If
                 missing, we get supported languages of Google general
                 base (PBMT) model.
+
                 This corresponds to the ``model`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -377,7 +384,7 @@ class TranslationServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.translation_service.SupportedLanguages:
+            google.cloud.translate_v3beta1.types.SupportedLanguages:
                 The response message for discovering
                 supported languages.
 
@@ -451,7 +458,7 @@ class TranslationServiceAsyncClient:
         of the call.
 
         Args:
-            request (:class:`~.translation_service.BatchTranslateTextRequest`):
+            request (:class:`google.cloud.translate_v3beta1.types.BatchTranslateTextRequest`):
                 The request object. The batch translation request.
 
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
@@ -461,15 +468,12 @@ class TranslationServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.operation_async.AsyncOperation:
+            google.api_core.operation_async.AsyncOperation:
                 An object representing a long-running operation.
 
-                The result type for the operation will be
-                :class:``~.translation_service.BatchTranslateResponse``:
-                Stored in the
-                [google.longrunning.Operation.response][google.longrunning.Operation.response]
-                field returned by BatchTranslateText if at least one
-                sentence is translated successfully.
+                The result type for the operation will be :class:`google.cloud.translate_v3beta1.types.BatchTranslateResponse` Stored in the [google.longrunning.Operation.response][google.longrunning.Operation.response] field returned by
+                   BatchTranslateText if at least one sentence is
+                   translated successfully.
 
         """
         # Create or coerce a protobuf request object.
@@ -518,14 +522,14 @@ class TranslationServiceAsyncClient:
         Returns NOT_FOUND, if the project doesn't exist.
 
         Args:
-            request (:class:`~.translation_service.CreateGlossaryRequest`):
+            request (:class:`google.cloud.translate_v3beta1.types.CreateGlossaryRequest`):
                 The request object. Request message for CreateGlossary.
             parent (:class:`str`):
                 Required. The project name.
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            glossary (:class:`~.translation_service.Glossary`):
+            glossary (:class:`google.cloud.translate_v3beta1.types.Glossary`):
                 Required. The glossary to create.
                 This corresponds to the ``glossary`` field
                 on the ``request`` instance; if ``request`` is provided, this
@@ -538,12 +542,12 @@ class TranslationServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.operation_async.AsyncOperation:
+            google.api_core.operation_async.AsyncOperation:
                 An object representing a long-running operation.
 
                 The result type for the operation will be
-                :class:``~.translation_service.Glossary``: Represents a
-                glossary built from user provided data.
+                :class:`google.cloud.translate_v3beta1.types.Glossary`
+                Represents a glossary built from user provided data.
 
         """
         # Create or coerce a protobuf request object.
@@ -608,12 +612,13 @@ class TranslationServiceAsyncClient:
         doesn't exist.
 
         Args:
-            request (:class:`~.translation_service.ListGlossariesRequest`):
+            request (:class:`google.cloud.translate_v3beta1.types.ListGlossariesRequest`):
                 The request object. Request message for ListGlossaries.
             parent (:class:`str`):
                 Required. The name of the project
                 from which to list all of the
                 glossaries.
+
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -623,6 +628,7 @@ class TranslationServiceAsyncClient:
                 Filtering is not supported yet, and the
                 parameter currently has no effect. If
                 missing, no filtering is performed.
+
                 This corresponds to the ``filter`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -634,7 +640,7 @@ class TranslationServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.pagers.ListGlossariesAsyncPager:
+            google.cloud.translate_v3beta1.services.translation_service.pagers.ListGlossariesAsyncPager:
                 Response message for ListGlossaries.
                 Iterating over this object will yield
                 results and resolve additional pages
@@ -708,11 +714,12 @@ class TranslationServiceAsyncClient:
         exist.
 
         Args:
-            request (:class:`~.translation_service.GetGlossaryRequest`):
+            request (:class:`google.cloud.translate_v3beta1.types.GetGlossaryRequest`):
                 The request object. Request message for GetGlossary.
             name (:class:`str`):
                 Required. The name of the glossary to
                 retrieve.
+
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -724,7 +731,7 @@ class TranslationServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.translation_service.Glossary:
+            google.cloud.translate_v3beta1.types.Glossary:
                 Represents a glossary built from user
                 provided data.
 
@@ -789,11 +796,12 @@ class TranslationServiceAsyncClient:
         doesn't exist.
 
         Args:
-            request (:class:`~.translation_service.DeleteGlossaryRequest`):
+            request (:class:`google.cloud.translate_v3beta1.types.DeleteGlossaryRequest`):
                 The request object. Request message for DeleteGlossary.
             name (:class:`str`):
                 Required. The name of the glossary to
                 delete.
+
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -805,14 +813,11 @@ class TranslationServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.operation_async.AsyncOperation:
+            google.api_core.operation_async.AsyncOperation:
                 An object representing a long-running operation.
 
-                The result type for the operation will be
-                :class:``~.translation_service.DeleteGlossaryResponse``:
-                Stored in the
-                [google.longrunning.Operation.response][google.longrunning.Operation.response]
-                field returned by DeleteGlossary.
+                The result type for the operation will be :class:`google.cloud.translate_v3beta1.types.DeleteGlossaryResponse` Stored in the [google.longrunning.Operation.response][google.longrunning.Operation.response] field returned by
+                   DeleteGlossary.
 
         """
         # Create or coerce a protobuf request object.

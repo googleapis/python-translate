@@ -133,12 +133,12 @@ class TranslateTextRequest(proto.Message):
 
             If missing, the system decides which google base model to
             use.
-        glossary_config (~.translation_service.TranslateTextGlossaryConfig):
+        glossary_config (google.cloud.translate_v3beta1.types.TranslateTextGlossaryConfig):
             Optional. Glossary to be applied. The glossary must be
             within the same region (have the same location-id) as the
             model, otherwise an INVALID_ARGUMENT (400) error is
             returned.
-        labels (Sequence[~.translation_service.TranslateTextRequest.LabelsEntry]):
+        labels (Sequence[google.cloud.translate_v3beta1.types.TranslateTextRequest.LabelsEntry]):
             Optional. The labels with user-defined
             metadata for the request.
             Label keys and values can be no longer than 63
@@ -175,11 +175,11 @@ class TranslateTextResponse(proto.Message):
     r"""
 
     Attributes:
-        translations (Sequence[~.translation_service.Translation]):
+        translations (Sequence[google.cloud.translate_v3beta1.types.Translation]):
             Text translation responses with no glossary applied. This
             field has the same length as
             [``contents``][google.cloud.translation.v3beta1.TranslateTextRequest.contents].
-        glossary_translations (Sequence[~.translation_service.Translation]):
+        glossary_translations (Sequence[google.cloud.translate_v3beta1.types.Translation]):
             Text translation responses if a glossary is provided in the
             request. This can be the same as
             [``translations``][google.cloud.translation.v3beta1.TranslateTextResponse.translations]
@@ -210,7 +210,7 @@ class Translation(proto.Message):
             request. If the source language was passed,
             auto-detection of the language does not occur
             and this field is empty.
-        glossary_config (~.translation_service.TranslateTextGlossaryConfig):
+        glossary_config (google.cloud.translate_v3beta1.types.TranslateTextGlossaryConfig):
             The ``glossary_config`` used for this translation.
     """
 
@@ -259,7 +259,7 @@ class DetectLanguageRequest(proto.Message):
             Optional. The format of the source text, for
             example, "text/html", "text/plain". If left
             blank, the MIME type defaults to "text/html".
-        labels (Sequence[~.translation_service.DetectLanguageRequest.LabelsEntry]):
+        labels (Sequence[google.cloud.translate_v3beta1.types.DetectLanguageRequest.LabelsEntry]):
             Optional. The labels with user-defined
             metadata for the request.
             Label keys and values can be no longer than 63
@@ -305,7 +305,7 @@ class DetectLanguageResponse(proto.Message):
     r"""The response message for language detection.
 
     Attributes:
-        languages (Sequence[~.translation_service.DetectedLanguage]):
+        languages (Sequence[google.cloud.translate_v3beta1.types.DetectedLanguage]):
             A list of detected languages sorted by
             detection confidence in descending order. The
             most probable language first.
@@ -369,7 +369,7 @@ class SupportedLanguages(proto.Message):
     r"""The response message for discovering supported languages.
 
     Attributes:
-        languages (Sequence[~.translation_service.SupportedLanguage]):
+        languages (Sequence[google.cloud.translate_v3beta1.types.SupportedLanguage]):
             A list of supported language responses. This
             list contains an entry for each language the
             Translation API supports.
@@ -431,7 +431,7 @@ class InputConfig(proto.Message):
             "text/html" is used if mime_type is missing. For ``.html``,
             this field must be "text/html" or empty. For ``.txt``, this
             field must be "text/plain" or empty.
-        gcs_source (~.translation_service.GcsSource):
+        gcs_source (google.cloud.translate_v3beta1.types.GcsSource):
             Required. Google Cloud Storage location for the source
             input. This can be a single file (for example,
             ``gs://translation-test/input.tsv``) or a wildcard (for
@@ -478,7 +478,7 @@ class OutputConfig(proto.Message):
     r"""Output configuration for BatchTranslateText request.
 
     Attributes:
-        gcs_destination (~.translation_service.GcsDestination):
+        gcs_destination (google.cloud.translate_v3beta1.types.GcsDestination):
             Google Cloud Storage destination for output content. For
             every single input file (for example,
             gs://a/b/c.[extension]), we generate at most 2 \* n output
@@ -578,7 +578,7 @@ class BatchTranslateTextRequest(proto.Message):
         target_language_codes (Sequence[str]):
             Required. Specify up to 10 language codes
             here.
-        models (Sequence[~.translation_service.BatchTranslateTextRequest.ModelsEntry]):
+        models (Sequence[google.cloud.translate_v3beta1.types.BatchTranslateTextRequest.ModelsEntry]):
             Optional. The models to use for translation. Map's key is
             target language code. Map's value is model name. Value can
             be a built-in general model, or an AutoML Translation model.
@@ -594,21 +594,21 @@ class BatchTranslateTextRequest(proto.Message):
 
             If the map is empty or a specific model is not requested for
             a language pair, then default google model (nmt) is used.
-        input_configs (Sequence[~.translation_service.InputConfig]):
+        input_configs (Sequence[google.cloud.translate_v3beta1.types.InputConfig]):
             Required. Input configurations.
             The total number of files matched should be <=
             1000. The total content size should be <= 100M
             Unicode codepoints. The files must use UTF-8
             encoding.
-        output_config (~.translation_service.OutputConfig):
+        output_config (google.cloud.translate_v3beta1.types.OutputConfig):
             Required. Output configuration.
             If 2 input configs match to the same file (that
             is, same input path), we don't generate output
             for duplicate inputs.
-        glossaries (Sequence[~.translation_service.BatchTranslateTextRequest.GlossariesEntry]):
+        glossaries (Sequence[google.cloud.translate_v3beta1.types.BatchTranslateTextRequest.GlossariesEntry]):
             Optional. Glossaries to be applied for
             translation. It's keyed by target language code.
-        labels (Sequence[~.translation_service.BatchTranslateTextRequest.LabelsEntry]):
+        labels (Sequence[google.cloud.translate_v3beta1.types.BatchTranslateTextRequest.LabelsEntry]):
             Optional. The labels with user-defined
             metadata for the request.
             Label keys and values can be no longer than 63
@@ -645,7 +645,7 @@ class BatchTranslateMetadata(proto.Message):
     r"""State metadata for the batch translation operation.
 
     Attributes:
-        state (~.translation_service.BatchTranslateMetadata.State):
+        state (google.cloud.translate_v3beta1.types.BatchTranslateMetadata.State):
             The state of the operation.
         translated_characters (int):
             Number of successfully translated characters
@@ -659,7 +659,7 @@ class BatchTranslateMetadata(proto.Message):
             codepoints from input files times the number of
             target languages and appears here shortly after
             the call is submitted.
-        submit_time (~.timestamp.Timestamp):
+        submit_time (google.protobuf.timestamp_pb2.Timestamp):
             Time when the operation was submitted.
     """
 
@@ -699,9 +699,9 @@ class BatchTranslateResponse(proto.Message):
         failed_characters (int):
             Number of characters that have failed to
             process (Unicode codepoints).
-        submit_time (~.timestamp.Timestamp):
+        submit_time (google.protobuf.timestamp_pb2.Timestamp):
             Time when the operation was submitted.
-        end_time (~.timestamp.Timestamp):
+        end_time (google.protobuf.timestamp_pb2.Timestamp):
             The time when the operation is finished and
             [google.longrunning.Operation.done][google.longrunning.Operation.done]
             is set to true.
@@ -722,7 +722,7 @@ class GlossaryInputConfig(proto.Message):
     r"""Input configuration for glossaries.
 
     Attributes:
-        gcs_source (~.translation_service.GcsSource):
+        gcs_source (google.cloud.translate_v3beta1.types.GcsSource):
             Required. Google Cloud Storage location of glossary data.
             File format is determined based on the filename extension.
             API returns [google.rpc.Code.INVALID_ARGUMENT] for
@@ -763,20 +763,20 @@ class Glossary(proto.Message):
             Required. The resource name of the glossary. Glossary names
             have the form
             ``projects/{project-id}/locations/{location-id}/glossaries/{glossary-id}``.
-        language_pair (~.translation_service.Glossary.LanguageCodePair):
+        language_pair (google.cloud.translate_v3beta1.types.Glossary.LanguageCodePair):
             Used with unidirectional glossaries.
-        language_codes_set (~.translation_service.Glossary.LanguageCodesSet):
+        language_codes_set (google.cloud.translate_v3beta1.types.Glossary.LanguageCodesSet):
             Used with equivalent term set glossaries.
-        input_config (~.translation_service.GlossaryInputConfig):
+        input_config (google.cloud.translate_v3beta1.types.GlossaryInputConfig):
             Required. Provides examples to build the
             glossary from. Total glossary must not exceed
             10M Unicode codepoints.
         entry_count (int):
             Output only. The number of entries defined in
             the glossary.
-        submit_time (~.timestamp.Timestamp):
+        submit_time (google.protobuf.timestamp_pb2.Timestamp):
             Output only. When CreateGlossary was called.
-        end_time (~.timestamp.Timestamp):
+        end_time (google.protobuf.timestamp_pb2.Timestamp):
             Output only. When the glossary creation was
             finished.
     """
@@ -837,7 +837,7 @@ class CreateGlossaryRequest(proto.Message):
     Attributes:
         parent (str):
             Required. The project name.
-        glossary (~.translation_service.Glossary):
+        glossary (google.cloud.translate_v3beta1.types.Glossary):
             Required. The glossary to create.
     """
 
@@ -907,7 +907,7 @@ class ListGlossariesResponse(proto.Message):
     r"""Response message for ListGlossaries.
 
     Attributes:
-        glossaries (Sequence[~.translation_service.Glossary]):
+        glossaries (Sequence[google.cloud.translate_v3beta1.types.Glossary]):
             The list of glossaries for a project.
         next_page_token (str):
             A token to retrieve a page of results. Pass this value in
@@ -934,10 +934,10 @@ class CreateGlossaryMetadata(proto.Message):
         name (str):
             The name of the glossary that is being
             created.
-        state (~.translation_service.CreateGlossaryMetadata.State):
+        state (google.cloud.translate_v3beta1.types.CreateGlossaryMetadata.State):
             The current state of the glossary creation
             operation.
-        submit_time (~.timestamp.Timestamp):
+        submit_time (google.protobuf.timestamp_pb2.Timestamp):
             The time when the operation was submitted to
             the server.
     """
@@ -969,10 +969,10 @@ class DeleteGlossaryMetadata(proto.Message):
         name (str):
             The name of the glossary that is being
             deleted.
-        state (~.translation_service.DeleteGlossaryMetadata.State):
+        state (google.cloud.translate_v3beta1.types.DeleteGlossaryMetadata.State):
             The current state of the glossary deletion
             operation.
-        submit_time (~.timestamp.Timestamp):
+        submit_time (google.protobuf.timestamp_pb2.Timestamp):
             The time when the operation was submitted to
             the server.
     """
@@ -1003,10 +1003,10 @@ class DeleteGlossaryResponse(proto.Message):
     Attributes:
         name (str):
             The name of the deleted glossary.
-        submit_time (~.timestamp.Timestamp):
+        submit_time (google.protobuf.timestamp_pb2.Timestamp):
             The time when the operation was submitted to
             the server.
-        end_time (~.timestamp.Timestamp):
+        end_time (google.protobuf.timestamp_pb2.Timestamp):
             The time when the glossary deletion is finished and
             [google.longrunning.Operation.done][google.longrunning.Operation.done]
             is set to true.

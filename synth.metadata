@@ -11,8 +11,8 @@
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "57fc4a8a94a5bd015a83fb0f0a1707f62254b2cd",
-        "internalRef": "348813319"
+        "sha": "520682435235d9c503983a360a2090025aa47cd1",
+        "internalRef": "350246057"
       }
     },
     {
@@ -51,6 +51,7 @@
     }
   ],
   "generatedFiles": [
+    ".coveragerc",
     ".flake8",
     ".github/CONTRIBUTING.md",
     ".github/ISSUE_TEMPLATE/bug_report.md",
@@ -105,8 +106,10 @@
     "docs/conf.py",
     "docs/multiprocessing.rst",
     "docs/translate_v3/services.rst",
+    "docs/translate_v3/translation_service.rst",
     "docs/translate_v3/types.rst",
     "docs/translate_v3beta1/services.rst",
+    "docs/translate_v3beta1/translation_service.rst",
     "docs/translate_v3beta1/types.rst",
     "google/cloud/translate/__init__.py",
     "google/cloud/translate/py.typed",
