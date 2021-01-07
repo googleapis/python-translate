@@ -54,7 +54,6 @@ def glossary():
     delete_glossary()
 
 
-
 @pytest.fixture(scope="function")
 def bucket():
     """Create a temporary bucket to store annotation output."""
