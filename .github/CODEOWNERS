@@ -8,7 +8,7 @@
 *               @googleapis/yoshi-python
 
 # The @googleapis/cdpe-cloudai own the samples
-*               @googleapis/cdpe-cloudai
+/samples/**/*.py                       @googleapis/cdpe-cloudai
 
 # The python-samples-owners team is the default owner for samples
 /samples/**/*.py                       @telpirion @sirtorry @googleapis/python-samples-owners
