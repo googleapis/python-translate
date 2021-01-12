@@ -23,6 +23,7 @@ https://cloud.google.com/translate/docs.
 
 import argparse
 
+
 # [START translate_detect_language]
 def detect_language(text):
     """Detects the text's language."""
