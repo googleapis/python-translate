@@ -45,11 +45,12 @@ class TranslationServiceTransport(abc.ABC):
         "https://www.googleapis.com/auth/cloud-platform",
         "https://www.googleapis.com/auth/cloud-translation",
     )
+    DEFAULT_HOST = "translate.googleapis.com"
 
     def __init__(
         self,
         *,
-        host: str = "translate.googleapis.com",
+        host: str = DEFAULT_HOST,
         credentials: credentials.Credentials = None,
         credentials_file: typing.Optional[str] = None,
         scopes: typing.Optional[typing.Sequence[str]] = AUTH_SCOPES,

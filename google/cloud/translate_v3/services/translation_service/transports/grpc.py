@@ -105,6 +105,12 @@ class TranslationServiceGrpcTransport(TranslationServiceTransport):
         """
         self._ssl_channel_credentials = ssl_channel_credentials
 
+        # If a custom API endpoint is set, set scopes to ensure the auth
+        # library does not used the self-signed JWT flow for service
+        # accounts
+        if host.split(":")[0] != self.DEFAULT_HOST and not scopes:
+            scopes = self.AUTH_SCOPES
+
         if channel:
             # Sanity check: Ensure that channel and credentials are not both
             # provided.
@@ -127,7 +133,9 @@ class TranslationServiceGrpcTransport(TranslationServiceTransport):
 
             if credentials is None:
                 credentials, _ = auth.default(
-                    scopes=self.AUTH_SCOPES, quota_project_id=quota_project_id
+                    default_scopes=self.AUTH_SCOPES,
+                    scopes=scopes,
+                    quota_project_id=quota_project_id
                 )
 
             # Create SSL credentials with client_cert_source or application
@@ -146,7 +154,7 @@ class TranslationServiceGrpcTransport(TranslationServiceTransport):
                 credentials=credentials,
                 credentials_file=credentials_file,
                 ssl_credentials=ssl_credentials,
-                scopes=scopes or self.AUTH_SCOPES,
+                scopes=scopes,
                 quota_project_id=quota_project_id,
                 options=[
                     ("grpc.max_send_message_length", -1),
@@ -159,7 +167,9 @@ class TranslationServiceGrpcTransport(TranslationServiceTransport):
 
             if credentials is None:
                 credentials, _ = auth.default(
-                    scopes=self.AUTH_SCOPES, quota_project_id=quota_project_id
+                    default_scopes=self.AUTH_SCOPES,
+                    scopes=scopes,
+                    quota_project_id=quota_project_id
                 )
 
             # create a new channel. The provided one is ignored.
@@ -168,7 +178,7 @@ class TranslationServiceGrpcTransport(TranslationServiceTransport):
                 credentials=credentials,
                 credentials_file=credentials_file,
                 ssl_credentials=ssl_channel_credentials,
-                scopes=scopes or self.AUTH_SCOPES,
+                scopes=scopes,
                 quota_project_id=quota_project_id,
                 options=[
                     ("grpc.max_send_message_length", -1),
@@ -184,7 +194,7 @@ class TranslationServiceGrpcTransport(TranslationServiceTransport):
             host=host,
             credentials=credentials,
             credentials_file=credentials_file,
-            scopes=scopes or self.AUTH_SCOPES,
+            scopes=scopes,
             quota_project_id=quota_project_id,
             client_info=client_info,
         )
@@ -224,13 +234,17 @@ class TranslationServiceGrpcTransport(TranslationServiceTransport):
             google.api_core.exceptions.DuplicateCredentialArgs: If both ``credentials``
               and ``credentials_file`` are passed.
         """
-        scopes = scopes or cls.AUTH_SCOPES
+        kwargs["default_scopes"] = cls.AUTH_SCOPES
+        # Only pass scopes if they exist
+        if scopes:
+            kwargs["scopes"] = scopes
+
         return grpc_helpers.create_channel(
             host,
             credentials=credentials,
             credentials_file=credentials_file,
-            scopes=scopes,
             quota_project_id=quota_project_id,
+            default_host=cls.DEFAULT_HOST,
             **kwargs,
         )
 
