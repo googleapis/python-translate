@@ -2406,10 +2406,11 @@ def test_translation_service_auth_adc():
         adc.return_value = (credentials.AnonymousCredentials(), None)
         TranslationServiceClient()
         adc.assert_called_once_with(
-            scopes=(
+            default_scopes=(
                 "https://www.googleapis.com/auth/cloud-platform",
                 "https://www.googleapis.com/auth/cloud-translation",
             ),
+            scopes=None,
             quota_project_id=None,
         )
 
@@ -2420,15 +2421,37 @@ def test_translation_service_transport_auth_adc():
     with mock.patch.object(auth, "default") as adc:
         adc.return_value = (credentials.AnonymousCredentials(), None)
         transports.TranslationServiceGrpcTransport(
+            quota_project_id="octopus"
+        )
+        adc.assert_called_once_with(
+            default_scopes=(
+                "https://www.googleapis.com/auth/cloud-platform",
+                "https://www.googleapis.com/auth/cloud-translation",
+            ),
+            scopes=None,
+            quota_project_id="octopus",
+        )
+
+def test_translation_service_transport_auth_adc_custom_host():
+    # If credentials and host are not provided, the transport class should use
+    # ADC credentials.
+    with mock.patch.object(auth, "default") as adc:
+        adc.return_value = (credentials.AnonymousCredentials(), None)
+        transports.TranslationServiceGrpcTransport(
             host="squid.clam.whelk", quota_project_id="octopus"
         )
         adc.assert_called_once_with(
+            default_scopes=(
+                "https://www.googleapis.com/auth/cloud-platform",
+                "https://www.googleapis.com/auth/cloud-translation",
+            ),
             scopes=(
                 "https://www.googleapis.com/auth/cloud-platform",
                 "https://www.googleapis.com/auth/cloud-translation",
             ),
             quota_project_id="octopus",
         )
+
 
 
 def test_translation_service_host_no_port():

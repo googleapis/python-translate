@@ -78,13 +78,19 @@ def default(session):
     session.install("-e", ".")
 
     # Temporarily install google-api-core from branch to test self-signed jwt
-    session.install("git+https://github.com/googleapis/python-api-core.git@self-signed-jwt#egg=google-api-core")
-    session.install("git+https://github.com/googleapis/google-auth-library-python.git@self-signed-jwt#egg=google-auth")
+    session.install("-e", "git+https://github.com/googleapis/python-api-core.git@self-signed-jwt#egg=google-api-core")
+    session.install("-e", "git+https://github.com/googleapis/google-auth-library-python.git@self-signed-jwt#egg=google-auth")
 
     # Run py.test against the unit tests.
     session.run(
         "py.test",
-        "--collect-only",
+        "--quiet",
+        "--cov=google/cloud",	
+        "--cov=tests/unit",	
+        "--cov-append",	
+        "--cov-config=.coveragerc",	
+        "--cov-report=",	
+        "--cov-fail-under=0",
         os.path.join("tests", "unit"),
         *session.posargs,
     )
