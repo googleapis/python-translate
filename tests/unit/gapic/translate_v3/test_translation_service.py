@@ -2420,9 +2420,7 @@ def test_translation_service_transport_auth_adc():
     # ADC credentials.
     with mock.patch.object(auth, "default") as adc:
         adc.return_value = (credentials.AnonymousCredentials(), None)
-        transports.TranslationServiceGrpcTransport(
-            quota_project_id="octopus"
-        )
+        transports.TranslationServiceGrpcTransport(quota_project_id="octopus")
         adc.assert_called_once_with(
             default_scopes=(
                 "https://www.googleapis.com/auth/cloud-platform",
@@ -2431,6 +2429,7 @@ def test_translation_service_transport_auth_adc():
             scopes=None,
             quota_project_id="octopus",
         )
+
 
 def test_translation_service_transport_auth_adc_custom_host():
     # If credentials and host are not provided, the transport class should use
@@ -2451,7 +2450,6 @@ def test_translation_service_transport_auth_adc_custom_host():
             ),
             quota_project_id="octopus",
         )
-
 
 
 def test_translation_service_host_no_port():

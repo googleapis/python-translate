@@ -135,7 +135,7 @@ class TranslationServiceGrpcTransport(TranslationServiceTransport):
                 credentials, _ = auth.default(
                     default_scopes=self.AUTH_SCOPES,
                     scopes=scopes,
-                    quota_project_id=quota_project_id
+                    quota_project_id=quota_project_id,
                 )
 
             # Create SSL credentials with client_cert_source or application
@@ -169,7 +169,7 @@ class TranslationServiceGrpcTransport(TranslationServiceTransport):
                 credentials, _ = auth.default(
                     default_scopes=self.AUTH_SCOPES,
                     scopes=scopes,
-                    quota_project_id=quota_project_id
+                    quota_project_id=quota_project_id,
                 )
 
             # create a new channel. The provided one is ignored.
