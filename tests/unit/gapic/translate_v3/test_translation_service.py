@@ -21,6 +21,7 @@ import mock
 import grpc
 from grpc.experimental import aio
 import math
+import packaging.version
 import pytest
 from proto.marshal.rules.dates import DurationRule, TimestampRule
 
@@ -43,11 +44,39 @@ from google.cloud.translate_v3.services.translation_service import (
 )
 from google.cloud.translate_v3.services.translation_service import pagers
 from google.cloud.translate_v3.services.translation_service import transports
+from google.cloud.translate_v3.services.translation_service.transports.grpc import (
+    _GOOGLE_AUTH_VERSION,
+)
+from google.cloud.translate_v3.services.translation_service.transports.grpc import (
+    _API_CORE_VERSION,
+)
 from google.cloud.translate_v3.types import translation_service
 from google.longrunning import operations_pb2
 from google.oauth2 import service_account
 from google.protobuf import timestamp_pb2 as timestamp  # type: ignore
 
+
+# TODO(busunkim): Once google-api-core >= 1.26.0 is required:
+# - Delete all the api-core and auth "less than" test cases
+# - Delete these pytest markers (Make the "greater than or equal to" tests the default).
+requires_google_auth_lt_1_25_0 = pytest.mark.skipif(
+    packaging.version.parse(_GOOGLE_AUTH_VERSION) >= packaging.version.parse("1.25.0"),
+    reason="This test requires google-auth < 1.25.0",
+)
+requires_google_auth_gte_1_25_0 = pytest.mark.skipif(
+    packaging.version.parse(_GOOGLE_AUTH_VERSION) < packaging.version.parse("1.25.0"),
+    reason="This test requires google-auth >= 1.25.0",
+)
+
+requires_api_core_lt_1_25_0 = pytest.mark.skipif(
+    packaging.version.parse(_API_CORE_VERSION) >= packaging.version.parse("1.25.0"),
+    reason="This test requires google-api-core < 1.25.0",
+)
+
+requires_api_core_gte_1_25_0 = pytest.mark.skipif(
+    packaging.version.parse(_API_CORE_VERSION) < packaging.version.parse("1.25.0"),
+    reason="This test requires google-api-core >= 1.25.0",
+)
 
 def client_cert_source_callback():
     return b"cert bytes", b"key bytes"
@@ -2391,7 +2420,7 @@ def test_translation_service_base_transport_with_credentials_file():
 
 def test_translation_service_base_transport_with_adc():
     # Test the default credentials are used if credentials and credentials_file are None.
-    with mock.patch.object(auth, "default") as adc, mock.patch(
+    with mock.patch.object(auth, "default", autospec=True) as adc, mock.patch(
         "google.cloud.translate_v3.services.translation_service.transports.TranslationServiceTransport._prep_wrapped_messages"
     ) as Transport:
         Transport.return_value = None
@@ -2400,37 +2429,123 @@ def test_translation_service_base_transport_with_adc():
         adc.assert_called_once()
 
 
+@requires_google_auth_gte_1_25_0
 def test_translation_service_auth_adc():
     # If no credentials are provided, we should use ADC credentials.
-    with mock.patch.object(auth, "default") as adc:
+    with mock.patch.object(auth, "default", autospec=True) as adc:
         adc.return_value = (credentials.AnonymousCredentials(), None)
         TranslationServiceClient()
         adc.assert_called_once_with(
+            scopes=None,
             default_scopes=(
                 "https://www.googleapis.com/auth/cloud-platform",
                 "https://www.googleapis.com/auth/cloud-translation",
             ),
-            scopes=None,
             quota_project_id=None,
         )
 
 
+@requires_google_auth_lt_1_25_0
+def test_translation_service_auth_adc_no_default_scopes():
+    # If no credentials are provided, we should use ADC credentials.
+    with mock.patch.object(auth, "default", autospec=True) as adc:
+        adc.return_value = (credentials.AnonymousCredentials(), None)
+        TranslationServiceClient()
+        adc.assert_called_once_with(
+            scopes=(
+                "https://www.googleapis.com/auth/cloud-platform",
+                "https://www.googleapis.com/auth/cloud-translation",
+            ),
+            quota_project_id=None,
+        )
+
+
+@requires_google_auth_gte_1_25_0
 def test_translation_service_transport_auth_adc():
     # If credentials and host are not provided, the transport class should use
     # ADC credentials.
-    with mock.patch.object(auth, "default") as adc:
+    with mock.patch.object(auth, "default", autospec=True) as adc:
         adc.return_value = (credentials.AnonymousCredentials(), None)
         transports.TranslationServiceGrpcTransport(quota_project_id="octopus")
         adc.assert_called_once_with(
+            scopes=None,
             default_scopes=(
                 "https://www.googleapis.com/auth/cloud-platform",
                 "https://www.googleapis.com/auth/cloud-translation",
             ),
-            scopes=None,
             quota_project_id="octopus",
         )
 
 
+@requires_google_auth_lt_1_25_0
+def test_translation_service_transport_auth_adc_old_google_auth():
+    # If credentials and host are not provided, the transport class should use
+    # ADC credentials.
+    with mock.patch.object(auth, "default", autospec=True) as adc:
+        adc.return_value = (credentials.AnonymousCredentials(), None)
+        transports.TranslationServiceGrpcTransport(quota_project_id="octopus")
+        adc.assert_called_once_with(
+            scopes=(
+                "https://www.googleapis.com/auth/cloud-platform",
+                "https://www.googleapis.com/auth/cloud-translation",
+            ),
+            quota_project_id="octopus",
+        )
+
+@requires_api_core_lt_1_25_0
+def test_translation_service_transport_auth_adc_old_api_core():
+    # If credentials and host are not provided, the transport class should use
+    # ADC credentials.
+    with mock.patch.object(auth, "default", autospec=True) as adc, mock.patch.object(grpc_helpers.create_channel, autospec=True) as create_channel:
+
+        adc.return_value = (credentials.AnonymousCredentials(), None)
+        transports.TranslationServiceGrpcTransport(quota_project_id="octopus")
+        adc.assert_called_once_with(
+            scopes=(
+                "https://www.googleapis.com/auth/cloud-platform",
+                "https://www.googleapis.com/auth/cloud-translation",
+            ),
+            quota_project_id="octopus",
+        )
+
+        create_channel.assert_called_with(
+            host="translation.googleapis.com",
+            credentials=credentials.AnonymousCredentials,
+            credentials_file=None,
+            quota_project_id="octopus",
+            scopes=("https://www.googleapis.com/auth/cloud-platform",
+                "https://www.googleapis.com/auth/cloud-translation")
+        )
+
+@requires_api_core_gte_1_25_0
+def test_translation_service_transport_auth_adc_new_api_core():
+    # If credentials and host are not provided, the transport class should use
+    # ADC credentials.
+    with mock.patch.object(auth, "default", autospec=True) as adc, mock.patch.object(grpc_helpers.create_channel, autospec=True) as create_channel:
+
+        adc.return_value = (credentials.AnonymousCredentials(), None)
+        transports.TranslationServiceGrpcTransport(quota_project_id="octopus")
+        adc.assert_called_once_with(
+            scopes=(
+                "https://www.googleapis.com/auth/cloud-platform",
+                "https://www.googleapis.com/auth/cloud-translation",
+            ),
+            quota_project_id="octopus",
+        )
+
+        create_channel.assert_called_with(
+            host="translation.googleapis.com",
+            credentials=credentials.AnonymousCredentials,
+            credentials_file=None,
+            quota_project_id="octopus",
+            default_scopes=("https://www.googleapis.com/auth/cloud-platform",
+                "https://www.googleapis.com/auth/cloud-translation")
+            scopes=None,
+            default_host="translation.googleapis.com"
+        )
+
+
+@requires_google_auth_gte_1_25_0
 def test_translation_service_transport_auth_adc_custom_host():
     # If credentials and host are not provided, the transport class should use
     # ADC credentials.

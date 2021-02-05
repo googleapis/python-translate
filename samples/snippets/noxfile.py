@@ -183,10 +183,12 @@ def _session_tests(session: nox.sessions.Session, post_install: Callable = None)
     if post_install:
         post_install(session)
 
-    # Temporarily install google-api-core from branch to test self-signed jwt
-    session.install("-e", "git+https://github.com/googleapis/python-api-core.git@self-signed-jwt#egg=google-api-core")
-    session.install("-e", "git+https://github.com/googleapis/google-auth-library-python.git@self-signed-jwt#egg=google-auth")
-
+    # Temporarily install google-api-core from HEAD to test self-signed jwt
+    session.install(
+        "-e",
+        "git+https://github.com/googleapis/python-api-core.git@master#egg=google-api-core",
+    )
+    
     session.run(
         "pytest",
         *(PYTEST_COMMON_ARGS + session.posargs),

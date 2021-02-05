@@ -24,6 +24,7 @@ from google.api_core import operations_v1  # type: ignore
 from google import auth  # type: ignore
 from google.auth import credentials  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
+import packaging.version
 
 import grpc  # type: ignore
 from grpc.experimental import aio  # type: ignore
@@ -33,6 +34,8 @@ from google.longrunning import operations_pb2 as operations  # type: ignore
 
 from .base import TranslationServiceTransport, DEFAULT_CLIENT_INFO
 from .grpc import TranslationServiceGrpcTransport
+from .grpc import _API_CORE_VERSION
+from .grpc import _GOOGLE_AUTH_VERSION
 
 
 class TranslationServiceGrpcAsyncIOTransport(TranslationServiceTransport):
@@ -82,7 +85,19 @@ class TranslationServiceGrpcAsyncIOTransport(TranslationServiceTransport):
         Returns:
             aio.Channel: A gRPC AsyncIO channel object.
         """
-        scopes = scopes or cls.AUTH_SCOPES
+        self_signed_jwt_kwargs = {}
+
+        # TODO: Remove this if/else once google-api-core >= 1.26.0 is required
+        if _API_CORE_VERSION and (
+            packaging.version.parse(_API_CORE_VERSION)
+            >= packaging.version.parse("1.26.0")
+        ):
+            self_signed_jwt_kwargs["default_scopes"] = cls.AUTH_SCOPES
+            self_signed_jwt_kwargs["scopes"] = scopes
+            self_signed_jwt_kwargs["default_host"] = cls.DEFAULT_HOST
+        else:
+            self_signed_jwt_kwargs["scopes"] = scopes or cls.AUTH_SCOPES
+
         return grpc_helpers_async.create_channel(
             host,
             credentials=credentials,
@@ -150,6 +165,20 @@ class TranslationServiceGrpcAsyncIOTransport(TranslationServiceTransport):
         """
         self._ssl_channel_credentials = ssl_channel_credentials
 
+        # If a custom API endpoint is set, set scopes to ensure the auth
+        # library does not used the self-signed JWT flow for service
+        # accounts
+        if host.split(":")[0] != self.DEFAULT_HOST and not scopes:
+            scopes = self.AUTH_SCOPES
+
+        # TODO: Remove this if/else once google-auth >= 1.25.0 is required
+        if _GOOGLE_AUTH_VERSION and packaging.version.parse(
+            _GOOGLE_AUTH_VERSION
+        ) >= packaging.version.parse("1.25.0"):
+            scopes_kwargs = {"scopes": scopes, "default_scopes": self.AUTH_SCOPES}
+        else:
+            scopes_kwargs = {"scopes": scopes or self.AUTH_SCOPES}
+
         if channel:
             # Sanity check: Ensure that channel and credentials are not both
             # provided.
@@ -172,7 +201,7 @@ class TranslationServiceGrpcAsyncIOTransport(TranslationServiceTransport):
 
             if credentials is None:
                 credentials, _ = auth.default(
-                    scopes=self.AUTH_SCOPES, quota_project_id=quota_project_id
+                    quota_project_id=quota_project_id, **scopes_kwargs
                 )
 
             # Create SSL credentials with client_cert_source or application
@@ -204,7 +233,7 @@ class TranslationServiceGrpcAsyncIOTransport(TranslationServiceTransport):
 
             if credentials is None:
                 credentials, _ = auth.default(
-                    scopes=self.AUTH_SCOPES, quota_project_id=quota_project_id
+                    quota_project_id=quota_project_id, **scopes_kwargs,
                 )
 
             # create a new channel. The provided one is ignored.

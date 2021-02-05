@@ -18,12 +18,15 @@
 import warnings
 from typing import Callable, Dict, Optional, Sequence, Tuple
 
+import google.api_core
 from google.api_core import grpc_helpers  # type: ignore
 from google.api_core import operations_v1  # type: ignore
 from google.api_core import gapic_v1  # type: ignore
 from google import auth  # type: ignore
 from google.auth import credentials  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
+import packaging.version
+import pkg_resources
 
 import grpc  # type: ignore
 
@@ -31,6 +34,24 @@ from google.cloud.translate_v3.types import translation_service
 from google.longrunning import operations_pb2 as operations  # type: ignore
 
 from .base import TranslationServiceTransport, DEFAULT_CLIENT_INFO
+
+
+try:
+    # google.auth.__version__ was added in 1.26.0
+    _GOOGLE_AUTH_VERSION = auth.__version__
+except AttributeError:
+    try:  # try pkg_resources if it is available
+        _GOOGLE_AUTH_VERSION = pkg_resources.get_distribution("google-auth").version
+    except pkg_resources.DistributionNotFound:  # pragma: NO COVER
+        _GOOGLE_AUTH_VERSION = None
+
+try:
+    _API_CORE_VERSION = google.api_core.__version__
+except AttributeError:
+    try:  # try pkg_resources
+        _API_CORE_VERSION = pkg_resources.get_distribution("google-api-core").version
+    except pkg_resources.DistributionNotFound:  # pragma: NO COVER
+        _API_CORE_VERSION = None
 
 
 class TranslationServiceGrpcTransport(TranslationServiceTransport):
@@ -111,6 +132,15 @@ class TranslationServiceGrpcTransport(TranslationServiceTransport):
         if host.split(":")[0] != self.DEFAULT_HOST and not scopes:
             scopes = self.AUTH_SCOPES
 
+        # TODO: Remove this if/else once google-auth >= 1.25.0 is required
+        if _GOOGLE_AUTH_VERSION and (
+            packaging.version.parse(_GOOGLE_AUTH_VERSION)
+            >= packaging.version.parse("1.25.0")
+        ):
+            scopes_kwargs = {"scopes": scopes, "default_scopes": self.AUTH_SCOPES}
+        else:
+            scopes_kwargs = {"scopes": scopes or self.AUTH_SCOPES}
+
         if channel:
             # Sanity check: Ensure that channel and credentials are not both
             # provided.
@@ -133,9 +163,7 @@ class TranslationServiceGrpcTransport(TranslationServiceTransport):
 
             if credentials is None:
                 credentials, _ = auth.default(
-                    default_scopes=self.AUTH_SCOPES,
-                    scopes=scopes,
-                    quota_project_id=quota_project_id,
+                    **scopes_kwargs, quota_project_id=quota_project_id,
                 )
 
             # Create SSL credentials with client_cert_source or application
@@ -167,9 +195,7 @@ class TranslationServiceGrpcTransport(TranslationServiceTransport):
 
             if credentials is None:
                 credentials, _ = auth.default(
-                    default_scopes=self.AUTH_SCOPES,
-                    scopes=scopes,
-                    quota_project_id=quota_project_id,
+                    **scopes_kwargs, quota_project_id=quota_project_id,
                 )
 
             # create a new channel. The provided one is ignored.
@@ -234,17 +260,26 @@ class TranslationServiceGrpcTransport(TranslationServiceTransport):
             google.api_core.exceptions.DuplicateCredentialArgs: If both ``credentials``
               and ``credentials_file`` are passed.
         """
-        kwargs["default_scopes"] = cls.AUTH_SCOPES
-        # Only pass scopes if they exist
-        if scopes:
-            kwargs["scopes"] = scopes
+
+        self_signed_jwt_kwargs = {}
+
+        # TODO: Remove this if/else once google-api-core >= 1.26.0 is required
+        if _API_CORE_VERSION and (
+            packaging.version.parse(_API_CORE_VERSION)
+            >= packaging.version.parse("1.26.0")
+        ):
+            self_signed_jwt_kwargs["default_scopes"] = cls.AUTH_SCOPES
+            self_signed_jwt_kwargs["scopes"] = scopes
+            self_signed_jwt_kwargs["default_host"] = cls.DEFAULT_HOST
+        else:
+            self_signed_jwt_kwargs["scopes"] = scopes or cls.AUTH_SCOPES
 
         return grpc_helpers.create_channel(
             host,
             credentials=credentials,
             credentials_file=credentials_file,
             quota_project_id=quota_project_id,
-            default_host=cls.DEFAULT_HOST,
+            **self_signed_jwt_kwargs,
             **kwargs,
         )
 
