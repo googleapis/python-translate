@@ -84,15 +84,6 @@ def default(session):
     )
     session.install("-e", ".", "-c", constraints_path)
 
-    # Temporarily install google-api-core from branch to test self-signed jwt
-    session.install(
-        "-e",
-        "git+https://github.com/googleapis/python-api-core.git@master#egg=google-api-core",
-    )
-
-    # Install google-auth *again* since it will have been overwitten by api-core
-    session.install("google-auth", "-c", constraints_path)
-
     # Run py.test against the unit tests.
     session.run(
         "py.test",

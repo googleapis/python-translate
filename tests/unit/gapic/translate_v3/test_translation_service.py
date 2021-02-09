@@ -68,15 +68,16 @@ requires_google_auth_gte_1_25_0 = pytest.mark.skipif(
     reason="This test requires google-auth >= 1.25.0",
 )
 
-requires_api_core_lt_1_25_0 = pytest.mark.skipif(
-    packaging.version.parse(_API_CORE_VERSION) >= packaging.version.parse("1.25.0"),
-    reason="This test requires google-api-core < 1.25.0",
+requires_api_core_lt_1_26_0 = pytest.mark.skipif(
+    packaging.version.parse(_API_CORE_VERSION) >= packaging.version.parse("1.26.0"),
+    reason="This test requires google-api-core < 1.26.0",
 )
 
-requires_api_core_gte_1_25_0 = pytest.mark.skipif(
-    packaging.version.parse(_API_CORE_VERSION) < packaging.version.parse("1.25.0"),
-    reason="This test requires google-api-core >= 1.25.0",
+requires_api_core_gte_1_26_0 = pytest.mark.skipif(
+    packaging.version.parse(_API_CORE_VERSION) < packaging.version.parse("1.26.0"),
+    reason="This test requires google-api-core >= 1.26.0",
 )
+
 
 def client_cert_source_callback():
     return b"cert bytes", b"key bytes"
@@ -2492,56 +2493,62 @@ def test_translation_service_transport_auth_adc_old_google_auth():
             quota_project_id="octopus",
         )
 
-@requires_api_core_lt_1_25_0
-def test_translation_service_transport_auth_adc_old_api_core():
+
+@requires_api_core_lt_1_26_0
+def test_translation_service_transport_old_api_core():
     # If credentials and host are not provided, the transport class should use
     # ADC credentials.
-    with mock.patch.object(auth, "default", autospec=True) as adc, mock.patch.object(grpc_helpers.create_channel, autospec=True) as create_channel:
-
-        adc.return_value = (credentials.AnonymousCredentials(), None)
+    with mock.patch.object(auth, "default", autospec=True) as adc, mock.patch.object(
+        grpc_helpers, "create_channel", autospec=True
+    ) as create_channel:
+        creds = credentials.AnonymousCredentials()
+        adc.return_value = (creds, None)
         transports.TranslationServiceGrpcTransport(quota_project_id="octopus")
-        adc.assert_called_once_with(
+
+        create_channel.assert_called_with(
+            "translate.googleapis.com:443",
+            credentials=creds,
+            credentials_file=None,
+            quota_project_id="octopus",
             scopes=(
                 "https://www.googleapis.com/auth/cloud-platform",
                 "https://www.googleapis.com/auth/cloud-translation",
             ),
-            quota_project_id="octopus",
+            ssl_credentials=None,
+            options=[
+                ("grpc.max_send_message_length", -1),
+                ("grpc.max_receive_message_length", -1),
+            ],
         )
 
-        create_channel.assert_called_with(
-            host="translation.googleapis.com",
-            credentials=credentials.AnonymousCredentials,
-            credentials_file=None,
-            quota_project_id="octopus",
-            scopes=("https://www.googleapis.com/auth/cloud-platform",
-                "https://www.googleapis.com/auth/cloud-translation")
-        )
 
-@requires_api_core_gte_1_25_0
-def test_translation_service_transport_auth_adc_new_api_core():
+@requires_api_core_gte_1_26_0
+def test_translation_service_transport_new_api_core():
     # If credentials and host are not provided, the transport class should use
     # ADC credentials.
-    with mock.patch.object(auth, "default", autospec=True) as adc, mock.patch.object(grpc_helpers.create_channel, autospec=True) as create_channel:
-
-        adc.return_value = (credentials.AnonymousCredentials(), None)
+    with mock.patch.object(auth, "default", autospec=True) as adc, mock.patch.object(
+        grpc_helpers, "create_channel", autospec=True
+    ) as create_channel:
+        creds = credentials.AnonymousCredentials()
+        adc.return_value = (creds, None)
         transports.TranslationServiceGrpcTransport(quota_project_id="octopus")
-        adc.assert_called_once_with(
-            scopes=(
+
+        create_channel.assert_called_with(
+            "translate.googleapis.com:443",
+            credentials=creds,
+            credentials_file=None,
+            quota_project_id="octopus",
+            default_scopes=(
                 "https://www.googleapis.com/auth/cloud-platform",
                 "https://www.googleapis.com/auth/cloud-translation",
             ),
-            quota_project_id="octopus",
-        )
-
-        create_channel.assert_called_with(
-            host="translation.googleapis.com",
-            credentials=credentials.AnonymousCredentials,
-            credentials_file=None,
-            quota_project_id="octopus",
-            default_scopes=("https://www.googleapis.com/auth/cloud-platform",
-                "https://www.googleapis.com/auth/cloud-translation")
             scopes=None,
-            default_host="translation.googleapis.com"
+            default_host="translate.googleapis.com",
+            ssl_credentials=None,
+            options=[
+                ("grpc.max_send_message_length", -1),
+                ("grpc.max_receive_message_length", -1),
+            ],
         )
 
 
