@@ -47,6 +47,7 @@ except AttributeError:
 
 _API_CORE_VERSION = google.api_core.__version__
 
+
 class TranslationServiceGrpcTransport(TranslationServiceTransport):
     """gRPC backend transport for TranslationService.
 
