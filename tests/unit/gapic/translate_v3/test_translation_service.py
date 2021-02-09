@@ -2495,7 +2495,7 @@ def test_translation_service_transport_auth_adc_old_google_auth():
 
 
 @requires_api_core_lt_1_26_0
-def test_translation_service_transport_old_api_core():
+def test_translation_service_transport_create_channel_old_api_core():
     # If credentials and host are not provided, the transport class should use
     # ADC credentials.
     with mock.patch.object(auth, "default", autospec=True) as adc, mock.patch.object(
@@ -2523,7 +2523,7 @@ def test_translation_service_transport_old_api_core():
 
 
 @requires_api_core_gte_1_26_0
-def test_translation_service_transport_new_api_core():
+def test_translation_service_transport_create_channel():
     # If credentials and host are not provided, the transport class should use
     # ADC credentials.
     with mock.patch.object(auth, "default", autospec=True) as adc, mock.patch.object(

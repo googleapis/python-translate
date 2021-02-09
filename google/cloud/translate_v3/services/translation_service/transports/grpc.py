@@ -45,14 +45,7 @@ except AttributeError:
     except pkg_resources.DistributionNotFound:  # pragma: NO COVER
         _GOOGLE_AUTH_VERSION = None
 
-try:
-    _API_CORE_VERSION = google.api_core.__version__
-except AttributeError:
-    try:  # try pkg_resources
-        _API_CORE_VERSION = pkg_resources.get_distribution("google-api-core").version
-    except pkg_resources.DistributionNotFound:  # pragma: NO COVER
-        _API_CORE_VERSION = None
-
+_API_CORE_VERSION = google.api_core.__version__
 
 class TranslationServiceGrpcTransport(TranslationServiceTransport):
     """gRPC backend transport for TranslationService.
