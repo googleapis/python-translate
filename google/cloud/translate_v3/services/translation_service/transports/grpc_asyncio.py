@@ -102,8 +102,8 @@ class TranslationServiceGrpcAsyncIOTransport(TranslationServiceTransport):
             host,
             credentials=credentials,
             credentials_file=credentials_file,
-            scopes=scopes,
             quota_project_id=quota_project_id,
+            **self_signed_jwt_kwargs,
             **kwargs,
         )
 
@@ -220,7 +220,7 @@ class TranslationServiceGrpcAsyncIOTransport(TranslationServiceTransport):
                 credentials=credentials,
                 credentials_file=credentials_file,
                 ssl_credentials=ssl_credentials,
-                scopes=scopes or self.AUTH_SCOPES,
+                scopes=scopes,
                 quota_project_id=quota_project_id,
                 options=[
                     ("grpc.max_send_message_length", -1),
@@ -242,7 +242,7 @@ class TranslationServiceGrpcAsyncIOTransport(TranslationServiceTransport):
                 credentials=credentials,
                 credentials_file=credentials_file,
                 ssl_credentials=ssl_channel_credentials,
-                scopes=scopes or self.AUTH_SCOPES,
+                scopes=scopes,
                 quota_project_id=quota_project_id,
                 options=[
                     ("grpc.max_send_message_length", -1),
@@ -255,7 +255,7 @@ class TranslationServiceGrpcAsyncIOTransport(TranslationServiceTransport):
             host=host,
             credentials=credentials,
             credentials_file=credentials_file,
-            scopes=scopes or self.AUTH_SCOPES,
+            scopes=scopes,
             quota_project_id=quota_project_id,
             client_info=client_info,
         )

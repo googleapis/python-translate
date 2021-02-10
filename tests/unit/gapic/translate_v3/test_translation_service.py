@@ -2447,7 +2447,7 @@ def test_translation_service_auth_adc():
 
 
 @requires_google_auth_lt_1_25_0
-def test_translation_service_auth_adc_no_default_scopes():
+def test_translation_service_auth_adc_old_google_auth():
     # If no credentials are provided, we should use ADC credentials.
     with mock.patch.object(auth, "default", autospec=True) as adc:
         adc.return_value = (credentials.AnonymousCredentials(), None)
@@ -2467,9 +2467,11 @@ def test_translation_service_transport_auth_adc():
     # ADC credentials.
     with mock.patch.object(auth, "default", autospec=True) as adc:
         adc.return_value = (credentials.AnonymousCredentials(), None)
-        transports.TranslationServiceGrpcTransport(quota_project_id="octopus")
+        transports.TranslationServiceGrpcTransport(
+            quota_project_id="octopus", scopes=["1", "2"]
+        )
         adc.assert_called_once_with(
-            scopes=None,
+            scopes=["1", "2"],
             default_scopes=(
                 "https://www.googleapis.com/auth/cloud-platform",
                 "https://www.googleapis.com/auth/cloud-translation",
@@ -2478,13 +2480,48 @@ def test_translation_service_transport_auth_adc():
         )
 
 
+@pytest.mark.parametrize(
+    "transport_class",
+    [
+        transports.TranslationServiceGrpcTransport,
+        transports.TranslationServiceGrpcAsyncIOTransport,
+    ],
+)
+@requires_google_auth_gte_1_25_0
+def test_translation_service_transport_auth_adc_custom_host(transport_class):
+    # If credentials and host are not provided, the transport class should use
+    # ADC credentials.
+    with mock.patch.object(auth, "default") as adc:
+        adc.return_value = (credentials.AnonymousCredentials(), None)
+        transport_class(host="squid.clam.whelk", quota_project_id="octopus")
+        adc.assert_called_once_with(
+            default_scopes=(
+                "https://www.googleapis.com/auth/cloud-platform",
+                "https://www.googleapis.com/auth/cloud-translation",
+            ),
+            # scopes should be set since a custom endpoint (host) was set
+            scopes=(
+                "https://www.googleapis.com/auth/cloud-platform",
+                "https://www.googleapis.com/auth/cloud-translation",
+            ),
+            quota_project_id="octopus",
+        )
+
+
+@pytest.mark.parametrize(
+    "transport_class",
+    [
+        transports.TranslationServiceGrpcTransport,
+        transports.TranslationServiceGrpcAsyncIOTransport,
+    ],
+)
 @requires_google_auth_lt_1_25_0
-def test_translation_service_transport_auth_adc_old_google_auth():
+def test_translation_service_transport_auth_adc_old_google_auth(transport_class):
     # If credentials and host are not provided, the transport class should use
     # ADC credentials.
     with mock.patch.object(auth, "default", autospec=True) as adc:
         adc.return_value = (credentials.AnonymousCredentials(), None)
-        transports.TranslationServiceGrpcTransport(quota_project_id="octopus")
+        transport_class(quota_project_id="octopus")
         adc.assert_called_once_with(
             scopes=(
                 "https://www.googleapis.com/auth/cloud-platform",
@@ -2494,36 +2531,15 @@ def test_translation_service_transport_auth_adc_old_google_auth():
         )
 
 
-@requires_api_core_lt_1_26_0
-def test_translation_service_transport_create_channel_old_api_core():
-    # If credentials and host are not provided, the transport class should use
-    # ADC credentials.
-    with mock.patch.object(auth, "default", autospec=True) as adc, mock.patch.object(
-        grpc_helpers, "create_channel", autospec=True
-    ) as create_channel:
-        creds = credentials.AnonymousCredentials()
-        adc.return_value = (creds, None)
-        transports.TranslationServiceGrpcTransport(quota_project_id="octopus")
-
-        create_channel.assert_called_with(
-            "translate.googleapis.com:443",
-            credentials=creds,
-            credentials_file=None,
-            quota_project_id="octopus",
-            scopes=(
-                "https://www.googleapis.com/auth/cloud-platform",
-                "https://www.googleapis.com/auth/cloud-translation",
-            ),
-            ssl_credentials=None,
-            options=[
-                ("grpc.max_send_message_length", -1),
-                ("grpc.max_receive_message_length", -1),
-            ],
-        )
-
-
+@pytest.mark.parametrize(
+    "transport_class,grpc_helpers",
+    [
+        (transports.TranslationServiceGrpcTransport, grpc_helpers),
+        (transports.TranslationServiceGrpcAsyncIOTransport, grpc_helpers_async),
+    ],
+)
 @requires_api_core_gte_1_26_0
-def test_translation_service_transport_create_channel():
+def test_translation_service_transport_create_channel(transport_class, grpc_helpers):
     # If credentials and host are not provided, the transport class should use
     # ADC credentials.
     with mock.patch.object(auth, "default", autospec=True) as adc, mock.patch.object(
@@ -2531,7 +2547,7 @@ def test_translation_service_transport_create_channel():
     ) as create_channel:
         creds = credentials.AnonymousCredentials()
         adc.return_value = (creds, None)
-        transports.TranslationServiceGrpcTransport(quota_project_id="octopus")
+        transport_class(quota_project_id="octopus", scopes=["1", "2"])
 
         create_channel.assert_called_with(
             "translate.googleapis.com:443",
@@ -2542,7 +2558,7 @@ def test_translation_service_transport_create_channel():
                 "https://www.googleapis.com/auth/cloud-platform",
                 "https://www.googleapis.com/auth/cloud-translation",
             ),
-            scopes=None,
+            scopes=["1", "2"],
             default_host="translate.googleapis.com",
             ssl_credentials=None,
             options=[
@@ -2552,25 +2568,72 @@ def test_translation_service_transport_create_channel():
         )
 
 
-@requires_google_auth_gte_1_25_0
-def test_translation_service_transport_auth_adc_custom_host():
+@pytest.mark.parametrize(
+    "transport_class,grpc_helpers",
+    [
+        (transports.TranslationServiceGrpcTransport, grpc_helpers),
+        (transports.TranslationServiceGrpcAsyncIOTransport, grpc_helpers_async),
+    ],
+)
+@requires_api_core_lt_1_26_0
+def test_translation_service_transport_create_channel(transport_class, grpc_helpers):
     # If credentials and host are not provided, the transport class should use
     # ADC credentials.
-    with mock.patch.object(auth, "default") as adc:
-        adc.return_value = (credentials.AnonymousCredentials(), None)
-        transports.TranslationServiceGrpcTransport(
-            host="squid.clam.whelk", quota_project_id="octopus"
-        )
-        adc.assert_called_once_with(
-            default_scopes=(
-                "https://www.googleapis.com/auth/cloud-platform",
-                "https://www.googleapis.com/auth/cloud-translation",
-            ),
+    with mock.patch.object(auth, "default", autospec=True) as adc, mock.patch.object(
+        grpc_helpers, "create_channel", autospec=True
+    ) as create_channel:
+        creds = credentials.AnonymousCredentials()
+        adc.return_value = (creds, None)
+        transport_class(quota_project_id="octopus")
+
+        create_channel.assert_called_with(
+            "translate.googleapis.com:443",
+            credentials=creds,
+            credentials_file=None,
+            quota_project_id="octopus",
             scopes=(
                 "https://www.googleapis.com/auth/cloud-platform",
                 "https://www.googleapis.com/auth/cloud-translation",
             ),
+            ssl_credentials=None,
+            options=[
+                ("grpc.max_send_message_length", -1),
+                ("grpc.max_receive_message_length", -1),
+            ],
+        )
+
+
+@pytest.mark.parametrize(
+    "transport_class,grpc_helpers",
+    [
+        (transports.TranslationServiceGrpcTransport, grpc_helpers),
+        (transports.TranslationServiceGrpcAsyncIOTransport, grpc_helpers_async),
+    ],
+)
+@requires_api_core_lt_1_26_0
+def test_translation_service_transport_create_channel_old_api_core_user_scopes(
+    transport_class, grpc_helpers
+):
+    # If credentials and host are not provided, the transport class should use
+    # ADC credentials.
+    with mock.patch.object(auth, "default", autospec=True) as adc, mock.patch.object(
+        grpc_helpers, "create_channel", autospec=True
+    ) as create_channel:
+        creds = credentials.AnonymousCredentials()
+        adc.return_value = (creds, None)
+        transport_class(quota_project_id="octopus", scopes=["1", "2"])
+
+        create_channel.assert_called_with(
+            "translate.googleapis.com:443",
+            credentials=creds,
+            credentials_file=None,
             quota_project_id="octopus",
+            scopes=["1", "2"],
+            ssl_credentials=None,
+            options=[
+                ("grpc.max_send_message_length", -1),
+                ("grpc.max_receive_message_length", -1),
+            ],
         )
 
 
