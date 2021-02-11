@@ -2396,6 +2396,7 @@ def test_translation_service_base_transport():
     with pytest.raises(NotImplementedError):
         transport.operations_client
 
+
 @requires_google_auth_gte_1_25_0
 def test_translation_service_base_transport_with_credentials_file():
     # Instantiate the base transport with a credentials file
@@ -2436,6 +2437,36 @@ def test_translation_service_base_transport_with_credentials_file_old_google_aut
         load_creds.assert_called_once_with(
             "credentials.json",
             scopes=(
+                "https://www.googleapis.com/auth/cloud-platform",
+                "https://www.googleapis.com/auth/cloud-translation",
+            ),
+            quota_project_id="octopus",
+        )
+
+
+@requires_google_auth_gte_1_25_0
+def test_translation_service_base_transport_custom_host():
+    # Instantiate the base transport with a credentials file
+    with mock.patch.object(
+        auth, "load_credentials_from_file"
+    ) as load_creds, mock.patch(
+        "google.cloud.translate_v3.services.translation_service.transports.TranslationServiceTransport._prep_wrapped_messages"
+    ) as Transport:
+        Transport.return_value = None
+        load_creds.return_value = (credentials.AnonymousCredentials(), None)
+        transport = transports.TranslationServiceTransport(
+            host="squid.clam.whelk",
+            credentials_file="credentials.json",
+            quota_project_id="octopus",
+        )
+        load_creds.assert_called_once_with(
+            "credentials.json",
+            # scopes should be set since custom endpoint was passed
+            scopes=(
+                "https://www.googleapis.com/auth/cloud-platform",
+                "https://www.googleapis.com/auth/cloud-translation",
+            ),
+            default_scopes=(
                 "https://www.googleapis.com/auth/cloud-platform",
                 "https://www.googleapis.com/auth/cloud-translation",
             ),
@@ -2498,9 +2529,7 @@ def test_translation_service_transport_auth_adc(transport_class):
     # ADC credentials.
     with mock.patch.object(auth, "default", autospec=True) as adc:
         adc.return_value = (credentials.AnonymousCredentials(), None)
-        transport_class(
-            quota_project_id="octopus", scopes=["1", "2"]
-        )
+        transport_class(quota_project_id="octopus", scopes=["1", "2"])
         adc.assert_called_once_with(
             scopes=["1", "2"],
             default_scopes=(

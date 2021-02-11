@@ -36,7 +36,6 @@ from .base import TranslationServiceTransport, DEFAULT_CLIENT_INFO
 from .base import _GOOGLE_AUTH_VERSION, _API_CORE_VERSION
 
 
-
 class TranslationServiceGrpcTransport(TranslationServiceTransport):
     """gRPC backend transport for TranslationService.
 
