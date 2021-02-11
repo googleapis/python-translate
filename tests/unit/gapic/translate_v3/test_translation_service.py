@@ -44,10 +44,10 @@ from google.cloud.translate_v3.services.translation_service import (
 )
 from google.cloud.translate_v3.services.translation_service import pagers
 from google.cloud.translate_v3.services.translation_service import transports
-from google.cloud.translate_v3.services.translation_service.transports.grpc import (
+from google.cloud.translate_v3.services.translation_service.transports.base import (
     _GOOGLE_AUTH_VERSION,
 )
-from google.cloud.translate_v3.services.translation_service.transports.grpc import (
+from google.cloud.translate_v3.services.translation_service.transports.base import (
     _API_CORE_VERSION,
 )
 from google.cloud.translate_v3.types import translation_service
@@ -2396,8 +2396,32 @@ def test_translation_service_base_transport():
     with pytest.raises(NotImplementedError):
         transport.operations_client
 
-
+@requires_google_auth_gte_1_25_0
 def test_translation_service_base_transport_with_credentials_file():
+    # Instantiate the base transport with a credentials file
+    with mock.patch.object(
+        auth, "load_credentials_from_file"
+    ) as load_creds, mock.patch(
+        "google.cloud.translate_v3.services.translation_service.transports.TranslationServiceTransport._prep_wrapped_messages"
+    ) as Transport:
+        Transport.return_value = None
+        load_creds.return_value = (credentials.AnonymousCredentials(), None)
+        transport = transports.TranslationServiceTransport(
+            credentials_file="credentials.json", quota_project_id="octopus",
+        )
+        load_creds.assert_called_once_with(
+            "credentials.json",
+            scopes=None,
+            default_scopes=(
+                "https://www.googleapis.com/auth/cloud-platform",
+                "https://www.googleapis.com/auth/cloud-translation",
+            ),
+            quota_project_id="octopus",
+        )
+
+
+@requires_google_auth_lt_1_25_0
+def test_translation_service_base_transport_with_credentials_file_old_google_auth():
     # Instantiate the base transport with a credentials file
     with mock.patch.object(
         auth, "load_credentials_from_file"
@@ -2461,13 +2485,20 @@ def test_translation_service_auth_adc_old_google_auth():
         )
 
 
+@pytest.mark.parametrize(
+    "transport_class",
+    [
+        transports.TranslationServiceGrpcTransport,
+        transports.TranslationServiceGrpcAsyncIOTransport,
+    ],
+)
 @requires_google_auth_gte_1_25_0
-def test_translation_service_transport_auth_adc():
+def test_translation_service_transport_auth_adc(transport_class):
     # If credentials and host are not provided, the transport class should use
     # ADC credentials.
     with mock.patch.object(auth, "default", autospec=True) as adc:
         adc.return_value = (credentials.AnonymousCredentials(), None)
-        transports.TranslationServiceGrpcTransport(
+        transport_class(
             quota_project_id="octopus", scopes=["1", "2"]
         )
         adc.assert_called_once_with(

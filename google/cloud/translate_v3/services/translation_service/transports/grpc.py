@@ -18,14 +18,13 @@
 import warnings
 from typing import Callable, Dict, Optional, Sequence, Tuple
 
-import google.api_core
 from google.api_core import grpc_helpers  # type: ignore
 from google.api_core import operations_v1  # type: ignore
 from google.api_core import gapic_v1  # type: ignore
 from google import auth  # type: ignore
 from google.auth import credentials  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
-import packaging.version
+import packaging
 import pkg_resources
 
 import grpc  # type: ignore
@@ -34,18 +33,8 @@ from google.cloud.translate_v3.types import translation_service
 from google.longrunning import operations_pb2 as operations  # type: ignore
 
 from .base import TranslationServiceTransport, DEFAULT_CLIENT_INFO
+from .base import _GOOGLE_AUTH_VERSION, _API_CORE_VERSION
 
-
-try:
-    # google.auth.__version__ was added in 1.26.0
-    _GOOGLE_AUTH_VERSION = auth.__version__
-except AttributeError:
-    try:  # try pkg_resources if it is available
-        _GOOGLE_AUTH_VERSION = pkg_resources.get_distribution("google-auth").version
-    except pkg_resources.DistributionNotFound:  # pragma: NO COVER
-        _GOOGLE_AUTH_VERSION = None
-
-_API_CORE_VERSION = google.api_core.__version__
 
 
 class TranslationServiceGrpcTransport(TranslationServiceTransport):

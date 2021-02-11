@@ -17,9 +17,11 @@
 
 import abc
 import typing
+import packaging.version
 import pkg_resources
 
 from google import auth  # type: ignore
+import google.api_core
 from google.api_core import exceptions  # type: ignore
 from google.api_core import gapic_v1  # type: ignore
 from google.api_core import retry as retries  # type: ignore
@@ -37,6 +39,17 @@ try:
 except pkg_resources.DistributionNotFound:
     DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo()
 
+try:
+    # google.auth.__version__ was added in 1.26.0
+    _GOOGLE_AUTH_VERSION = auth.__version__
+except AttributeError:
+    try:  # try pkg_resources if it is available
+        _GOOGLE_AUTH_VERSION = pkg_resources.get_distribution("google-auth").version
+    except pkg_resources.DistributionNotFound:  # pragma: NO COVER
+        _GOOGLE_AUTH_VERSION = None
+
+_API_CORE_VERSION = google.api_core.__version__
+
 
 class TranslationServiceTransport(abc.ABC):
     """Abstract transport class for TranslationService."""
@@ -53,7 +66,7 @@ class TranslationServiceTransport(abc.ABC):
         host: str = DEFAULT_HOST,
         credentials: credentials.Credentials = None,
         credentials_file: typing.Optional[str] = None,
-        scopes: typing.Optional[typing.Sequence[str]] = AUTH_SCOPES,
+        scopes: typing.Optional[typing.Sequence[str]] = None,
         quota_project_id: typing.Optional[str] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
         **kwargs,
@@ -70,7 +83,7 @@ class TranslationServiceTransport(abc.ABC):
             credentials_file (Optional[str]): A file with credentials that can
                 be loaded with :func:`google.auth.load_credentials_from_file`.
                 This argument is mutually exclusive with credentials.
-            scope (Optional[Sequence[str]]): A list of scopes.
+            scopes (Optional[Sequence[str]]): A list of scopes.
             quota_project_id (Optional[str]): An optional project to use for billing
                 and quota.
             client_info (google.api_core.gapic_v1.client_info.ClientInfo):	
@@ -84,6 +97,21 @@ class TranslationServiceTransport(abc.ABC):
             host += ":443"
         self._host = host
 
+        # If a custom API endpoint is set, set scopes to ensure the auth
+        # library does not used the self-signed JWT flow for service
+        # accounts
+        if host.split(":")[0] != self.DEFAULT_HOST and not scopes:
+            scopes = self.AUTH_SCOPES
+
+        # TODO: Remove this if/else once google-auth >= 1.25.0 is required
+        if _GOOGLE_AUTH_VERSION and (
+            packaging.version.parse(_GOOGLE_AUTH_VERSION)
+            >= packaging.version.parse("1.25.0")
+        ):
+            scopes_kwargs = {"scopes": scopes, "default_scopes": self.AUTH_SCOPES}
+        else:
+            scopes_kwargs = {"scopes": scopes or self.AUTH_SCOPES}
+
         # If no credentials are provided, then determine the appropriate
         # defaults.
         if credentials and credentials_file:
@@ -93,12 +121,12 @@ class TranslationServiceTransport(abc.ABC):
 
         if credentials_file is not None:
             credentials, _ = auth.load_credentials_from_file(
-                credentials_file, scopes=scopes, quota_project_id=quota_project_id
+                credentials_file, **scopes_kwargs, quota_project_id=quota_project_id
             )
 
         elif credentials is None:
             credentials, _ = auth.default(
-                scopes=scopes, quota_project_id=quota_project_id
+                **scopes_kwargs, quota_project_id=quota_project_id
             )
 
         # Save the credentials.

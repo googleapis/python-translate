@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+ # -*- coding: utf-8 -*-
 
 # Copyright 2020 Google LLC
 #
@@ -33,10 +33,8 @@ from google.cloud.translate_v3.types import translation_service
 from google.longrunning import operations_pb2 as operations  # type: ignore
 
 from .base import TranslationServiceTransport, DEFAULT_CLIENT_INFO
+from .base import _GOOGLE_AUTH_VERSION, _API_CORE_VERSION
 from .grpc import TranslationServiceGrpcTransport
-from .grpc import _API_CORE_VERSION
-from .grpc import _GOOGLE_AUTH_VERSION
-
 
 class TranslationServiceGrpcAsyncIOTransport(TranslationServiceTransport):
     """gRPC AsyncIO backend transport for TranslationService.
