@@ -18,7 +18,9 @@
 
 from __future__ import absolute_import
 import os
+import sys
 import pathlib
+import subprocess
 import shutil
 
 import nox
@@ -32,6 +34,9 @@ SYSTEM_TEST_PYTHON_VERSIONS = ["3.8"]
 UNIT_TEST_PYTHON_VERSIONS = ["3.6", "3.7", "3.8", "3.9"]
 
 CURRENT_DIRECTORY = pathlib.Path(__file__).parent.absolute()
+
+LOWER_BOUND_CONSTRAINTS_FILE = CURRENT_DIRECTORY / "testing" / "constraints-3.6.txt"
+PACKAGE_NAME = package_name = subprocess.check_output([sys.executable, "setup.py", "--name"], encoding='utf-8').strip()
 
 
 @nox.session(python=DEFAULT_PYTHON_VERSION)
@@ -167,6 +172,37 @@ def cover(session):
 
     session.run("coverage", "erase")
 
+
+@nox.session(python="3.8")
+def check_lower_bounds(session):
+    """Check lower bounds in setup.py are reflected in constraints file"""
+    session.install("google-cloud-testutils")
+    session.install(".")
+
+    session.run(
+        "lower-bound-checker",
+        "check",
+        "--package-name",
+        PACKAGE_NAME,
+        "--constraints-file",
+        str(LOWER_BOUND_CONSTRAINTS_FILE),
+    )
+
+
+@nox.session(python="3.8")
+def update_lower_bounds(session):
+    """Update lower bounds in constraints.txt to match setup.py"""
+    session.install("google-cloud-testutils")
+    session.install(".")
+
+    session.run(
+        "lower-bound-checker",
+        "update",
+        "--package-name",
+        PACKAGE_NAME,
+        "--constraints-file",
+        str(LOWER_BOUND_CONSTRAINTS_FILE),
+    )
 
 @nox.session(python=DEFAULT_PYTHON_VERSION)
 def docs(session):
