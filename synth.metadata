@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/python-translate.git",
-        "sha": "6b723d40da81a95a60edfd3da1340651f8d1e161"
+        "sha": "5178aa9f6be5d8267fba9708308adfceee39548c"
       }
     },
     {
