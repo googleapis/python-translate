@@ -4,6 +4,13 @@
 
 [1]: https://pypi.org/project/google-cloud-translate/#history
 
+### [3.0.3](https://www.github.com/googleapis/python-translate/compare/v3.0.2...v3.0.3) (2021-03-23)
+
+
+### Bug Fixes
+
+* moves region tags ([#103](https://www.github.com/googleapis/python-translate/issues/103)) ([e161eb5](https://www.github.com/googleapis/python-translate/commit/e161eb5e9cdc3124aa7efe2d535bae67812ae93c))
+
 ### [3.0.2](https://www.github.com/googleapis/python-translate/compare/v3.0.1...v3.0.2) (2020-12-09)
 
 
