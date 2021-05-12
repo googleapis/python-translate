@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 from distutils import util
 import os
@@ -23,10 +21,10 @@ from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib  # type: ignore
-from google.api_core import exceptions  # type: ignore
+from google.api_core import exceptions as core_exceptions  # type: ignore
 from google.api_core import gapic_v1  # type: ignore
 from google.api_core import retry as retries  # type: ignore
-from google.auth import credentials  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
@@ -36,8 +34,7 @@ from google.api_core import operation  # type: ignore
 from google.api_core import operation_async  # type: ignore
 from google.cloud.translate_v3.services.translation_service import pagers
 from google.cloud.translate_v3.types import translation_service
-from google.protobuf import timestamp_pb2 as timestamp  # type: ignore
-
+from google.protobuf import timestamp_pb2  # type: ignore
 from .transports.base import TranslationServiceTransport, DEFAULT_CLIENT_INFO
 from .transports.grpc import TranslationServiceGrpcTransport
 from .transports.grpc_asyncio import TranslationServiceGrpcAsyncIOTransport
@@ -238,7 +235,7 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
     def __init__(
         self,
         *,
-        credentials: Optional[credentials.Credentials] = None,
+        credentials: Optional[ga_credentials.Credentials] = None,
         transport: Union[str, TranslationServiceTransport, None] = None,
         client_options: Optional[client_options_lib.ClientOptions] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
@@ -452,7 +449,6 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
                 This corresponds to the ``source_language_code`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -488,10 +484,8 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
         # there are no flattened fields.
         if not isinstance(request, translation_service.TranslateTextRequest):
             request = translation_service.TranslateTextRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if parent is not None:
                 request.parent = parent
             if target_language_code is not None:
@@ -589,7 +583,6 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
                 This corresponds to the ``content`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -618,10 +611,8 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
         # there are no flattened fields.
         if not isinstance(request, translation_service.DetectLanguageRequest):
             request = translation_service.DetectLanguageRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if parent is not None:
                 request.parent = parent
             if model is not None:
@@ -714,7 +705,6 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
                 This corresponds to the ``display_language_code`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -743,10 +733,8 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
         # there are no flattened fields.
         if not isinstance(request, translation_service.GetSupportedLanguagesRequest):
             request = translation_service.GetSupportedLanguagesRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if parent is not None:
                 request.parent = parent
             if model is not None:
@@ -791,7 +779,6 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
         Args:
             request (google.cloud.translate_v3.types.BatchTranslateTextRequest):
                 The request object. The batch translation request.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -809,7 +796,6 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-
         # Minor optimization to avoid making a copy if the user passes
         # in a translation_service.BatchTranslateTextRequest.
         # There's no risk of modifying the input as we've already verified
@@ -867,7 +853,6 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
                 This corresponds to the ``glossary`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -899,10 +884,8 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
         # there are no flattened fields.
         if not isinstance(request, translation_service.CreateGlossaryRequest):
             request = translation_service.CreateGlossaryRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if parent is not None:
                 request.parent = parent
             if glossary is not None:
@@ -955,7 +938,6 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -986,10 +968,8 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
         # there are no flattened fields.
         if not isinstance(request, translation_service.ListGlossariesRequest):
             request = translation_service.ListGlossariesRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if parent is not None:
                 request.parent = parent
 
@@ -1037,7 +1017,6 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1066,10 +1045,8 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
         # there are no flattened fields.
         if not isinstance(request, translation_service.GetGlossaryRequest):
             request = translation_service.GetGlossaryRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if name is not None:
                 request.name = name
 
@@ -1112,7 +1089,6 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1144,10 +1120,8 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
         # there are no flattened fields.
         if not isinstance(request, translation_service.DeleteGlossaryRequest):
             request = translation_service.DeleteGlossaryRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if name is not None:
                 request.name = name
 
