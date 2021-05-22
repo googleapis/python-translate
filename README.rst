@@ -92,7 +92,7 @@ found in `its documentation`_ as well as complete sample apps utilizing the API:
 
 - `"Mini Google Translate MVP" Flask web app`_ &mdash; any host or Google Cloud: `App Engine`_, `Cloud Functions`_, or `Cloud Run`_
 
-.. _samples: /tree/master/samples
+.. _samples: samples
 .. _its documentation: https://cloud.google.com/translate/docs
 .. _"Mini Google Translate MVP" web app: https://github.com/googlecodelabs/cloud-nebulous-serverless-python
 .. _App Engine: https://cloud.google.com/appengine
