@@ -90,15 +90,15 @@ Samples
 The `samples`_ folder contains all of the Cloud Translation API code snippets
 found in `its documentation`_ as well as complete sample apps:
 
-- `Mini-Google Translate "MVP"`_ app
+- `Mini Google Translate "MVP"`_ app
+
   - Shows how to use the API in a Python/Flask web app
   - Deployable locally or any on-prem or cloud host supporting Flask apps
-  - Also deployable to `Google Cloud serverless hosting platforms`_:
-      - `App Engine`_, `Cloud Functions`_, or `Cloud Run`_ with only minor configuration changes
+  - Also deployable to `Google Cloud serverless hosting platforms`_ (`App Engine`_, `Cloud Functions`_, or `Cloud Run`_) with only minor configuration changes
 
 .. _samples: samples
 .. _its documentation: https://cloud.google.com/translate/docs
-.. _"Mini Google Translate MVP" Flask web app: https://github.com/googlecodelabs/cloud-nebulous-serverless-python
+.. _Mini Google Translate "MVP": https://github.com/googlecodelabs/cloud-nebulous-serverless-python
 .. _Google Cloud serverless hosting platforms: https://cloud.google.com/serverless#serverless-products
 .. _App Engine: https://cloud.google.com/appengine
 .. _Cloud Functions: https://cloud.google.com/functions
