@@ -87,7 +87,7 @@ Windows
 Samples
 -----------
 
-The `samples`_ folder contains all of the Cloud Translation API code snippets
+The `samples`__ folder contains all of the Cloud Translation API code snippets
 found in `its documentation`_ as well as complete sample apps:
 
 - `Mini Google Translate "MVP"`_ app
