@@ -19,10 +19,6 @@ import translate_v3beta1_translate_document
 
 PROJECT_ID = os.environ["GOOGLE_CLOUD_PROJECT"]
 
-GCS_SOURCE = {
-    "input_uri": "gs://cloud-samples-data/translation/fake_invoice.pdf"
-}
-
 FILE_PATH = "resources/fake_invoice.pdf"
 
 
