@@ -36,7 +36,7 @@ def translate_document(project_id: str, file_path: str):
     response = client.translate_document(
         request={
             "parent": parent,
-            "target_language_code": "fr",
+            "target_language_code": "fr-FR",
             "document_input_config": document_input_config,
         }
     )
