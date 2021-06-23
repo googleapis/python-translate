@@ -45,7 +45,7 @@ def test_batch_translate_document(capsys, bucket):
         input_uri="gs://cloud-samples-data/translation/async_invoices/*",
         output_uri=f"gs://{bucket.name}/translation/BATCH_TRANSLATE_DOCUMENT_OUTPUT/",
         project_id=PROJECT_ID,
-        timeout=320,
+        timeout=500,
     )
 
     out, _ = capsys.readouterr()

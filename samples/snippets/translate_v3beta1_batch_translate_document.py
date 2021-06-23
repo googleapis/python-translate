@@ -13,7 +13,6 @@
 # limitations under the License.
 
 # [START translate_v3beta1_batch_translate_document]
-# from typing import Sequence, Union
 
 from google.cloud import translate_v3beta1 as translate
 
@@ -41,7 +40,6 @@ def batch_translate_document(
     batch_document_output_config = {"gcs_destination": gcs_destination}
     parent = f"projects/{project_id}/locations/{location}"
 
-    # pdb.set_trace()
     # Supported language codes: https://cloud.google.com/translate/docs/language
     operation = client.batch_translate_document(
         request={
@@ -53,7 +51,6 @@ def batch_translate_document(
         }
     )
 
-    # pdb.set_trace()
     print("Waiting for operation to complete...")
     response = operation.result(timeout)
 
