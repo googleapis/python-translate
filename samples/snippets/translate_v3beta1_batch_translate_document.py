@@ -26,8 +26,12 @@ def batch_translate_document(
 
     client = translate.TranslationServiceClient()
 
-    """The ``global`` location is not supported for batch translation"""
+    # The ``global`` location is not supported for batch translation
     location = "us-central1"
+
+    # Google Cloud Storage location for the source input. This can be a single file
+    # (for example, ``gs://translation-test/input.docx``) or a wildcard
+    # (for example, ``gs://translation-test/*``).
     # Supported file types: https://cloud.google.com/translate/docs/supported-formats
     gcs_source = {"input_uri": input_uri}
 
