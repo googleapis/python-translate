@@ -17,7 +17,6 @@ from google.cloud import translate_v3beta1 as translate
 
 
 def translate_document(project_id: str, file_path: str):
-    '''Translating a Document'''
 
     client = translate.TranslationServiceClient()
 

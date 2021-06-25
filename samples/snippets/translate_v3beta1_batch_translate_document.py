@@ -24,8 +24,6 @@ def batch_translate_document(
     timeout=180,
 ):
 
-    '''Batch Translating Documents'''
-
     client = translate.TranslationServiceClient()
 
     """The ``global`` location is not supported for batch translation"""
