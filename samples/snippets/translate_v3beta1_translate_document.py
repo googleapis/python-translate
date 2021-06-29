@@ -40,7 +40,7 @@ def translate_document(project_id: str, file_path: str):
             "document_input_config": document_input_config,
         }
     )
- 
+
     # To view translated document, write `response.document_translation.byte_stream_outputs` to file.
     # If not provided in the TranslationRequest, the translated file will only be returned through a byte-stream
     # and its output mime type will be the same as the input file's mime type
