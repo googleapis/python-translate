@@ -7,14 +7,14 @@
 ### [3.3.2](https://www.github.com/googleapis/python-translate/compare/v3.3.1...v3.3.2) (2021-07-29)
 
 
-### Features
-
-* add Samples section to CONTRIBUTING.rst ([#206](https://www.github.com/googleapis/python-translate/issues/206)) ([6f1df67](https://www.github.com/googleapis/python-translate/commit/6f1df6794394bcbedb18199793aaebb9c095ccf5))
-
-
 ### Bug Fixes
 
 * enable self signed jwt for grpc ([#215](https://www.github.com/googleapis/python-translate/issues/215)) ([2f1bc32](https://www.github.com/googleapis/python-translate/commit/2f1bc327fd436f2f7e86c676cbbf1e7d7cc61921))
+
+
+### Documentation
+
+* add Samples section to CONTRIBUTING.rst ([#206](https://www.github.com/googleapis/python-translate/issues/206)) ([6f1df67](https://www.github.com/googleapis/python-translate/commit/6f1df6794394bcbedb18199793aaebb9c095ccf5))
 
 
 ### Miscellaneous Chores
