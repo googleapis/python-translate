@@ -4,6 +4,13 @@
 
 [1]: https://pypi.org/project/google-cloud-translate/#history
 
+### [3.3.3](https://www.github.com/googleapis/python-translate/compare/v3.3.2...v3.3.3) (2021-08-25)
+
+
+### Bug Fixes
+
+* add missing annotation for batch document translation ([#231](https://www.github.com/googleapis/python-translate/issues/231)) ([a1297ba](https://www.github.com/googleapis/python-translate/commit/a1297ba6079524f82588c3fe79ec3f5c433a7606))
+
 ### [3.3.2](https://www.github.com/googleapis/python-translate/compare/v3.3.1...v3.3.2) (2021-07-29)
 
 
