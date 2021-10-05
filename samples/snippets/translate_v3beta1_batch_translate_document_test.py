@@ -39,7 +39,7 @@ def bucket():
     bucket.delete(force=True)
 
 
-@pytest.mark.flaky(max_runs=3, min_passes=1)
+@pytest.mark.flaky(reruns=3)
 def test_batch_translate_document(capsys, bucket):
     translate_v3beta1_batch_translate_document.batch_translate_document(
         input_uri="gs://cloud-samples-data/translation/async_invoices/*",
