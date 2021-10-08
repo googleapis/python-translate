@@ -48,7 +48,11 @@ def on_backoff(invocation_dict):
     invocation_dict['kwargs']['bucket'] = next(get_ephemeral_bucket())
 
 
-@backoff.on_exception(wait_gen=lambda : iter([100, 250, 300, 500]), exception=Exception, max_tries=5, on_backoff=on_backoff)
+# If necessary, retry test function while backing off the timeout sequentially
+MAX_TIMEOUT = 500
+
+
+@backoff.on_exception(wait_gen=lambda : iter([100, 250, 300, MAX_TIMEOUT]), exception=Exception, max_tries=5, on_backoff=on_backoff)
 def test_batch_translate_text_with_glossary(capsys, bucket):
 
     translate_v3_batch_translate_text_with_glossary.batch_translate_text_with_glossary(
@@ -56,7 +60,7 @@ def test_batch_translate_text_with_glossary(capsys, bucket):
         "gs://{}/translation/BATCH_TRANSLATION_GLOS_OUTPUT/".format(bucket.name),
         PROJECT_ID,
         GLOSSARY_ID,
-        500)
+        MAX_TIMEOUT)
 
     out, _ = capsys.readouterr()
     assert "Total Characters: 9" in out
