@@ -32,6 +32,7 @@ from google.api_core import grpc_helpers
 from google.api_core import grpc_helpers_async
 from google.api_core import operation_async  # type: ignore
 from google.api_core import operations_v1
+from google.api_core import path_template
 from google.auth import credentials as ga_credentials
 from google.auth.exceptions import MutualTLSChannelError
 from google.cloud.translate_v3beta1.services.translation_service import (
@@ -1550,6 +1551,168 @@ async def test_batch_translate_document_field_headers_async():
     assert ("x-goog-request-params", "parent=parent/value",) in kw["metadata"]
 
 
+def test_batch_translate_document_flattened():
+    client = TranslationServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(
+        type(client.transport.batch_translate_document), "__call__"
+    ) as call:
+        # Designate an appropriate return value for the call.
+        call.return_value = operations_pb2.Operation(name="operations/op")
+        # Call the method with a truthy value for each flattened field,
+        # using the keyword arguments to the method.
+        client.batch_translate_document(
+            parent="parent_value",
+            source_language_code="source_language_code_value",
+            target_language_codes=["target_language_codes_value"],
+            input_configs=[
+                translation_service.BatchDocumentInputConfig(
+                    gcs_source=translation_service.GcsSource(
+                        input_uri="input_uri_value"
+                    )
+                )
+            ],
+            output_config=translation_service.BatchDocumentOutputConfig(
+                gcs_destination=translation_service.GcsDestination(
+                    output_uri_prefix="output_uri_prefix_value"
+                )
+            ),
+        )
+
+        # Establish that the underlying call was made with the expected
+        # request object values.
+        assert len(call.mock_calls) == 1
+        _, args, _ = call.mock_calls[0]
+        assert args[0].parent == "parent_value"
+        assert args[0].source_language_code == "source_language_code_value"
+        assert args[0].target_language_codes == ["target_language_codes_value"]
+        assert args[0].input_configs == [
+            translation_service.BatchDocumentInputConfig(
+                gcs_source=translation_service.GcsSource(input_uri="input_uri_value")
+            )
+        ]
+        assert args[0].output_config == translation_service.BatchDocumentOutputConfig(
+            gcs_destination=translation_service.GcsDestination(
+                output_uri_prefix="output_uri_prefix_value"
+            )
+        )
+
+
+def test_batch_translate_document_flattened_error():
+    client = TranslationServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
+
+    # Attempting to call a method with both a request object and flattened
+    # fields is an error.
+    with pytest.raises(ValueError):
+        client.batch_translate_document(
+            translation_service.BatchTranslateDocumentRequest(),
+            parent="parent_value",
+            source_language_code="source_language_code_value",
+            target_language_codes=["target_language_codes_value"],
+            input_configs=[
+                translation_service.BatchDocumentInputConfig(
+                    gcs_source=translation_service.GcsSource(
+                        input_uri="input_uri_value"
+                    )
+                )
+            ],
+            output_config=translation_service.BatchDocumentOutputConfig(
+                gcs_destination=translation_service.GcsDestination(
+                    output_uri_prefix="output_uri_prefix_value"
+                )
+            ),
+        )
+
+
+@pytest.mark.asyncio
+async def test_batch_translate_document_flattened_async():
+    client = TranslationServiceAsyncClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(
+        type(client.transport.batch_translate_document), "__call__"
+    ) as call:
+        # Designate an appropriate return value for the call.
+        call.return_value = operations_pb2.Operation(name="operations/op")
+
+        call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
+            operations_pb2.Operation(name="operations/spam")
+        )
+        # Call the method with a truthy value for each flattened field,
+        # using the keyword arguments to the method.
+        response = await client.batch_translate_document(
+            parent="parent_value",
+            source_language_code="source_language_code_value",
+            target_language_codes=["target_language_codes_value"],
+            input_configs=[
+                translation_service.BatchDocumentInputConfig(
+                    gcs_source=translation_service.GcsSource(
+                        input_uri="input_uri_value"
+                    )
+                )
+            ],
+            output_config=translation_service.BatchDocumentOutputConfig(
+                gcs_destination=translation_service.GcsDestination(
+                    output_uri_prefix="output_uri_prefix_value"
+                )
+            ),
+        )
+
+        # Establish that the underlying call was made with the expected
+        # request object values.
+        assert len(call.mock_calls)
+        _, args, _ = call.mock_calls[0]
+        assert args[0].parent == "parent_value"
+        assert args[0].source_language_code == "source_language_code_value"
+        assert args[0].target_language_codes == ["target_language_codes_value"]
+        assert args[0].input_configs == [
+            translation_service.BatchDocumentInputConfig(
+                gcs_source=translation_service.GcsSource(input_uri="input_uri_value")
+            )
+        ]
+        assert args[0].output_config == translation_service.BatchDocumentOutputConfig(
+            gcs_destination=translation_service.GcsDestination(
+                output_uri_prefix="output_uri_prefix_value"
+            )
+        )
+
+
+@pytest.mark.asyncio
+async def test_batch_translate_document_flattened_error_async():
+    client = TranslationServiceAsyncClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
+
+    # Attempting to call a method with both a request object and flattened
+    # fields is an error.
+    with pytest.raises(ValueError):
+        await client.batch_translate_document(
+            translation_service.BatchTranslateDocumentRequest(),
+            parent="parent_value",
+            source_language_code="source_language_code_value",
+            target_language_codes=["target_language_codes_value"],
+            input_configs=[
+                translation_service.BatchDocumentInputConfig(
+                    gcs_source=translation_service.GcsSource(
+                        input_uri="input_uri_value"
+                    )
+                )
+            ],
+            output_config=translation_service.BatchDocumentOutputConfig(
+                gcs_destination=translation_service.GcsDestination(
+                    output_uri_prefix="output_uri_prefix_value"
+                )
+            ),
+        )
+
+
 def test_create_glossary(
     transport: str = "grpc", request_type=translation_service.CreateGlossaryRequest
 ):
@@ -2691,6 +2854,9 @@ def test_translation_service_base_transport():
         with pytest.raises(NotImplementedError):
             getattr(transport, method)(request=object())
 
+    with pytest.raises(NotImplementedError):
+        transport.close()
+
     # Additionally, the LRO client (a property) should
     # also raise NotImplementedError
     with pytest.raises(NotImplementedError):
@@ -3227,3 +3393,49 @@ def test_client_withDEFAULT_CLIENT_INFO():
             credentials=ga_credentials.AnonymousCredentials(), client_info=client_info,
         )
         prep.assert_called_once_with(client_info)
+
+
+@pytest.mark.asyncio
+async def test_transport_close_async():
+    client = TranslationServiceAsyncClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="grpc_asyncio",
+    )
+    with mock.patch.object(
+        type(getattr(client.transport, "grpc_channel")), "close"
+    ) as close:
+        async with client:
+            close.assert_not_called()
+        close.assert_called_once()
+
+
+def test_transport_close():
+    transports = {
+        "grpc": "_grpc_channel",
+    }
+
+    for transport, close_name in transports.items():
+        client = TranslationServiceClient(
+            credentials=ga_credentials.AnonymousCredentials(), transport=transport
+        )
+        with mock.patch.object(
+            type(getattr(client.transport, close_name)), "close"
+        ) as close:
+            with client:
+                close.assert_not_called()
+            close.assert_called_once()
+
+
+def test_client_ctx():
+    transports = [
+        "grpc",
+    ]
+    for transport in transports:
+        client = TranslationServiceClient(
+            credentials=ga_credentials.AnonymousCredentials(), transport=transport
+        )
+        # Test client calls underlying transport.
+        with mock.patch.object(type(client.transport), "close") as close:
+            close.assert_not_called()
+            with client:
+                pass
+            close.assert_called()
