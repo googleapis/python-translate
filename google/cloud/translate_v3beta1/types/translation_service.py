@@ -260,6 +260,7 @@ class DetectLanguageRequest(proto.Message):
             If not specified, the default model is used.
         content (str):
             The content of the input stored as a string.
+
             This field is a member of `oneof`_ ``source``.
         mime_type (str):
             Optional. The format of the source text, for
@@ -448,6 +449,7 @@ class InputConfig(proto.Message):
 
             The other supported file extensions are ``.txt`` or
             ``.html``, which is treated as a single large chunk of text.
+
             This field is a member of `oneof`_ ``source``.
     """
 
@@ -576,6 +578,7 @@ class DocumentInputConfig(proto.Message):
         content (bytes):
             Document's content represented as a stream of
             bytes.
+
             This field is a member of `oneof`_ ``source``.
         gcs_source (google.cloud.translate_v3beta1.types.GcsSource):
             Google Cloud Storage location. This must be a single file.
@@ -1009,6 +1012,7 @@ class GlossaryInputConfig(proto.Message):
                defined for Google Translation Toolkit and documented in
                `Use a
                glossary <https://support.google.com/translatortoolkit/answer/6306379?hl=en>`__.
+
             This field is a member of `oneof`_ ``source``.
     """
 
@@ -1034,9 +1038,11 @@ class Glossary(proto.Message):
             ``projects/{project-number-or-id}/locations/{location-id}/glossaries/{glossary-id}``.
         language_pair (google.cloud.translate_v3beta1.types.Glossary.LanguageCodePair):
             Used with unidirectional glossaries.
+
             This field is a member of `oneof`_ ``languages``.
         language_codes_set (google.cloud.translate_v3beta1.types.Glossary.LanguageCodesSet):
             Used with equivalent term set glossaries.
+
             This field is a member of `oneof`_ ``languages``.
         input_config (google.cloud.translate_v3beta1.types.GlossaryInputConfig):
             Required. Provides examples to build the
@@ -1405,6 +1411,7 @@ class BatchDocumentInputConfig(proto.Message):
             ``.xlsx`` is 100MB. The max file size to support for
             ``.pdf`` is 1GB and the max page limit is 1000 pages. The
             max file size to support for all input documents is 1GB.
+
             This field is a member of `oneof`_ ``source``.
     """
 
