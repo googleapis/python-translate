@@ -50,10 +50,10 @@ s.remove_staging_dirs()
 s.replace(
     "google/cloud/**/types/*.py",
     """\.
-            This field is a member of `oneof`_ ``destination``.""",
+            This field is a member of `oneof`_""",
     """.
 
-            This field is a member of `oneof`_ ``destination``."""
+            This field is a member of `oneof`_"""
 )
 
 # ----------------------------------------------------------------------------
