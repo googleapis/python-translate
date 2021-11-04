@@ -658,6 +658,7 @@ class DocumentOutputConfig(proto.Message):
             Callers should expect no partial outputs. If there is any
             error during document translation, no output will be stored
             in the Cloud Storage bucket.
+
             This field is a member of `oneof`_ ``destination``.
         mime_type (str):
             Optional. Specifies the translated document's mime_type. If
@@ -1471,6 +1472,7 @@ class BatchDocumentOutputConfig(proto.Message):
             ``glossary_error_output``:
             gs://translation_test/a_b_c*\ [trg]_glossary_translation.txt
             The error output is a txt file containing error details.
+
             This field is a member of `oneof`_ ``destination``.
     """
 
