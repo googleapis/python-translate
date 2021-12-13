@@ -41,7 +41,7 @@ def translate_document(project_id: str, file_path: str):
         }
     )
 
-    # To view translated document, uncomment the code below.
+    # To output the translated document, uncomment the code below.
     # f = open('/tmp/output', 'wb')
     # f.write(response.document_translation.byte_stream_outputs)
     # f.close()
