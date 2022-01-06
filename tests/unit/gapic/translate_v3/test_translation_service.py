@@ -15,7 +15,6 @@
 #
 import os
 import mock
-import packaging.version
 
 import grpc
 from grpc.experimental import aio
@@ -32,6 +31,7 @@ from google.api_core import grpc_helpers
 from google.api_core import grpc_helpers_async
 from google.api_core import operation_async  # type: ignore
 from google.api_core import operations_v1
+from google.api_core import path_template
 from google.auth import credentials as ga_credentials
 from google.auth.exceptions import MutualTLSChannelError
 from google.cloud.translate_v3.services.translation_service import (
@@ -42,40 +42,11 @@ from google.cloud.translate_v3.services.translation_service import (
 )
 from google.cloud.translate_v3.services.translation_service import pagers
 from google.cloud.translate_v3.services.translation_service import transports
-from google.cloud.translate_v3.services.translation_service.transports.base import (
-    _API_CORE_VERSION,
-)
-from google.cloud.translate_v3.services.translation_service.transports.base import (
-    _GOOGLE_AUTH_VERSION,
-)
 from google.cloud.translate_v3.types import translation_service
 from google.longrunning import operations_pb2
 from google.oauth2 import service_account
 from google.protobuf import timestamp_pb2  # type: ignore
 import google.auth
-
-
-# TODO(busunkim): Once google-api-core >= 1.26.0 is required:
-# - Delete all the api-core and auth "less than" test cases
-# - Delete these pytest markers (Make the "greater than or equal to" tests the default).
-requires_google_auth_lt_1_25_0 = pytest.mark.skipif(
-    packaging.version.parse(_GOOGLE_AUTH_VERSION) >= packaging.version.parse("1.25.0"),
-    reason="This test requires google-auth < 1.25.0",
-)
-requires_google_auth_gte_1_25_0 = pytest.mark.skipif(
-    packaging.version.parse(_GOOGLE_AUTH_VERSION) < packaging.version.parse("1.25.0"),
-    reason="This test requires google-auth >= 1.25.0",
-)
-
-requires_api_core_lt_1_26_0 = pytest.mark.skipif(
-    packaging.version.parse(_API_CORE_VERSION) >= packaging.version.parse("1.26.0"),
-    reason="This test requires google-api-core < 1.26.0",
-)
-
-requires_api_core_gte_1_26_0 = pytest.mark.skipif(
-    packaging.version.parse(_API_CORE_VERSION) < packaging.version.parse("1.26.0"),
-    reason="This test requires google-api-core >= 1.26.0",
-)
 
 
 def client_cert_source_callback():
@@ -138,6 +109,31 @@ def test_translation_service_client_from_service_account_info(client_class):
         assert isinstance(client, client_class)
 
         assert client.transport._host == "translate.googleapis.com:443"
+
+
+@pytest.mark.parametrize(
+    "transport_class,transport_name",
+    [
+        (transports.TranslationServiceGrpcTransport, "grpc"),
+        (transports.TranslationServiceGrpcAsyncIOTransport, "grpc_asyncio"),
+    ],
+)
+def test_translation_service_client_service_account_always_use_jwt(
+    transport_class, transport_name
+):
+    with mock.patch.object(
+        service_account.Credentials, "with_always_use_jwt_access", create=True
+    ) as use_jwt:
+        creds = service_account.Credentials(None, None, None)
+        transport = transport_class(credentials=creds, always_use_jwt_access=True)
+        use_jwt.assert_called_once_with(True)
+
+    with mock.patch.object(
+        service_account.Credentials, "with_always_use_jwt_access", create=True
+    ) as use_jwt:
+        creds = service_account.Credentials(None, None, None)
+        transport = transport_class(credentials=creds, always_use_jwt_access=False)
+        use_jwt.assert_not_called()
 
 
 @pytest.mark.parametrize(
@@ -210,7 +206,7 @@ def test_translation_service_client_client_options(
     options = client_options.ClientOptions(api_endpoint="squid.clam.whelk")
     with mock.patch.object(transport_class, "__init__") as patched:
         patched.return_value = None
-        client = client_class(client_options=options)
+        client = client_class(transport=transport_name, client_options=options)
         patched.assert_called_once_with(
             credentials=None,
             credentials_file=None,
@@ -219,6 +215,7 @@ def test_translation_service_client_client_options(
             client_cert_source_for_mtls=None,
             quota_project_id=None,
             client_info=transports.base.DEFAULT_CLIENT_INFO,
+            always_use_jwt_access=True,
         )
 
     # Check the case api_endpoint is not provided and GOOGLE_API_USE_MTLS_ENDPOINT is
@@ -226,7 +223,7 @@ def test_translation_service_client_client_options(
     with mock.patch.dict(os.environ, {"GOOGLE_API_USE_MTLS_ENDPOINT": "never"}):
         with mock.patch.object(transport_class, "__init__") as patched:
             patched.return_value = None
-            client = client_class()
+            client = client_class(transport=transport_name)
             patched.assert_called_once_with(
                 credentials=None,
                 credentials_file=None,
@@ -235,6 +232,7 @@ def test_translation_service_client_client_options(
                 client_cert_source_for_mtls=None,
                 quota_project_id=None,
                 client_info=transports.base.DEFAULT_CLIENT_INFO,
+                always_use_jwt_access=True,
             )
 
     # Check the case api_endpoint is not provided and GOOGLE_API_USE_MTLS_ENDPOINT is
@@ -242,7 +240,7 @@ def test_translation_service_client_client_options(
     with mock.patch.dict(os.environ, {"GOOGLE_API_USE_MTLS_ENDPOINT": "always"}):
         with mock.patch.object(transport_class, "__init__") as patched:
             patched.return_value = None
-            client = client_class()
+            client = client_class(transport=transport_name)
             patched.assert_called_once_with(
                 credentials=None,
                 credentials_file=None,
@@ -251,6 +249,7 @@ def test_translation_service_client_client_options(
                 client_cert_source_for_mtls=None,
                 quota_project_id=None,
                 client_info=transports.base.DEFAULT_CLIENT_INFO,
+                always_use_jwt_access=True,
             )
 
     # Check the case api_endpoint is not provided and GOOGLE_API_USE_MTLS_ENDPOINT has
@@ -270,7 +269,7 @@ def test_translation_service_client_client_options(
     options = client_options.ClientOptions(quota_project_id="octopus")
     with mock.patch.object(transport_class, "__init__") as patched:
         patched.return_value = None
-        client = client_class(client_options=options)
+        client = client_class(transport=transport_name, client_options=options)
         patched.assert_called_once_with(
             credentials=None,
             credentials_file=None,
@@ -279,6 +278,7 @@ def test_translation_service_client_client_options(
             client_cert_source_for_mtls=None,
             quota_project_id="octopus",
             client_info=transports.base.DEFAULT_CLIENT_INFO,
+            always_use_jwt_access=True,
         )
 
 
@@ -338,7 +338,7 @@ def test_translation_service_client_mtls_env_auto(
         )
         with mock.patch.object(transport_class, "__init__") as patched:
             patched.return_value = None
-            client = client_class(client_options=options)
+            client = client_class(transport=transport_name, client_options=options)
 
             if use_client_cert_env == "false":
                 expected_client_cert_source = None
@@ -355,6 +355,7 @@ def test_translation_service_client_mtls_env_auto(
                 client_cert_source_for_mtls=expected_client_cert_source,
                 quota_project_id=None,
                 client_info=transports.base.DEFAULT_CLIENT_INFO,
+                always_use_jwt_access=True,
             )
 
     # Check the case ADC client cert is provided. Whether client cert is used depends on
@@ -379,7 +380,7 @@ def test_translation_service_client_mtls_env_auto(
                         expected_client_cert_source = client_cert_source_callback
 
                     patched.return_value = None
-                    client = client_class()
+                    client = client_class(transport=transport_name)
                     patched.assert_called_once_with(
                         credentials=None,
                         credentials_file=None,
@@ -388,6 +389,7 @@ def test_translation_service_client_mtls_env_auto(
                         client_cert_source_for_mtls=expected_client_cert_source,
                         quota_project_id=None,
                         client_info=transports.base.DEFAULT_CLIENT_INFO,
+                        always_use_jwt_access=True,
                     )
 
     # Check the case client_cert_source and ADC client cert are not provided.
@@ -400,7 +402,7 @@ def test_translation_service_client_mtls_env_auto(
                 return_value=False,
             ):
                 patched.return_value = None
-                client = client_class()
+                client = client_class(transport=transport_name)
                 patched.assert_called_once_with(
                     credentials=None,
                     credentials_file=None,
@@ -409,6 +411,7 @@ def test_translation_service_client_mtls_env_auto(
                     client_cert_source_for_mtls=None,
                     quota_project_id=None,
                     client_info=transports.base.DEFAULT_CLIENT_INFO,
+                    always_use_jwt_access=True,
                 )
 
 
@@ -430,7 +433,7 @@ def test_translation_service_client_client_options_scopes(
     options = client_options.ClientOptions(scopes=["1", "2"],)
     with mock.patch.object(transport_class, "__init__") as patched:
         patched.return_value = None
-        client = client_class(client_options=options)
+        client = client_class(transport=transport_name, client_options=options)
         patched.assert_called_once_with(
             credentials=None,
             credentials_file=None,
@@ -439,6 +442,7 @@ def test_translation_service_client_client_options_scopes(
             client_cert_source_for_mtls=None,
             quota_project_id=None,
             client_info=transports.base.DEFAULT_CLIENT_INFO,
+            always_use_jwt_access=True,
         )
 
 
@@ -460,7 +464,7 @@ def test_translation_service_client_client_options_credentials_file(
     options = client_options.ClientOptions(credentials_file="credentials.json")
     with mock.patch.object(transport_class, "__init__") as patched:
         patched.return_value = None
-        client = client_class(client_options=options)
+        client = client_class(transport=transport_name, client_options=options)
         patched.assert_called_once_with(
             credentials=None,
             credentials_file="credentials.json",
@@ -469,6 +473,7 @@ def test_translation_service_client_client_options_credentials_file(
             client_cert_source_for_mtls=None,
             quota_project_id=None,
             client_info=transports.base.DEFAULT_CLIENT_INFO,
+            always_use_jwt_access=True,
         )
 
 
@@ -488,6 +493,7 @@ def test_translation_service_client_client_options_from_dict():
             client_cert_source_for_mtls=None,
             quota_project_id=None,
             client_info=transports.base.DEFAULT_CLIENT_INFO,
+            always_use_jwt_access=True,
         )
 
 
@@ -650,12 +656,24 @@ def test_translate_text_flattened():
         # request object values.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-        assert args[0].parent == "parent_value"
-        assert args[0].target_language_code == "target_language_code_value"
-        assert args[0].contents == ["contents_value"]
-        assert args[0].model == "model_value"
-        assert args[0].mime_type == "mime_type_value"
-        assert args[0].source_language_code == "source_language_code_value"
+        arg = args[0].parent
+        mock_val = "parent_value"
+        assert arg == mock_val
+        arg = args[0].target_language_code
+        mock_val = "target_language_code_value"
+        assert arg == mock_val
+        arg = args[0].contents
+        mock_val = ["contents_value"]
+        assert arg == mock_val
+        arg = args[0].model
+        mock_val = "model_value"
+        assert arg == mock_val
+        arg = args[0].mime_type
+        mock_val = "mime_type_value"
+        assert arg == mock_val
+        arg = args[0].source_language_code
+        mock_val = "source_language_code_value"
+        assert arg == mock_val
 
 
 def test_translate_text_flattened_error():
@@ -706,12 +724,24 @@ async def test_translate_text_flattened_async():
         # request object values.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-        assert args[0].parent == "parent_value"
-        assert args[0].target_language_code == "target_language_code_value"
-        assert args[0].contents == ["contents_value"]
-        assert args[0].model == "model_value"
-        assert args[0].mime_type == "mime_type_value"
-        assert args[0].source_language_code == "source_language_code_value"
+        arg = args[0].parent
+        mock_val = "parent_value"
+        assert arg == mock_val
+        arg = args[0].target_language_code
+        mock_val = "target_language_code_value"
+        assert arg == mock_val
+        arg = args[0].contents
+        mock_val = ["contents_value"]
+        assert arg == mock_val
+        arg = args[0].model
+        mock_val = "model_value"
+        assert arg == mock_val
+        arg = args[0].mime_type
+        mock_val = "mime_type_value"
+        assert arg == mock_val
+        arg = args[0].source_language_code
+        mock_val = "source_language_code_value"
+        assert arg == mock_val
 
 
 @pytest.mark.asyncio
@@ -891,9 +921,15 @@ def test_detect_language_flattened():
         # request object values.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-        assert args[0].parent == "parent_value"
-        assert args[0].model == "model_value"
-        assert args[0].mime_type == "mime_type_value"
+        arg = args[0].parent
+        mock_val = "parent_value"
+        assert arg == mock_val
+        arg = args[0].model
+        mock_val = "model_value"
+        assert arg == mock_val
+        arg = args[0].mime_type
+        mock_val = "mime_type_value"
+        assert arg == mock_val
         assert args[0].content == "content_value"
 
 
@@ -941,9 +977,15 @@ async def test_detect_language_flattened_async():
         # request object values.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-        assert args[0].parent == "parent_value"
-        assert args[0].model == "model_value"
-        assert args[0].mime_type == "mime_type_value"
+        arg = args[0].parent
+        mock_val = "parent_value"
+        assert arg == mock_val
+        arg = args[0].model
+        mock_val = "model_value"
+        assert arg == mock_val
+        arg = args[0].mime_type
+        mock_val = "mime_type_value"
+        assert arg == mock_val
         assert args[0].content == "content_value"
 
 
@@ -1134,9 +1176,15 @@ def test_get_supported_languages_flattened():
         # request object values.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-        assert args[0].parent == "parent_value"
-        assert args[0].model == "model_value"
-        assert args[0].display_language_code == "display_language_code_value"
+        arg = args[0].parent
+        mock_val = "parent_value"
+        assert arg == mock_val
+        arg = args[0].model
+        mock_val = "model_value"
+        assert arg == mock_val
+        arg = args[0].display_language_code
+        mock_val = "display_language_code_value"
+        assert arg == mock_val
 
 
 def test_get_supported_languages_flattened_error():
@@ -1183,9 +1231,15 @@ async def test_get_supported_languages_flattened_async():
         # request object values.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-        assert args[0].parent == "parent_value"
-        assert args[0].model == "model_value"
-        assert args[0].display_language_code == "display_language_code_value"
+        arg = args[0].parent
+        mock_val = "parent_value"
+        assert arg == mock_val
+        arg = args[0].model
+        mock_val = "model_value"
+        assert arg == mock_val
+        arg = args[0].display_language_code
+        mock_val = "display_language_code_value"
+        assert arg == mock_val
 
 
 @pytest.mark.asyncio
@@ -1203,6 +1257,155 @@ async def test_get_supported_languages_flattened_error_async():
             model="model_value",
             display_language_code="display_language_code_value",
         )
+
+
+def test_translate_document(
+    transport: str = "grpc", request_type=translation_service.TranslateDocumentRequest
+):
+    client = TranslationServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+    )
+
+    # Everything is optional in proto3 as far as the runtime is concerned,
+    # and we are mocking out the actual API, so just send an empty request.
+    request = request_type()
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(
+        type(client.transport.translate_document), "__call__"
+    ) as call:
+        # Designate an appropriate return value for the call.
+        call.return_value = translation_service.TranslateDocumentResponse(
+            model="model_value",
+        )
+        response = client.translate_document(request)
+
+        # Establish that the underlying gRPC stub method was called.
+        assert len(call.mock_calls) == 1
+        _, args, _ = call.mock_calls[0]
+        assert args[0] == translation_service.TranslateDocumentRequest()
+
+    # Establish that the response is the type that we expect.
+    assert isinstance(response, translation_service.TranslateDocumentResponse)
+    assert response.model == "model_value"
+
+
+def test_translate_document_from_dict():
+    test_translate_document(request_type=dict)
+
+
+def test_translate_document_empty_call():
+    # This test is a coverage failsafe to make sure that totally empty calls,
+    # i.e. request == None and no flattened fields passed, work.
+    client = TranslationServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="grpc",
+    )
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(
+        type(client.transport.translate_document), "__call__"
+    ) as call:
+        client.translate_document()
+        call.assert_called()
+        _, args, _ = call.mock_calls[0]
+        assert args[0] == translation_service.TranslateDocumentRequest()
+
+
+@pytest.mark.asyncio
+async def test_translate_document_async(
+    transport: str = "grpc_asyncio",
+    request_type=translation_service.TranslateDocumentRequest,
+):
+    client = TranslationServiceAsyncClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+    )
+
+    # Everything is optional in proto3 as far as the runtime is concerned,
+    # and we are mocking out the actual API, so just send an empty request.
+    request = request_type()
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(
+        type(client.transport.translate_document), "__call__"
+    ) as call:
+        # Designate an appropriate return value for the call.
+        call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
+            translation_service.TranslateDocumentResponse(model="model_value",)
+        )
+        response = await client.translate_document(request)
+
+        # Establish that the underlying gRPC stub method was called.
+        assert len(call.mock_calls)
+        _, args, _ = call.mock_calls[0]
+        assert args[0] == translation_service.TranslateDocumentRequest()
+
+    # Establish that the response is the type that we expect.
+    assert isinstance(response, translation_service.TranslateDocumentResponse)
+    assert response.model == "model_value"
+
+
+@pytest.mark.asyncio
+async def test_translate_document_async_from_dict():
+    await test_translate_document_async(request_type=dict)
+
+
+def test_translate_document_field_headers():
+    client = TranslationServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
+
+    # Any value that is part of the HTTP/1.1 URI should be sent as
+    # a field header. Set these to a non-empty value.
+    request = translation_service.TranslateDocumentRequest()
+
+    request.parent = "parent/value"
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(
+        type(client.transport.translate_document), "__call__"
+    ) as call:
+        call.return_value = translation_service.TranslateDocumentResponse()
+        client.translate_document(request)
+
+        # Establish that the underlying gRPC stub method was called.
+        assert len(call.mock_calls) == 1
+        _, args, _ = call.mock_calls[0]
+        assert args[0] == request
+
+    # Establish that the field header was sent.
+    _, _, kw = call.mock_calls[0]
+    assert ("x-goog-request-params", "parent=parent/value",) in kw["metadata"]
+
+
+@pytest.mark.asyncio
+async def test_translate_document_field_headers_async():
+    client = TranslationServiceAsyncClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
+
+    # Any value that is part of the HTTP/1.1 URI should be sent as
+    # a field header. Set these to a non-empty value.
+    request = translation_service.TranslateDocumentRequest()
+
+    request.parent = "parent/value"
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(
+        type(client.transport.translate_document), "__call__"
+    ) as call:
+        call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
+            translation_service.TranslateDocumentResponse()
+        )
+        await client.translate_document(request)
+
+        # Establish that the underlying gRPC stub method was called.
+        assert len(call.mock_calls)
+        _, args, _ = call.mock_calls[0]
+        assert args[0] == request
+
+    # Establish that the field header was sent.
+    _, _, kw = call.mock_calls[0]
+    assert ("x-goog-request-params", "parent=parent/value",) in kw["metadata"]
 
 
 def test_batch_translate_text(
@@ -1348,6 +1551,334 @@ async def test_batch_translate_text_field_headers_async():
     # Establish that the field header was sent.
     _, _, kw = call.mock_calls[0]
     assert ("x-goog-request-params", "parent=parent/value",) in kw["metadata"]
+
+
+def test_batch_translate_document(
+    transport: str = "grpc",
+    request_type=translation_service.BatchTranslateDocumentRequest,
+):
+    client = TranslationServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+    )
+
+    # Everything is optional in proto3 as far as the runtime is concerned,
+    # and we are mocking out the actual API, so just send an empty request.
+    request = request_type()
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(
+        type(client.transport.batch_translate_document), "__call__"
+    ) as call:
+        # Designate an appropriate return value for the call.
+        call.return_value = operations_pb2.Operation(name="operations/spam")
+        response = client.batch_translate_document(request)
+
+        # Establish that the underlying gRPC stub method was called.
+        assert len(call.mock_calls) == 1
+        _, args, _ = call.mock_calls[0]
+        assert args[0] == translation_service.BatchTranslateDocumentRequest()
+
+    # Establish that the response is the type that we expect.
+    assert isinstance(response, future.Future)
+
+
+def test_batch_translate_document_from_dict():
+    test_batch_translate_document(request_type=dict)
+
+
+def test_batch_translate_document_empty_call():
+    # This test is a coverage failsafe to make sure that totally empty calls,
+    # i.e. request == None and no flattened fields passed, work.
+    client = TranslationServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="grpc",
+    )
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(
+        type(client.transport.batch_translate_document), "__call__"
+    ) as call:
+        client.batch_translate_document()
+        call.assert_called()
+        _, args, _ = call.mock_calls[0]
+        assert args[0] == translation_service.BatchTranslateDocumentRequest()
+
+
+@pytest.mark.asyncio
+async def test_batch_translate_document_async(
+    transport: str = "grpc_asyncio",
+    request_type=translation_service.BatchTranslateDocumentRequest,
+):
+    client = TranslationServiceAsyncClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+    )
+
+    # Everything is optional in proto3 as far as the runtime is concerned,
+    # and we are mocking out the actual API, so just send an empty request.
+    request = request_type()
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(
+        type(client.transport.batch_translate_document), "__call__"
+    ) as call:
+        # Designate an appropriate return value for the call.
+        call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
+            operations_pb2.Operation(name="operations/spam")
+        )
+        response = await client.batch_translate_document(request)
+
+        # Establish that the underlying gRPC stub method was called.
+        assert len(call.mock_calls)
+        _, args, _ = call.mock_calls[0]
+        assert args[0] == translation_service.BatchTranslateDocumentRequest()
+
+    # Establish that the response is the type that we expect.
+    assert isinstance(response, future.Future)
+
+
+@pytest.mark.asyncio
+async def test_batch_translate_document_async_from_dict():
+    await test_batch_translate_document_async(request_type=dict)
+
+
+def test_batch_translate_document_field_headers():
+    client = TranslationServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
+
+    # Any value that is part of the HTTP/1.1 URI should be sent as
+    # a field header. Set these to a non-empty value.
+    request = translation_service.BatchTranslateDocumentRequest()
+
+    request.parent = "parent/value"
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(
+        type(client.transport.batch_translate_document), "__call__"
+    ) as call:
+        call.return_value = operations_pb2.Operation(name="operations/op")
+        client.batch_translate_document(request)
+
+        # Establish that the underlying gRPC stub method was called.
+        assert len(call.mock_calls) == 1
+        _, args, _ = call.mock_calls[0]
+        assert args[0] == request
+
+    # Establish that the field header was sent.
+    _, _, kw = call.mock_calls[0]
+    assert ("x-goog-request-params", "parent=parent/value",) in kw["metadata"]
+
+
+@pytest.mark.asyncio
+async def test_batch_translate_document_field_headers_async():
+    client = TranslationServiceAsyncClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
+
+    # Any value that is part of the HTTP/1.1 URI should be sent as
+    # a field header. Set these to a non-empty value.
+    request = translation_service.BatchTranslateDocumentRequest()
+
+    request.parent = "parent/value"
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(
+        type(client.transport.batch_translate_document), "__call__"
+    ) as call:
+        call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
+            operations_pb2.Operation(name="operations/op")
+        )
+        await client.batch_translate_document(request)
+
+        # Establish that the underlying gRPC stub method was called.
+        assert len(call.mock_calls)
+        _, args, _ = call.mock_calls[0]
+        assert args[0] == request
+
+    # Establish that the field header was sent.
+    _, _, kw = call.mock_calls[0]
+    assert ("x-goog-request-params", "parent=parent/value",) in kw["metadata"]
+
+
+def test_batch_translate_document_flattened():
+    client = TranslationServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(
+        type(client.transport.batch_translate_document), "__call__"
+    ) as call:
+        # Designate an appropriate return value for the call.
+        call.return_value = operations_pb2.Operation(name="operations/op")
+        # Call the method with a truthy value for each flattened field,
+        # using the keyword arguments to the method.
+        client.batch_translate_document(
+            parent="parent_value",
+            source_language_code="source_language_code_value",
+            target_language_codes=["target_language_codes_value"],
+            input_configs=[
+                translation_service.BatchDocumentInputConfig(
+                    gcs_source=translation_service.GcsSource(
+                        input_uri="input_uri_value"
+                    )
+                )
+            ],
+            output_config=translation_service.BatchDocumentOutputConfig(
+                gcs_destination=translation_service.GcsDestination(
+                    output_uri_prefix="output_uri_prefix_value"
+                )
+            ),
+        )
+
+        # Establish that the underlying call was made with the expected
+        # request object values.
+        assert len(call.mock_calls) == 1
+        _, args, _ = call.mock_calls[0]
+        arg = args[0].parent
+        mock_val = "parent_value"
+        assert arg == mock_val
+        arg = args[0].source_language_code
+        mock_val = "source_language_code_value"
+        assert arg == mock_val
+        arg = args[0].target_language_codes
+        mock_val = ["target_language_codes_value"]
+        assert arg == mock_val
+        arg = args[0].input_configs
+        mock_val = [
+            translation_service.BatchDocumentInputConfig(
+                gcs_source=translation_service.GcsSource(input_uri="input_uri_value")
+            )
+        ]
+        assert arg == mock_val
+        arg = args[0].output_config
+        mock_val = translation_service.BatchDocumentOutputConfig(
+            gcs_destination=translation_service.GcsDestination(
+                output_uri_prefix="output_uri_prefix_value"
+            )
+        )
+        assert arg == mock_val
+
+
+def test_batch_translate_document_flattened_error():
+    client = TranslationServiceClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
+
+    # Attempting to call a method with both a request object and flattened
+    # fields is an error.
+    with pytest.raises(ValueError):
+        client.batch_translate_document(
+            translation_service.BatchTranslateDocumentRequest(),
+            parent="parent_value",
+            source_language_code="source_language_code_value",
+            target_language_codes=["target_language_codes_value"],
+            input_configs=[
+                translation_service.BatchDocumentInputConfig(
+                    gcs_source=translation_service.GcsSource(
+                        input_uri="input_uri_value"
+                    )
+                )
+            ],
+            output_config=translation_service.BatchDocumentOutputConfig(
+                gcs_destination=translation_service.GcsDestination(
+                    output_uri_prefix="output_uri_prefix_value"
+                )
+            ),
+        )
+
+
+@pytest.mark.asyncio
+async def test_batch_translate_document_flattened_async():
+    client = TranslationServiceAsyncClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(
+        type(client.transport.batch_translate_document), "__call__"
+    ) as call:
+        # Designate an appropriate return value for the call.
+        call.return_value = operations_pb2.Operation(name="operations/op")
+
+        call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
+            operations_pb2.Operation(name="operations/spam")
+        )
+        # Call the method with a truthy value for each flattened field,
+        # using the keyword arguments to the method.
+        response = await client.batch_translate_document(
+            parent="parent_value",
+            source_language_code="source_language_code_value",
+            target_language_codes=["target_language_codes_value"],
+            input_configs=[
+                translation_service.BatchDocumentInputConfig(
+                    gcs_source=translation_service.GcsSource(
+                        input_uri="input_uri_value"
+                    )
+                )
+            ],
+            output_config=translation_service.BatchDocumentOutputConfig(
+                gcs_destination=translation_service.GcsDestination(
+                    output_uri_prefix="output_uri_prefix_value"
+                )
+            ),
+        )
+
+        # Establish that the underlying call was made with the expected
+        # request object values.
+        assert len(call.mock_calls)
+        _, args, _ = call.mock_calls[0]
+        arg = args[0].parent
+        mock_val = "parent_value"
+        assert arg == mock_val
+        arg = args[0].source_language_code
+        mock_val = "source_language_code_value"
+        assert arg == mock_val
+        arg = args[0].target_language_codes
+        mock_val = ["target_language_codes_value"]
+        assert arg == mock_val
+        arg = args[0].input_configs
+        mock_val = [
+            translation_service.BatchDocumentInputConfig(
+                gcs_source=translation_service.GcsSource(input_uri="input_uri_value")
+            )
+        ]
+        assert arg == mock_val
+        arg = args[0].output_config
+        mock_val = translation_service.BatchDocumentOutputConfig(
+            gcs_destination=translation_service.GcsDestination(
+                output_uri_prefix="output_uri_prefix_value"
+            )
+        )
+        assert arg == mock_val
+
+
+@pytest.mark.asyncio
+async def test_batch_translate_document_flattened_error_async():
+    client = TranslationServiceAsyncClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
+
+    # Attempting to call a method with both a request object and flattened
+    # fields is an error.
+    with pytest.raises(ValueError):
+        await client.batch_translate_document(
+            translation_service.BatchTranslateDocumentRequest(),
+            parent="parent_value",
+            source_language_code="source_language_code_value",
+            target_language_codes=["target_language_codes_value"],
+            input_configs=[
+                translation_service.BatchDocumentInputConfig(
+                    gcs_source=translation_service.GcsSource(
+                        input_uri="input_uri_value"
+                    )
+                )
+            ],
+            output_config=translation_service.BatchDocumentOutputConfig(
+                gcs_destination=translation_service.GcsDestination(
+                    output_uri_prefix="output_uri_prefix_value"
+                )
+            ),
+        )
 
 
 def test_create_glossary(
@@ -1505,8 +2036,12 @@ def test_create_glossary_flattened():
         # request object values.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-        assert args[0].parent == "parent_value"
-        assert args[0].glossary == translation_service.Glossary(name="name_value")
+        arg = args[0].parent
+        mock_val = "parent_value"
+        assert arg == mock_val
+        arg = args[0].glossary
+        mock_val = translation_service.Glossary(name="name_value")
+        assert arg == mock_val
 
 
 def test_create_glossary_flattened_error():
@@ -1549,8 +2084,12 @@ async def test_create_glossary_flattened_async():
         # request object values.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-        assert args[0].parent == "parent_value"
-        assert args[0].glossary == translation_service.Glossary(name="name_value")
+        arg = args[0].parent
+        mock_val = "parent_value"
+        assert arg == mock_val
+        arg = args[0].glossary
+        mock_val = translation_service.Glossary(name="name_value")
+        assert arg == mock_val
 
 
 @pytest.mark.asyncio
@@ -1727,7 +2266,9 @@ def test_list_glossaries_flattened():
         # request object values.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-        assert args[0].parent == "parent_value"
+        arg = args[0].parent
+        mock_val = "parent_value"
+        assert arg == mock_val
 
 
 def test_list_glossaries_flattened_error():
@@ -1765,7 +2306,9 @@ async def test_list_glossaries_flattened_async():
         # request object values.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-        assert args[0].parent == "parent_value"
+        arg = args[0].parent
+        mock_val = "parent_value"
+        assert arg == mock_val
 
 
 @pytest.mark.asyncio
@@ -2105,7 +2648,9 @@ def test_get_glossary_flattened():
         # request object values.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-        assert args[0].name == "name_value"
+        arg = args[0].name
+        mock_val = "name_value"
+        assert arg == mock_val
 
 
 def test_get_glossary_flattened_error():
@@ -2143,7 +2688,9 @@ async def test_get_glossary_flattened_async():
         # request object values.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-        assert args[0].name == "name_value"
+        arg = args[0].name
+        mock_val = "name_value"
+        assert arg == mock_val
 
 
 @pytest.mark.asyncio
@@ -2312,7 +2859,9 @@ def test_delete_glossary_flattened():
         # request object values.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-        assert args[0].name == "name_value"
+        arg = args[0].name
+        mock_val = "name_value"
+        assert arg == mock_val
 
 
 def test_delete_glossary_flattened_error():
@@ -2350,7 +2899,9 @@ async def test_delete_glossary_flattened_async():
         # request object values.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-        assert args[0].name == "name_value"
+        arg = args[0].name
+        mock_val = "name_value"
+        assert arg == mock_val
 
 
 @pytest.mark.asyncio
@@ -2469,7 +3020,9 @@ def test_translation_service_base_transport():
         "translate_text",
         "detect_language",
         "get_supported_languages",
+        "translate_document",
         "batch_translate_text",
+        "batch_translate_document",
         "create_glossary",
         "list_glossaries",
         "get_glossary",
@@ -2479,13 +3032,15 @@ def test_translation_service_base_transport():
         with pytest.raises(NotImplementedError):
             getattr(transport, method)(request=object())
 
+    with pytest.raises(NotImplementedError):
+        transport.close()
+
     # Additionally, the LRO client (a property) should
     # also raise NotImplementedError
     with pytest.raises(NotImplementedError):
         transport.operations_client
 
 
-@requires_google_auth_gte_1_25_0
 def test_translation_service_base_transport_with_credentials_file():
     # Instantiate the base transport with a credentials file
     with mock.patch.object(
@@ -2509,29 +3064,6 @@ def test_translation_service_base_transport_with_credentials_file():
         )
 
 
-@requires_google_auth_lt_1_25_0
-def test_translation_service_base_transport_with_credentials_file_old_google_auth():
-    # Instantiate the base transport with a credentials file
-    with mock.patch.object(
-        google.auth, "load_credentials_from_file", autospec=True
-    ) as load_creds, mock.patch(
-        "google.cloud.translate_v3.services.translation_service.transports.TranslationServiceTransport._prep_wrapped_messages"
-    ) as Transport:
-        Transport.return_value = None
-        load_creds.return_value = (ga_credentials.AnonymousCredentials(), None)
-        transport = transports.TranslationServiceTransport(
-            credentials_file="credentials.json", quota_project_id="octopus",
-        )
-        load_creds.assert_called_once_with(
-            "credentials.json",
-            scopes=(
-                "https://www.googleapis.com/auth/cloud-platform",
-                "https://www.googleapis.com/auth/cloud-translation",
-            ),
-            quota_project_id="octopus",
-        )
-
-
 def test_translation_service_base_transport_with_adc():
     # Test the default credentials are used if credentials and credentials_file are None.
     with mock.patch.object(google.auth, "default", autospec=True) as adc, mock.patch(
@@ -2543,7 +3075,6 @@ def test_translation_service_base_transport_with_adc():
         adc.assert_called_once()
 
 
-@requires_google_auth_gte_1_25_0
 def test_translation_service_auth_adc():
     # If no credentials are provided, we should use ADC credentials.
     with mock.patch.object(google.auth, "default", autospec=True) as adc:
@@ -2559,21 +3090,6 @@ def test_translation_service_auth_adc():
         )
 
 
-@requires_google_auth_lt_1_25_0
-def test_translation_service_auth_adc_old_google_auth():
-    # If no credentials are provided, we should use ADC credentials.
-    with mock.patch.object(google.auth, "default", autospec=True) as adc:
-        adc.return_value = (ga_credentials.AnonymousCredentials(), None)
-        TranslationServiceClient()
-        adc.assert_called_once_with(
-            scopes=(
-                "https://www.googleapis.com/auth/cloud-platform",
-                "https://www.googleapis.com/auth/cloud-translation",
-            ),
-            quota_project_id=None,
-        )
-
-
 @pytest.mark.parametrize(
     "transport_class",
     [
@@ -2581,7 +3097,6 @@ def test_translation_service_auth_adc_old_google_auth():
         transports.TranslationServiceGrpcAsyncIOTransport,
     ],
 )
-@requires_google_auth_gte_1_25_0
 def test_translation_service_transport_auth_adc(transport_class):
     # If credentials and host are not provided, the transport class should use
     # ADC credentials.
@@ -2599,36 +3114,12 @@ def test_translation_service_transport_auth_adc(transport_class):
 
 
 @pytest.mark.parametrize(
-    "transport_class",
-    [
-        transports.TranslationServiceGrpcTransport,
-        transports.TranslationServiceGrpcAsyncIOTransport,
-    ],
-)
-@requires_google_auth_lt_1_25_0
-def test_translation_service_transport_auth_adc_old_google_auth(transport_class):
-    # If credentials and host are not provided, the transport class should use
-    # ADC credentials.
-    with mock.patch.object(google.auth, "default", autospec=True) as adc:
-        adc.return_value = (ga_credentials.AnonymousCredentials(), None)
-        transport_class(quota_project_id="octopus")
-        adc.assert_called_once_with(
-            scopes=(
-                "https://www.googleapis.com/auth/cloud-platform",
-                "https://www.googleapis.com/auth/cloud-translation",
-            ),
-            quota_project_id="octopus",
-        )
-
-
-@pytest.mark.parametrize(
     "transport_class,grpc_helpers",
     [
         (transports.TranslationServiceGrpcTransport, grpc_helpers),
         (transports.TranslationServiceGrpcAsyncIOTransport, grpc_helpers_async),
     ],
 )
-@requires_api_core_gte_1_26_0
 def test_translation_service_transport_create_channel(transport_class, grpc_helpers):
     # If credentials and host are not provided, the transport class should use
     # ADC credentials.
@@ -2661,82 +3152,6 @@ def test_translation_service_transport_create_channel(transport_class, grpc_help
 
 
 @pytest.mark.parametrize(
-    "transport_class,grpc_helpers",
-    [
-        (transports.TranslationServiceGrpcTransport, grpc_helpers),
-        (transports.TranslationServiceGrpcAsyncIOTransport, grpc_helpers_async),
-    ],
-)
-@requires_api_core_lt_1_26_0
-def test_translation_service_transport_create_channel_old_api_core(
-    transport_class, grpc_helpers
-):
-    # If credentials and host are not provided, the transport class should use
-    # ADC credentials.
-    with mock.patch.object(
-        google.auth, "default", autospec=True
-    ) as adc, mock.patch.object(
-        grpc_helpers, "create_channel", autospec=True
-    ) as create_channel:
-        creds = ga_credentials.AnonymousCredentials()
-        adc.return_value = (creds, None)
-        transport_class(quota_project_id="octopus")
-
-        create_channel.assert_called_with(
-            "translate.googleapis.com:443",
-            credentials=creds,
-            credentials_file=None,
-            quota_project_id="octopus",
-            scopes=(
-                "https://www.googleapis.com/auth/cloud-platform",
-                "https://www.googleapis.com/auth/cloud-translation",
-            ),
-            ssl_credentials=None,
-            options=[
-                ("grpc.max_send_message_length", -1),
-                ("grpc.max_receive_message_length", -1),
-            ],
-        )
-
-
-@pytest.mark.parametrize(
-    "transport_class,grpc_helpers",
-    [
-        (transports.TranslationServiceGrpcTransport, grpc_helpers),
-        (transports.TranslationServiceGrpcAsyncIOTransport, grpc_helpers_async),
-    ],
-)
-@requires_api_core_lt_1_26_0
-def test_translation_service_transport_create_channel_user_scopes(
-    transport_class, grpc_helpers
-):
-    # If credentials and host are not provided, the transport class should use
-    # ADC credentials.
-    with mock.patch.object(
-        google.auth, "default", autospec=True
-    ) as adc, mock.patch.object(
-        grpc_helpers, "create_channel", autospec=True
-    ) as create_channel:
-        creds = ga_credentials.AnonymousCredentials()
-        adc.return_value = (creds, None)
-
-        transport_class(quota_project_id="octopus", scopes=["1", "2"])
-
-        create_channel.assert_called_with(
-            "translate.googleapis.com:443",
-            credentials=creds,
-            credentials_file=None,
-            quota_project_id="octopus",
-            scopes=["1", "2"],
-            ssl_credentials=None,
-            options=[
-                ("grpc.max_send_message_length", -1),
-                ("grpc.max_receive_message_length", -1),
-            ],
-        )
-
-
-@pytest.mark.parametrize(
     "transport_class",
     [
         transports.TranslationServiceGrpcTransport,
@@ -2760,10 +3175,7 @@ def test_translation_service_grpc_transport_client_cert_source_for_mtls(
             "squid.clam.whelk:443",
             credentials=cred,
             credentials_file=None,
-            scopes=(
-                "https://www.googleapis.com/auth/cloud-platform",
-                "https://www.googleapis.com/auth/cloud-translation",
-            ),
+            scopes=None,
             ssl_credentials=mock_ssl_channel_creds,
             quota_project_id=None,
             options=[
@@ -2872,10 +3284,7 @@ def test_translation_service_transport_channel_mtls_with_client_cert_source(
                 "mtls.squid.clam.whelk:443",
                 credentials=cred,
                 credentials_file=None,
-                scopes=(
-                    "https://www.googleapis.com/auth/cloud-platform",
-                    "https://www.googleapis.com/auth/cloud-translation",
-                ),
+                scopes=None,
                 ssl_credentials=mock_ssl_cred,
                 quota_project_id=None,
                 options=[
@@ -2922,10 +3331,7 @@ def test_translation_service_transport_channel_mtls_with_adc(transport_class):
                 "mtls.squid.clam.whelk:443",
                 credentials=mock_cred,
                 credentials_file=None,
-                scopes=(
-                    "https://www.googleapis.com/auth/cloud-platform",
-                    "https://www.googleapis.com/auth/cloud-translation",
-                ),
+                scopes=None,
                 ssl_credentials=mock_ssl_cred,
                 quota_project_id=None,
                 options=[
@@ -3101,3 +3507,49 @@ def test_client_withDEFAULT_CLIENT_INFO():
             credentials=ga_credentials.AnonymousCredentials(), client_info=client_info,
         )
         prep.assert_called_once_with(client_info)
+
+
+@pytest.mark.asyncio
+async def test_transport_close_async():
+    client = TranslationServiceAsyncClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="grpc_asyncio",
+    )
+    with mock.patch.object(
+        type(getattr(client.transport, "grpc_channel")), "close"
+    ) as close:
+        async with client:
+            close.assert_not_called()
+        close.assert_called_once()
+
+
+def test_transport_close():
+    transports = {
+        "grpc": "_grpc_channel",
+    }
+
+    for transport, close_name in transports.items():
+        client = TranslationServiceClient(
+            credentials=ga_credentials.AnonymousCredentials(), transport=transport
+        )
+        with mock.patch.object(
+            type(getattr(client.transport, close_name)), "close"
+        ) as close:
+            with client:
+                close.assert_not_called()
+            close.assert_called_once()
+
+
+def test_client_ctx():
+    transports = [
+        "grpc",
+    ]
+    for transport in transports:
+        client = TranslationServiceClient(
+            credentials=ga_credentials.AnonymousCredentials(), transport=transport
+        )
+        # Test client calls underlying transport.
+        with mock.patch.object(type(client.transport), "close") as close:
+            close.assert_not_called()
+            with client:
+                pass
+            close.assert_called()

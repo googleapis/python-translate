@@ -14,21 +14,25 @@
 # limitations under the License.
 #
 from collections import OrderedDict
-from distutils import util
 import os
 import re
-from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
+from typing import Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
-from google.api_core import client_options as client_options_lib  # type: ignore
-from google.api_core import exceptions as core_exceptions  # type: ignore
-from google.api_core import gapic_v1  # type: ignore
-from google.api_core import retry as retries  # type: ignore
+from google.api_core import client_options as client_options_lib
+from google.api_core import exceptions as core_exceptions
+from google.api_core import gapic_v1
+from google.api_core import retry as retries
 from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
 from google.oauth2 import service_account  # type: ignore
+
+try:
+    OptionalRetry = Union[retries.Retry, gapic_v1.method._MethodDefault]
+except AttributeError:  # pragma: NO COVER
+    OptionalRetry = Union[retries.Retry, object]  # type: ignore
 
 from google.api_core import operation  # type: ignore
 from google.api_core import operation_async  # type: ignore
@@ -286,8 +290,15 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
             client_options = client_options_lib.ClientOptions()
 
         # Create SSL credentials for mutual TLS if needed.
-        use_client_cert = bool(
-            util.strtobool(os.getenv("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false"))
+        if os.getenv("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false") not in (
+            "true",
+            "false",
+        ):
+            raise ValueError(
+                "Environment variable `GOOGLE_API_USE_CLIENT_CERTIFICATE` must be either `true` or `false`"
+            )
+        use_client_cert = (
+            os.getenv("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false") == "true"
         )
 
         client_cert_source_func = None
@@ -349,20 +360,21 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
                 client_cert_source_for_mtls=client_cert_source_func,
                 quota_project_id=client_options.quota_project_id,
                 client_info=client_info,
+                always_use_jwt_access=True,
             )
 
     def translate_text(
         self,
-        request: translation_service.TranslateTextRequest = None,
+        request: Union[translation_service.TranslateTextRequest, dict] = None,
         *,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> translation_service.TranslateTextResponse:
         r"""Translates input text and returns translated text.
 
         Args:
-            request (google.cloud.translate_v3beta1.types.TranslateTextRequest):
+            request (Union[google.cloud.translate_v3beta1.types.TranslateTextRequest, dict]):
                 The request object. The request message for synchronous
                 translation.
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
@@ -401,19 +413,19 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
 
     def detect_language(
         self,
-        request: translation_service.DetectLanguageRequest = None,
+        request: Union[translation_service.DetectLanguageRequest, dict] = None,
         *,
         parent: str = None,
         model: str = None,
         mime_type: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> translation_service.DetectLanguageResponse:
         r"""Detects the language of text within a request.
 
         Args:
-            request (google.cloud.translate_v3beta1.types.DetectLanguageRequest):
+            request (Union[google.cloud.translate_v3beta1.types.DetectLanguageRequest, dict]):
                 The request object. The request message for language
                 detection.
             parent (str):
@@ -428,8 +440,8 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
                 ``projects/{project-number-or-id}/locations/global`` or
                 ``projects/{project-number-or-id}``.
 
-                Only models within the same region, which have the same
-                location-id, can be used. Otherwise an INVALID_ARGUMENT
+                Only models within the same region (has same
+                location-id) can be used. Otherwise an INVALID_ARGUMENT
                 (400) error is returned.
 
                 This corresponds to the ``parent`` field
@@ -514,12 +526,12 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
 
     def get_supported_languages(
         self,
-        request: translation_service.GetSupportedLanguagesRequest = None,
+        request: Union[translation_service.GetSupportedLanguagesRequest, dict] = None,
         *,
         parent: str = None,
         display_language_code: str = None,
         model: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> translation_service.SupportedLanguages:
@@ -527,7 +539,7 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
         translation.
 
         Args:
-            request (google.cloud.translate_v3beta1.types.GetSupportedLanguagesRequest):
+            request (Union[google.cloud.translate_v3beta1.types.GetSupportedLanguagesRequest, dict]):
                 The request object. The request message for discovering
                 supported languages.
             parent (str):
@@ -570,11 +582,10 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
 
                 -  General (built-in) models:
                    ``projects/{project-number-or-id}/locations/{location-id}/models/general/nmt``,
-                   ``projects/{project-number-or-id}/locations/{location-id}/models/general/base``
 
                 Returns languages supported by the specified model. If
                 missing, we get supported languages of Google general
-                base (PBMT) model.
+                NMT model.
 
                 This corresponds to the ``model`` field
                 on the ``request`` instance; if ``request`` is provided, this
@@ -634,16 +645,16 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
 
     def translate_document(
         self,
-        request: translation_service.TranslateDocumentRequest = None,
+        request: Union[translation_service.TranslateDocumentRequest, dict] = None,
         *,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> translation_service.TranslateDocumentResponse:
         r"""Translates documents in synchronous mode.
 
         Args:
-            request (google.cloud.translate_v3beta1.types.TranslateDocumentRequest):
+            request (Union[google.cloud.translate_v3beta1.types.TranslateDocumentRequest, dict]):
                 The request object. A document translation request.
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
@@ -683,9 +694,9 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
 
     def batch_translate_text(
         self,
-        request: translation_service.BatchTranslateTextRequest = None,
+        request: Union[translation_service.BatchTranslateTextRequest, dict] = None,
         *,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
@@ -700,7 +711,7 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
         of the call.
 
         Args:
-            request (google.cloud.translate_v3beta1.types.BatchTranslateTextRequest):
+            request (Union[google.cloud.translate_v3beta1.types.BatchTranslateTextRequest, dict]):
                 The request object. The batch translation request.
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
@@ -752,9 +763,14 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
 
     def batch_translate_document(
         self,
-        request: translation_service.BatchTranslateDocumentRequest = None,
+        request: Union[translation_service.BatchTranslateDocumentRequest, dict] = None,
         *,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        parent: str = None,
+        source_language_code: str = None,
+        target_language_codes: Sequence[str] = None,
+        input_configs: Sequence[translation_service.BatchDocumentInputConfig] = None,
+        output_config: translation_service.BatchDocumentOutputConfig = None,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
@@ -769,8 +785,65 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
         the call.
 
         Args:
-            request (google.cloud.translate_v3beta1.types.BatchTranslateDocumentRequest):
+            request (Union[google.cloud.translate_v3beta1.types.BatchTranslateDocumentRequest, dict]):
                 The request object. The BatchTranslateDocument request.
+            parent (str):
+                Required. Location to make a regional call.
+
+                Format:
+                ``projects/{project-number-or-id}/locations/{location-id}``.
+
+                The ``global`` location is not supported for batch
+                translation.
+
+                Only AutoML Translation models or glossaries within the
+                same region (have the same location-id) can be used,
+                otherwise an INVALID_ARGUMENT (400) error is returned.
+
+                This corresponds to the ``parent`` field
+                on the ``request`` instance; if ``request`` is provided, this
+                should not be set.
+            source_language_code (str):
+                Required. The BCP-47 language code of
+                the input document if known, for
+                example, "en-US" or "sr-Latn". Supported
+                language codes are listed in Language
+                Support
+                (https://cloud.google.com/translate/docs/languages).
+
+                This corresponds to the ``source_language_code`` field
+                on the ``request`` instance; if ``request`` is provided, this
+                should not be set.
+            target_language_codes (Sequence[str]):
+                Required. The BCP-47 language code to
+                use for translation of the input
+                document. Specify up to 10 language
+                codes here.
+
+                This corresponds to the ``target_language_codes`` field
+                on the ``request`` instance; if ``request`` is provided, this
+                should not be set.
+            input_configs (Sequence[google.cloud.translate_v3beta1.types.BatchDocumentInputConfig]):
+                Required. Input configurations.
+                The total number of files matched should
+                be <= 100. The total content size to
+                translate should be <= 100M Unicode
+                codepoints. The files must use UTF-8
+                encoding.
+
+                This corresponds to the ``input_configs`` field
+                on the ``request`` instance; if ``request`` is provided, this
+                should not be set.
+            output_config (google.cloud.translate_v3beta1.types.BatchDocumentOutputConfig):
+                Required. Output configuration.
+                If 2 input configs match to the same
+                file (that is, same input path), we
+                don't generate output for duplicate
+                inputs.
+
+                This corresponds to the ``output_config`` field
+                on the ``request`` instance; if ``request`` is provided, this
+                should not be set.
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -788,12 +861,41 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
 
         """
         # Create or coerce a protobuf request object.
+        # Sanity check: If we got a request object, we should *not* have
+        # gotten any keyword arguments that map to the request.
+        has_flattened_params = any(
+            [
+                parent,
+                source_language_code,
+                target_language_codes,
+                input_configs,
+                output_config,
+            ]
+        )
+        if request is not None and has_flattened_params:
+            raise ValueError(
+                "If the `request` argument is set, then none of "
+                "the individual field arguments should be set."
+            )
+
         # Minor optimization to avoid making a copy if the user passes
         # in a translation_service.BatchTranslateDocumentRequest.
         # There's no risk of modifying the input as we've already verified
         # there are no flattened fields.
         if not isinstance(request, translation_service.BatchTranslateDocumentRequest):
             request = translation_service.BatchTranslateDocumentRequest(request)
+            # If we have keyword arguments corresponding to fields on the
+            # request, apply these.
+            if parent is not None:
+                request.parent = parent
+            if source_language_code is not None:
+                request.source_language_code = source_language_code
+            if target_language_codes is not None:
+                request.target_language_codes = target_language_codes
+            if input_configs is not None:
+                request.input_configs = input_configs
+            if output_config is not None:
+                request.output_config = output_config
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
@@ -821,11 +923,11 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
 
     def create_glossary(
         self,
-        request: translation_service.CreateGlossaryRequest = None,
+        request: Union[translation_service.CreateGlossaryRequest, dict] = None,
         *,
         parent: str = None,
         glossary: translation_service.Glossary = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
@@ -833,7 +935,7 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
         Returns NOT_FOUND, if the project doesn't exist.
 
         Args:
-            request (google.cloud.translate_v3beta1.types.CreateGlossaryRequest):
+            request (Union[google.cloud.translate_v3beta1.types.CreateGlossaryRequest, dict]):
                 The request object. Request message for CreateGlossary.
             parent (str):
                 Required. The project name.
@@ -909,11 +1011,11 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
 
     def list_glossaries(
         self,
-        request: translation_service.ListGlossariesRequest = None,
+        request: Union[translation_service.ListGlossariesRequest, dict] = None,
         *,
         parent: str = None,
         filter: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListGlossariesPager:
@@ -921,7 +1023,7 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
         doesn't exist.
 
         Args:
-            request (google.cloud.translate_v3beta1.types.ListGlossariesRequest):
+            request (Union[google.cloud.translate_v3beta1.types.ListGlossariesRequest, dict]):
                 The request object. Request message for ListGlossaries.
             parent (str):
                 Required. The name of the project
@@ -1026,10 +1128,10 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
 
     def get_glossary(
         self,
-        request: translation_service.GetGlossaryRequest = None,
+        request: Union[translation_service.GetGlossaryRequest, dict] = None,
         *,
         name: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> translation_service.Glossary:
@@ -1037,7 +1139,7 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
         exist.
 
         Args:
-            request (google.cloud.translate_v3beta1.types.GetGlossaryRequest):
+            request (Union[google.cloud.translate_v3beta1.types.GetGlossaryRequest, dict]):
                 The request object. Request message for GetGlossary.
             name (str):
                 Required. The name of the glossary to
@@ -1097,10 +1199,10 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
 
     def delete_glossary(
         self,
-        request: translation_service.DeleteGlossaryRequest = None,
+        request: Union[translation_service.DeleteGlossaryRequest, dict] = None,
         *,
         name: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
@@ -1109,7 +1211,7 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
         doesn't exist.
 
         Args:
-            request (google.cloud.translate_v3beta1.types.DeleteGlossaryRequest):
+            request (Union[google.cloud.translate_v3beta1.types.DeleteGlossaryRequest, dict]):
                 The request object. Request message for DeleteGlossary.
             name (str):
                 Required. The name of the glossary to
@@ -1177,6 +1279,19 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
 
         # Done; return the response.
         return response
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, type, value, traceback):
+        """Releases underlying transport's resources.
+
+        .. warning::
+            ONLY use as a context manager if the transport is NOT shared
+            with other clients! Exiting the with block will CLOSE the transport
+            and may cause errors in other clients!
+        """
+        self.transport.close()
 
 
 try:

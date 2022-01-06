@@ -45,17 +45,26 @@ for library in s.get_staging_dirs(default_version):
 
 s.remove_staging_dirs()
 
+# work around gapic generator bug
+# https://github.com/googleapis/gapic-generator-python/pull/1071
+s.replace(
+    "google/cloud/**/types/*.py",
+    """\.
+            This field is a member of `oneof`_""",
+    """.
+
+            This field is a member of `oneof`_"""
+)
+
 # ----------------------------------------------------------------------------
 # Add templated files
 # ----------------------------------------------------------------------------
 templated_files = common.py_library(
     samples=True,
     microgenerator=True,
+    cov_level=99,
 )
 s.move(templated_files, excludes=[".coveragerc"])  # microgenerator has a good .coveragerc file
-
-# Correct namespace in noxfile
-s.replace("noxfile.py", "google.cloud.translation", "google.cloud.translate")
 
 # ----------------------------------------------------------------------------
 # Samples templates

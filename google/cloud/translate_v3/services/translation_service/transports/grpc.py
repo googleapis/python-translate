@@ -16,9 +16,9 @@
 import warnings
 from typing import Callable, Dict, Optional, Sequence, Tuple, Union
 
-from google.api_core import grpc_helpers  # type: ignore
-from google.api_core import operations_v1  # type: ignore
-from google.api_core import gapic_v1  # type: ignore
+from google.api_core import grpc_helpers
+from google.api_core import operations_v1
+from google.api_core import gapic_v1
 import google.auth  # type: ignore
 from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
@@ -59,6 +59,7 @@ class TranslationServiceGrpcTransport(TranslationServiceTransport):
         client_cert_source_for_mtls: Callable[[], Tuple[bytes, bytes]] = None,
         quota_project_id: Optional[str] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
+        always_use_jwt_access: Optional[bool] = False,
     ) -> None:
         """Instantiate the transport.
 
@@ -81,16 +82,16 @@ class TranslationServiceGrpcTransport(TranslationServiceTransport):
             api_mtls_endpoint (Optional[str]): Deprecated. The mutual TLS endpoint.
                 If provided, it overrides the ``host`` argument and tries to create
                 a mutual TLS channel with client SSL credentials from
-                ``client_cert_source`` or applicatin default SSL credentials.
+                ``client_cert_source`` or application default SSL credentials.
             client_cert_source (Optional[Callable[[], Tuple[bytes, bytes]]]):
                 Deprecated. A callback to provide client SSL certificate bytes and
                 private key bytes, both in PEM format. It is ignored if
                 ``api_mtls_endpoint`` is None.
             ssl_channel_credentials (grpc.ChannelCredentials): SSL credentials
-                for grpc channel. It is ignored if ``channel`` is provided.
+                for the grpc channel. It is ignored if ``channel`` is provided.
             client_cert_source_for_mtls (Optional[Callable[[], Tuple[bytes, bytes]]]):
                 A callback to provide client certificate bytes and private key bytes,
-                both in PEM format. It is used to configure mutual TLS channel. It is
+                both in PEM format. It is used to configure a mutual TLS channel. It is
                 ignored if ``channel`` or ``ssl_channel_credentials`` is provided.
             quota_project_id (Optional[str]): An optional project to use for billing
                 and quota.
@@ -99,6 +100,8 @@ class TranslationServiceGrpcTransport(TranslationServiceTransport):
                 API requests. If ``None``, then default info will be used.
                 Generally, you only need to set this if you're developing
                 your own client library.
+            always_use_jwt_access (Optional[bool]): Whether self signed JWT should
+                be used for service account credentials.
 
         Raises:
           google.auth.exceptions.MutualTLSChannelError: If mutual TLS transport
@@ -109,7 +112,7 @@ class TranslationServiceGrpcTransport(TranslationServiceTransport):
         self._grpc_channel = None
         self._ssl_channel_credentials = ssl_channel_credentials
         self._stubs: Dict[str, Callable] = {}
-        self._operations_client = None
+        self._operations_client: Optional[operations_v1.OperationsClient] = None
 
         if api_mtls_endpoint:
             warnings.warn("api_mtls_endpoint is deprecated", DeprecationWarning)
@@ -152,6 +155,7 @@ class TranslationServiceGrpcTransport(TranslationServiceTransport):
             scopes=scopes,
             quota_project_id=quota_project_id,
             client_info=client_info,
+            always_use_jwt_access=always_use_jwt_access,
         )
 
         if not self._grpc_channel:
@@ -207,14 +211,14 @@ class TranslationServiceGrpcTransport(TranslationServiceTransport):
               and ``credentials_file`` are passed.
         """
 
-        self_signed_jwt_kwargs = cls._get_self_signed_jwt_kwargs(host, scopes)
-
         return grpc_helpers.create_channel(
             host,
             credentials=credentials,
             credentials_file=credentials_file,
             quota_project_id=quota_project_id,
-            **self_signed_jwt_kwargs,
+            default_scopes=cls.AUTH_SCOPES,
+            scopes=scopes,
+            default_host=cls.DEFAULT_HOST,
             **kwargs,
         )
 
@@ -327,6 +331,35 @@ class TranslationServiceGrpcTransport(TranslationServiceTransport):
         return self._stubs["get_supported_languages"]
 
     @property
+    def translate_document(
+        self,
+    ) -> Callable[
+        [translation_service.TranslateDocumentRequest],
+        translation_service.TranslateDocumentResponse,
+    ]:
+        r"""Return a callable for the translate document method over gRPC.
+
+        Translates documents in synchronous mode.
+
+        Returns:
+            Callable[[~.TranslateDocumentRequest],
+                    ~.TranslateDocumentResponse]:
+                A function that, when called, will call the underlying RPC
+                on the server.
+        """
+        # Generate a "stub function" on-the-fly which will actually make
+        # the request.
+        # gRPC handles serialization and deserialization, so we just need
+        # to pass in the functions for each.
+        if "translate_document" not in self._stubs:
+            self._stubs["translate_document"] = self.grpc_channel.unary_unary(
+                "/google.cloud.translation.v3.TranslationService/TranslateDocument",
+                request_serializer=translation_service.TranslateDocumentRequest.serialize,
+                response_deserializer=translation_service.TranslateDocumentResponse.deserialize,
+            )
+        return self._stubs["translate_document"]
+
+    @property
     def batch_translate_text(
         self,
     ) -> Callable[
@@ -361,6 +394,42 @@ class TranslationServiceGrpcTransport(TranslationServiceTransport):
                 response_deserializer=operations_pb2.Operation.FromString,
             )
         return self._stubs["batch_translate_text"]
+
+    @property
+    def batch_translate_document(
+        self,
+    ) -> Callable[
+        [translation_service.BatchTranslateDocumentRequest], operations_pb2.Operation
+    ]:
+        r"""Return a callable for the batch translate document method over gRPC.
+
+        Translates a large volume of document in asynchronous
+        batch mode. This function provides real-time output as
+        the inputs are being processed. If caller cancels a
+        request, the partial results (for an input file, it's
+        all or nothing) may still be available on the specified
+        output location.
+        This call returns immediately and you can use
+        google.longrunning.Operation.name to poll the status of
+        the call.
+
+        Returns:
+            Callable[[~.BatchTranslateDocumentRequest],
+                    ~.Operation]:
+                A function that, when called, will call the underlying RPC
+                on the server.
+        """
+        # Generate a "stub function" on-the-fly which will actually make
+        # the request.
+        # gRPC handles serialization and deserialization, so we just need
+        # to pass in the functions for each.
+        if "batch_translate_document" not in self._stubs:
+            self._stubs["batch_translate_document"] = self.grpc_channel.unary_unary(
+                "/google.cloud.translation.v3.TranslationService/BatchTranslateDocument",
+                request_serializer=translation_service.BatchTranslateDocumentRequest.serialize,
+                response_deserializer=operations_pb2.Operation.FromString,
+            )
+        return self._stubs["batch_translate_document"]
 
     @property
     def create_glossary(
@@ -479,6 +548,9 @@ class TranslationServiceGrpcTransport(TranslationServiceTransport):
                 response_deserializer=operations_pb2.Operation.FromString,
             )
         return self._stubs["delete_glossary"]
+
+    def close(self):
+        self.grpc_channel.close()
 
 
 __all__ = ("TranslationServiceGrpcTransport",)

@@ -81,6 +81,7 @@ class TranslateTextGlossaryConfig(proto.Message):
 
 class TranslateTextRequest(proto.Message):
     r"""The request message for synchronous translation.
+
     Attributes:
         contents (Sequence[str]):
             Required. The content of the input in string
@@ -131,14 +132,12 @@ class TranslateTextRequest(proto.Message):
 
             -  General (built-in) models:
                ``projects/{project-number-or-id}/locations/{location-id}/models/general/nmt``,
-               ``projects/{project-number-or-id}/locations/{location-id}/models/general/base``
 
             For global (non-regionalized) requests, use ``location-id``
             ``global``. For example,
             ``projects/{project-number-or-id}/locations/global/models/general/nmt``.
 
-            If missing, the system decides which google base model to
-            use.
+            If not provided, the default Google model (NMT) will be used
         glossary_config (google.cloud.translate_v3beta1.types.TranslateTextGlossaryConfig):
             Optional. Glossary to be applied. The glossary must be
             within the same region (have the same location-id) as the
@@ -172,6 +171,7 @@ class TranslateTextRequest(proto.Message):
 
 class TranslateTextResponse(proto.Message):
     r"""
+
     Attributes:
         translations (Sequence[google.cloud.translate_v3beta1.types.Translation]):
             Text translation responses with no glossary applied. This
@@ -193,9 +193,12 @@ class TranslateTextResponse(proto.Message):
 
 class Translation(proto.Message):
     r"""A single translation response.
+
     Attributes:
         translated_text (str):
             Text translated into the target language.
+            If an error occurs during translation, this
+            field might be excluded from the response.
         model (str):
             Only present when ``model`` is present in the request.
             ``model`` here is normalized to have project number.
@@ -226,6 +229,9 @@ class Translation(proto.Message):
 
 class DetectLanguageRequest(proto.Message):
     r"""The request message for language detection.
+
+    .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
+
     Attributes:
         parent (str):
             Required. Project or location to make a call. Must refer to
@@ -239,9 +245,9 @@ class DetectLanguageRequest(proto.Message):
             ``projects/{project-number-or-id}/locations/global`` or
             ``projects/{project-number-or-id}``.
 
-            Only models within the same region, which have the same
-            location-id, can be used. Otherwise an INVALID_ARGUMENT
-            (400) error is returned.
+            Only models within the same region (has same location-id)
+            can be used. Otherwise an INVALID_ARGUMENT (400) error is
+            returned.
         model (str):
             Optional. The language detection model to be used.
 
@@ -254,6 +260,8 @@ class DetectLanguageRequest(proto.Message):
             If not specified, the default model is used.
         content (str):
             The content of the input stored as a string.
+
+            This field is a member of `oneof`_ ``source``.
         mime_type (str):
             Optional. The format of the source text, for
             example, "text/html", "text/plain". If left
@@ -281,6 +289,7 @@ class DetectLanguageRequest(proto.Message):
 
 class DetectedLanguage(proto.Message):
     r"""The response message for language detection.
+
     Attributes:
         language_code (str):
             The BCP-47 language code of source content in
@@ -296,6 +305,7 @@ class DetectedLanguage(proto.Message):
 
 class DetectLanguageResponse(proto.Message):
     r"""The response message for language detection.
+
     Attributes:
         languages (Sequence[google.cloud.translate_v3beta1.types.DetectedLanguage]):
             A list of detected languages sorted by
@@ -310,6 +320,7 @@ class DetectLanguageResponse(proto.Message):
 
 class GetSupportedLanguagesRequest(proto.Message):
     r"""The request message for discovering supported languages.
+
     Attributes:
         parent (str):
             Required. Project or location to make a call. Must refer to
@@ -342,11 +353,10 @@ class GetSupportedLanguagesRequest(proto.Message):
 
             -  General (built-in) models:
                ``projects/{project-number-or-id}/locations/{location-id}/models/general/nmt``,
-               ``projects/{project-number-or-id}/locations/{location-id}/models/general/base``
 
             Returns languages supported by the specified model. If
-            missing, we get supported languages of Google general base
-            (PBMT) model.
+            missing, we get supported languages of Google general NMT
+            model.
     """
 
     parent = proto.Field(proto.STRING, number=3,)
@@ -356,6 +366,7 @@ class GetSupportedLanguagesRequest(proto.Message):
 
 class SupportedLanguages(proto.Message):
     r"""The response message for discovering supported languages.
+
     Attributes:
         languages (Sequence[google.cloud.translate_v3beta1.types.SupportedLanguage]):
             A list of supported language responses. This
@@ -397,6 +408,7 @@ class SupportedLanguage(proto.Message):
 
 class GcsSource(proto.Message):
     r"""The Google Cloud Storage location for the input content.
+
     Attributes:
         input_uri (str):
             Required. Source data URI. For example,
@@ -408,6 +420,9 @@ class GcsSource(proto.Message):
 
 class InputConfig(proto.Message):
     r"""Input configuration for BatchTranslateText request.
+
+    .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
+
     Attributes:
         mime_type (str):
             Optional. Can be "text/plain" or "text/html". For ``.tsv``,
@@ -434,6 +449,8 @@ class InputConfig(proto.Message):
 
             The other supported file extensions are ``.txt`` or
             ``.html``, which is treated as a single large chunk of text.
+
+            This field is a member of `oneof`_ ``source``.
     """
 
     mime_type = proto.Field(proto.STRING, number=1,)
@@ -444,6 +461,7 @@ class InputConfig(proto.Message):
 
 class GcsDestination(proto.Message):
     r"""The Google Cloud Storage location for the output content.
+
     Attributes:
         output_uri_prefix (str):
             Required. There must be no files under 'output_uri_prefix'.
@@ -457,6 +475,9 @@ class GcsDestination(proto.Message):
 
 class OutputConfig(proto.Message):
     r"""Output configuration for BatchTranslateText request.
+
+    .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
+
     Attributes:
         gcs_destination (google.cloud.translate_v3beta1.types.GcsDestination):
             Google Cloud Storage destination for output content. For
@@ -490,13 +511,13 @@ class OutputConfig(proto.Message):
             content to output.
 
             Once a row is present in index.csv, the input/output
-            matching never changes. Callers should also expect the
-            contents in the input_file are processed and ready to be
-            consumed (that is, no partial output file is written).
+            matching never changes. Callers should also expect all the
+            content in input_file are processed and ready to be consumed
+            (that is, no partial output file is written).
 
-            Since index.csv will be updated during the process, please
-            make sure there is no custom retention policy applied on the
-            output bucket that may prevent file updating.
+            Since index.csv will be keeping updated during the process,
+            please make sure there is no custom retention policy applied
+            on the output bucket that may avoid file updating.
             (https://cloud.google.com/storage/docs/bucket-lock?hl=en#retention-policy)
 
             The format of translations_file (for target language code
@@ -535,6 +556,8 @@ class OutputConfig(proto.Message):
             glossary_error_file will be generated that contains error
             details. glossary_error_file has format of
             gs://translation_test/a_b_c\_'trg'_glossary_errors.[extension]
+
+            This field is a member of `oneof`_ ``destination``.
     """
 
     gcs_destination = proto.Field(
@@ -544,13 +567,25 @@ class OutputConfig(proto.Message):
 
 class DocumentInputConfig(proto.Message):
     r"""A document translation request input config.
+
+    This message has `oneof`_ fields (mutually exclusive fields).
+    For each oneof, at most one member field can be set at the same time.
+    Setting any member of the oneof automatically clears all other
+    members.
+
+    .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
+
     Attributes:
         content (bytes):
             Document's content represented as a stream of
             bytes.
+
+            This field is a member of `oneof`_ ``source``.
         gcs_source (google.cloud.translate_v3beta1.types.GcsSource):
             Google Cloud Storage location. This must be a single file.
             For example: gs://example_bucket/example_file.pdf
+
+            This field is a member of `oneof`_ ``source``.
         mime_type (str):
             Specifies the input document's mime_type.
 
@@ -574,6 +609,9 @@ class DocumentInputConfig(proto.Message):
 
 class DocumentOutputConfig(proto.Message):
     r"""A document translation request output config.
+
+    .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
+
     Attributes:
         gcs_destination (google.cloud.translate_v3beta1.types.GcsDestination):
             Optional. Google Cloud Storage destination for the
@@ -625,6 +663,8 @@ class DocumentOutputConfig(proto.Message):
             Callers should expect no partial outputs. If there is any
             error during document translation, no output will be stored
             in the Cloud Storage bucket.
+
+            This field is a member of `oneof`_ ``destination``.
         mime_type (str):
             Optional. Specifies the translated document's mime_type. If
             not specified, the translated file's mime type will be the
@@ -645,6 +685,7 @@ class DocumentOutputConfig(proto.Message):
 
 class TranslateDocumentRequest(proto.Message):
     r"""A document translation request.
+
     Attributes:
         parent (str):
             Required. Location to make a regional call.
@@ -653,8 +694,7 @@ class TranslateDocumentRequest(proto.Message):
             ``projects/{project-number-or-id}/locations/{location-id}``.
 
             For global calls, use
-            ``projects/{project-number-or-id}/locations/global`` or
-            ``projects/{project-number-or-id}``.
+            ``projects/{project-number-or-id}/locations/global``.
 
             Non-global location is required for requests using AutoML
             models or custom glossaries.
@@ -696,7 +736,6 @@ class TranslateDocumentRequest(proto.Message):
 
             -  General (built-in) models:
                ``projects/{project-number-or-id}/locations/{location-id}/models/general/nmt``,
-               ``projects/{project-number-or-id}/locations/{location-id}/models/general/base``
 
             If not provided, the default Google model (NMT) will be used
             for translation.
@@ -737,6 +776,7 @@ class TranslateDocumentRequest(proto.Message):
 
 class DocumentTranslation(proto.Message):
     r"""A translated document message.
+
     Attributes:
         byte_stream_outputs (Sequence[bytes]):
             The array of translated documents. It is
@@ -762,6 +802,7 @@ class DocumentTranslation(proto.Message):
 
 class TranslateDocumentResponse(proto.Message):
     r"""A translated document response message.
+
     Attributes:
         document_translation (google.cloud.translate_v3beta1.types.DocumentTranslation):
             Translated document.
@@ -797,6 +838,7 @@ class TranslateDocumentResponse(proto.Message):
 
 class BatchTranslateTextRequest(proto.Message):
     r"""The batch translation request.
+
     Attributes:
         parent (str):
             Required. Location to make a call. Must refer to a caller's
@@ -818,9 +860,8 @@ class BatchTranslateTextRequest(proto.Message):
             here.
         models (Sequence[google.cloud.translate_v3beta1.types.BatchTranslateTextRequest.ModelsEntry]):
             Optional. The models to use for translation. Map's key is
-            target language code. Map's value is the model name. Value
-            can be a built-in general model, or an AutoML Translation
-            model.
+            target language code. Map's value is model name. Value can
+            be a built-in general model, or an AutoML Translation model.
 
             The value format depends on model type:
 
@@ -829,7 +870,6 @@ class BatchTranslateTextRequest(proto.Message):
 
             -  General (built-in) models:
                ``projects/{project-number-or-id}/locations/{location-id}/models/general/nmt``,
-               ``projects/{project-number-or-id}/locations/{location-id}/models/general/base``
 
             If the map is empty or a specific model is not requested for
             a language pair, then default google model (nmt) is used.
@@ -875,6 +915,7 @@ class BatchTranslateTextRequest(proto.Message):
 
 class BatchTranslateMetadata(proto.Message):
     r"""State metadata for the batch translation operation.
+
     Attributes:
         state (google.cloud.translate_v3beta1.types.BatchTranslateMetadata.State):
             The state of the operation.
@@ -943,6 +984,9 @@ class BatchTranslateResponse(proto.Message):
 
 class GlossaryInputConfig(proto.Message):
     r"""Input configuration for glossaries.
+
+    .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
+
     Attributes:
         gcs_source (google.cloud.translate_v3beta1.types.GcsSource):
             Required. Google Cloud Storage location of glossary data.
@@ -970,6 +1014,8 @@ class GlossaryInputConfig(proto.Message):
                defined for Google Translation Toolkit and documented in
                `Use a
                glossary <https://support.google.com/translatortoolkit/answer/6306379?hl=en>`__.
+
+            This field is a member of `oneof`_ ``source``.
     """
 
     gcs_source = proto.Field(
@@ -979,6 +1025,14 @@ class GlossaryInputConfig(proto.Message):
 
 class Glossary(proto.Message):
     r"""Represents a glossary built from user provided data.
+
+    This message has `oneof`_ fields (mutually exclusive fields).
+    For each oneof, at most one member field can be set at the same time.
+    Setting any member of the oneof automatically clears all other
+    members.
+
+    .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
+
     Attributes:
         name (str):
             Required. The resource name of the glossary. Glossary names
@@ -986,8 +1040,12 @@ class Glossary(proto.Message):
             ``projects/{project-number-or-id}/locations/{location-id}/glossaries/{glossary-id}``.
         language_pair (google.cloud.translate_v3beta1.types.Glossary.LanguageCodePair):
             Used with unidirectional glossaries.
+
+            This field is a member of `oneof`_ ``languages``.
         language_codes_set (google.cloud.translate_v3beta1.types.Glossary.LanguageCodesSet):
             Used with equivalent term set glossaries.
+
+            This field is a member of `oneof`_ ``languages``.
         input_config (google.cloud.translate_v3beta1.types.GlossaryInputConfig):
             Required. Provides examples to build the
             glossary from. Total glossary must not exceed
@@ -1004,6 +1062,7 @@ class Glossary(proto.Message):
 
     class LanguageCodePair(proto.Message):
         r"""Used with unidirectional glossaries.
+
         Attributes:
             source_language_code (str):
                 Required. The BCP-47 language code of the input text, for
@@ -1020,6 +1079,7 @@ class Glossary(proto.Message):
 
     class LanguageCodesSet(proto.Message):
         r"""Used with equivalent term set glossaries.
+
         Attributes:
             language_codes (Sequence[str]):
                 The BCP-47 language code(s) for terms defined in the
@@ -1045,6 +1105,7 @@ class Glossary(proto.Message):
 
 class CreateGlossaryRequest(proto.Message):
     r"""Request message for CreateGlossary.
+
     Attributes:
         parent (str):
             Required. The project name.
@@ -1058,6 +1119,7 @@ class CreateGlossaryRequest(proto.Message):
 
 class GetGlossaryRequest(proto.Message):
     r"""Request message for GetGlossary.
+
     Attributes:
         name (str):
             Required. The name of the glossary to
@@ -1069,6 +1131,7 @@ class GetGlossaryRequest(proto.Message):
 
 class DeleteGlossaryRequest(proto.Message):
     r"""Request message for DeleteGlossary.
+
     Attributes:
         name (str):
             Required. The name of the glossary to delete.
@@ -1079,6 +1142,7 @@ class DeleteGlossaryRequest(proto.Message):
 
 class ListGlossariesRequest(proto.Message):
     r"""Request message for ListGlossaries.
+
     Attributes:
         parent (str):
             Required. The name of the project from which
@@ -1129,6 +1193,7 @@ class ListGlossariesRequest(proto.Message):
 
 class ListGlossariesResponse(proto.Message):
     r"""Response message for ListGlossaries.
+
     Attributes:
         glossaries (Sequence[google.cloud.translate_v3beta1.types.Glossary]):
             The list of glossaries for a project.
@@ -1237,6 +1302,7 @@ class DeleteGlossaryResponse(proto.Message):
 
 class BatchTranslateDocumentRequest(proto.Message):
     r"""The BatchTranslateDocument request.
+
     Attributes:
         parent (str):
             Required. Location to make a regional call.
@@ -1284,13 +1350,24 @@ class BatchTranslateDocumentRequest(proto.Message):
 
             -  General (built-in) models:
                ``projects/{project-number-or-id}/locations/{location-id}/models/general/nmt``,
-               ``projects/{project-number-or-id}/locations/{location-id}/models/general/base``
 
             If the map is empty or a specific model is not requested for
             a language pair, then default google model (nmt) is used.
         glossaries (Sequence[google.cloud.translate_v3beta1.types.BatchTranslateDocumentRequest.GlossariesEntry]):
             Optional. Glossaries to be applied. It's
             keyed by target language code.
+        format_conversions (Sequence[google.cloud.translate_v3beta1.types.BatchTranslateDocumentRequest.FormatConversionsEntry]):
+            Optional. File format conversion map to be applied to all
+            input files. Map's key is the original mime_type. Map's
+            value is the target mime_type of translated documents.
+
+            Supported file format conversion includes:
+
+            -  ``application/pdf`` to
+               ``application/vnd.openxmlformats-officedocument.wordprocessingml.document``
+
+            If nothing specified, output files will be in the same
+            format as the original file.
     """
 
     parent = proto.Field(proto.STRING, number=1,)
@@ -1306,10 +1383,14 @@ class BatchTranslateDocumentRequest(proto.Message):
     glossaries = proto.MapField(
         proto.STRING, proto.MESSAGE, number=7, message="TranslateTextGlossaryConfig",
     )
+    format_conversions = proto.MapField(proto.STRING, proto.STRING, number=8,)
 
 
 class BatchDocumentInputConfig(proto.Message):
     r"""Input configuration for BatchTranslateDocument request.
+
+    .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
+
     Attributes:
         gcs_source (google.cloud.translate_v3beta1.types.GcsSource):
             Google Cloud Storage location for the source input. This can
@@ -1328,10 +1409,12 @@ class BatchDocumentInputConfig(proto.Message):
             -  ``xlsx``,
                application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
 
-            The max file size supported for ``.docx``, ``.pptx`` and
-            ``.xlsx`` is 100MB. The max file size supported for ``.pdf``
-            is 1GB and the max page limit is 1000 pages. The max file
-            size supported for all input documents is 1GB.
+            The max file size to support for ``.docx``, ``.pptx`` and
+            ``.xlsx`` is 100MB. The max file size to support for
+            ``.pdf`` is 1GB and the max page limit is 1000 pages. The
+            max file size to support for all input documents is 1GB.
+
+            This field is a member of `oneof`_ ``source``.
     """
 
     gcs_source = proto.Field(
@@ -1341,6 +1424,9 @@ class BatchDocumentInputConfig(proto.Message):
 
 class BatchDocumentOutputConfig(proto.Message):
     r"""Output configuration for BatchTranslateDocument request.
+
+    .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
+
     Attributes:
         gcs_destination (google.cloud.translate_v3beta1.types.GcsDestination):
             Google Cloud Storage destination for output content. For
@@ -1395,6 +1481,8 @@ class BatchDocumentOutputConfig(proto.Message):
             ``glossary_error_output``:
             gs://translation_test/a_b_c*\ [trg]_glossary_translation.txt
             The error output is a txt file containing error details.
+
+            This field is a member of `oneof`_ ``destination``.
     """
 
     gcs_destination = proto.Field(
@@ -1411,15 +1499,15 @@ class BatchTranslateDocumentResponse(proto.Message):
     Attributes:
         total_pages (int):
             Total number of pages to translate in all
-            documents. Documents without a clear page
+            documents. Documents without clear page
             definition (such as XLSX) are not counted.
         translated_pages (int):
             Number of successfully translated pages in
-            all documents. Documents without a clear page
+            all documents. Documents without clear page
             definition (such as XLSX) are not counted.
         failed_pages (int):
             Number of pages that failed to process in all
-            documents. Documents without a clear page
+            documents. Documents without clear page
             definition (such as XLSX) are not counted.
         total_billable_pages (int):
             Number of billable pages in documents with
@@ -1459,6 +1547,7 @@ class BatchTranslateDocumentResponse(proto.Message):
 
 class BatchTranslateDocumentMetadata(proto.Message):
     r"""State metadata for the batch translation operation.
+
     Attributes:
         state (google.cloud.translate_v3beta1.types.BatchTranslateDocumentMetadata.State):
             The state of the operation.

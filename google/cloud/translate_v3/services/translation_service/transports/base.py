@@ -15,16 +15,16 @@
 #
 import abc
 from typing import Awaitable, Callable, Dict, Optional, Sequence, Union
-import packaging.version
 import pkg_resources
 
 import google.auth  # type: ignore
-import google.api_core  # type: ignore
-from google.api_core import exceptions as core_exceptions  # type: ignore
-from google.api_core import gapic_v1  # type: ignore
-from google.api_core import retry as retries  # type: ignore
-from google.api_core import operations_v1  # type: ignore
+import google.api_core
+from google.api_core import exceptions as core_exceptions
+from google.api_core import gapic_v1
+from google.api_core import retry as retries
+from google.api_core import operations_v1
 from google.auth import credentials as ga_credentials  # type: ignore
+from google.oauth2 import service_account  # type: ignore
 
 from google.cloud.translate_v3.types import translation_service
 from google.longrunning import operations_pb2  # type: ignore
@@ -35,17 +35,6 @@ try:
     )
 except pkg_resources.DistributionNotFound:
     DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo()
-
-try:
-    # google.auth.__version__ was added in 1.26.0
-    _GOOGLE_AUTH_VERSION = google.auth.__version__
-except AttributeError:
-    try:  # try pkg_resources if it is available
-        _GOOGLE_AUTH_VERSION = pkg_resources.get_distribution("google-auth").version
-    except pkg_resources.DistributionNotFound:  # pragma: NO COVER
-        _GOOGLE_AUTH_VERSION = None
-
-_API_CORE_VERSION = google.api_core.__version__
 
 
 class TranslationServiceTransport(abc.ABC):
@@ -67,6 +56,7 @@ class TranslationServiceTransport(abc.ABC):
         scopes: Optional[Sequence[str]] = None,
         quota_project_id: Optional[str] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
+        always_use_jwt_access: Optional[bool] = False,
         **kwargs,
     ) -> None:
         """Instantiate the transport.
@@ -90,16 +80,18 @@ class TranslationServiceTransport(abc.ABC):
                 API requests. If ``None``, then default info will be used.
                 Generally, you only need to set this if you're developing
                 your own client library.
+            always_use_jwt_access (Optional[bool]): Whether self signed JWT should
+                be used for service account credentials.
         """
         # Save the hostname. Default to port 443 (HTTPS) if none is specified.
         if ":" not in host:
             host += ":443"
         self._host = host
 
-        scopes_kwargs = self._get_scopes_kwargs(self._host, scopes)
+        scopes_kwargs = {"scopes": scopes, "default_scopes": self.AUTH_SCOPES}
 
         # Save the scopes.
-        self._scopes = scopes or self.AUTH_SCOPES
+        self._scopes = scopes
 
         # If no credentials are provided, then determine the appropriate
         # defaults.
@@ -118,53 +110,16 @@ class TranslationServiceTransport(abc.ABC):
                 **scopes_kwargs, quota_project_id=quota_project_id
             )
 
+        # If the credentials are service account credentials, then always try to use self signed JWT.
+        if (
+            always_use_jwt_access
+            and isinstance(credentials, service_account.Credentials)
+            and hasattr(service_account.Credentials, "with_always_use_jwt_access")
+        ):
+            credentials = credentials.with_always_use_jwt_access(True)
+
         # Save the credentials.
         self._credentials = credentials
-
-    # TODO(busunkim): These two class methods are in the base transport
-    # to avoid duplicating code across the transport classes. These functions
-    # should be deleted once the minimum required versions of google-api-core
-    # and google-auth are increased.
-
-    # TODO: Remove this function once google-auth >= 1.25.0 is required
-    @classmethod
-    def _get_scopes_kwargs(
-        cls, host: str, scopes: Optional[Sequence[str]]
-    ) -> Dict[str, Optional[Sequence[str]]]:
-        """Returns scopes kwargs to pass to google-auth methods depending on the google-auth version"""
-
-        scopes_kwargs = {}
-
-        if _GOOGLE_AUTH_VERSION and (
-            packaging.version.parse(_GOOGLE_AUTH_VERSION)
-            >= packaging.version.parse("1.25.0")
-        ):
-            scopes_kwargs = {"scopes": scopes, "default_scopes": cls.AUTH_SCOPES}
-        else:
-            scopes_kwargs = {"scopes": scopes or cls.AUTH_SCOPES}
-
-        return scopes_kwargs
-
-    # TODO: Remove this function once google-api-core >= 1.26.0 is required
-    @classmethod
-    def _get_self_signed_jwt_kwargs(
-        cls, host: str, scopes: Optional[Sequence[str]]
-    ) -> Dict[str, Union[Optional[Sequence[str]], str]]:
-        """Returns kwargs to pass to grpc_helpers.create_channel depending on the google-api-core version"""
-
-        self_signed_jwt_kwargs: Dict[str, Union[Optional[Sequence[str]], str]] = {}
-
-        if _API_CORE_VERSION and (
-            packaging.version.parse(_API_CORE_VERSION)
-            >= packaging.version.parse("1.26.0")
-        ):
-            self_signed_jwt_kwargs["default_scopes"] = cls.AUTH_SCOPES
-            self_signed_jwt_kwargs["scopes"] = scopes
-            self_signed_jwt_kwargs["default_host"] = cls.DEFAULT_HOST
-        else:
-            self_signed_jwt_kwargs["scopes"] = scopes or cls.AUTH_SCOPES
-
-        return self_signed_jwt_kwargs
 
     def _prep_wrapped_messages(self, client_info):
         # Precompute the wrapped methods.
@@ -190,8 +145,16 @@ class TranslationServiceTransport(abc.ABC):
                 default_timeout=600.0,
                 client_info=client_info,
             ),
+            self.translate_document: gapic_v1.method.wrap_method(
+                self.translate_document, default_timeout=600.0, client_info=client_info,
+            ),
             self.batch_translate_text: gapic_v1.method.wrap_method(
                 self.batch_translate_text,
+                default_timeout=600.0,
+                client_info=client_info,
+            ),
+            self.batch_translate_document: gapic_v1.method.wrap_method(
+                self.batch_translate_document,
                 default_timeout=600.0,
                 client_info=client_info,
             ),
@@ -245,8 +208,17 @@ class TranslationServiceTransport(abc.ABC):
             ),
         }
 
+    def close(self):
+        """Closes resources associated with the transport.
+
+       .. warning::
+            Only call this method if the transport is NOT shared
+            with other clients - this may cause errors in other clients!
+        """
+        raise NotImplementedError()
+
     @property
-    def operations_client(self) -> operations_v1.OperationsClient:
+    def operations_client(self):
         """Return the client designed to process long-running operations."""
         raise NotImplementedError()
 
@@ -287,10 +259,31 @@ class TranslationServiceTransport(abc.ABC):
         raise NotImplementedError()
 
     @property
+    def translate_document(
+        self,
+    ) -> Callable[
+        [translation_service.TranslateDocumentRequest],
+        Union[
+            translation_service.TranslateDocumentResponse,
+            Awaitable[translation_service.TranslateDocumentResponse],
+        ],
+    ]:
+        raise NotImplementedError()
+
+    @property
     def batch_translate_text(
         self,
     ) -> Callable[
         [translation_service.BatchTranslateTextRequest],
+        Union[operations_pb2.Operation, Awaitable[operations_pb2.Operation]],
+    ]:
+        raise NotImplementedError()
+
+    @property
+    def batch_translate_document(
+        self,
+    ) -> Callable[
+        [translation_service.BatchTranslateDocumentRequest],
         Union[operations_pb2.Operation, Awaitable[operations_pb2.Operation]],
     ]:
         raise NotImplementedError()

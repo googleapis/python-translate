@@ -4,6 +4,126 @@
 
 [1]: https://pypi.org/project/google-cloud-translate/#history
 
+### [3.6.1](https://www.github.com/googleapis/python-translate/compare/v3.6.0...v3.6.1) (2021-11-04)
+
+
+### Bug Fixes
+
+* **deps:** drop packaging dependency ([7924322](https://www.github.com/googleapis/python-translate/commit/79243222e5e16e1b7cb50b9d69862ddf6023ad4f))
+* **deps:** require google-api-core >= 1.28.0 ([7924322](https://www.github.com/googleapis/python-translate/commit/79243222e5e16e1b7cb50b9d69862ddf6023ad4f))
+
+
+### Documentation
+
+* list oneofs in docstring ([7924322](https://www.github.com/googleapis/python-translate/commit/79243222e5e16e1b7cb50b9d69862ddf6023ad4f))
+* **samples:** Add Cloud Code tags for API Explorer pilot ([#282](https://www.github.com/googleapis/python-translate/issues/282)) ([3e8df68](https://www.github.com/googleapis/python-translate/commit/3e8df6836f0508fb4c6cd1c4a9f2f39192a01cea))
+
+## [3.6.0](https://www.github.com/googleapis/python-translate/compare/v3.5.0...v3.6.0) (2021-10-18)
+
+
+### Features
+
+* add support for python 3.10 ([#275](https://www.github.com/googleapis/python-translate/issues/275)) ([381fc15](https://www.github.com/googleapis/python-translate/commit/381fc15cd920252edbc280b7623125955ee68347))
+
+
+### Bug Fixes
+
+* add model signature for batch document translation ([#276](https://www.github.com/googleapis/python-translate/issues/276)) ([be0b01b](https://www.github.com/googleapis/python-translate/commit/be0b01bb5b21cec9910967305784fc02c7ce83ff))
+
+## [3.5.0](https://www.github.com/googleapis/python-translate/compare/v3.4.1...v3.5.0) (2021-10-11)
+
+
+### Features
+
+* add context manager support in client ([#267](https://www.github.com/googleapis/python-translate/issues/267)) ([6e750e8](https://www.github.com/googleapis/python-translate/commit/6e750e8d655cc6ae7967ff5e105b6f64dd05c4c3))
+
+
+### Bug Fixes
+
+* [#254](https://www.github.com/googleapis/python-translate/issues/254) by increasing timeout, use backoff module instead of flaky ([#271](https://www.github.com/googleapis/python-translate/issues/271)) ([0cff0f2](https://www.github.com/googleapis/python-translate/commit/0cff0f2d6c1a6509f03e18a5a3dbd8377f864b27))
+
+### [3.4.1](https://www.github.com/googleapis/python-translate/compare/v3.4.0...v3.4.1) (2021-09-30)
+
+
+### Bug Fixes
+
+* add 'dict' annotation type to 'request' ([6bbf390](https://www.github.com/googleapis/python-translate/commit/6bbf39038f37a3d16018d9ee9f356145a50f987c))
+* improper types in pagers generation ([cd70523](https://www.github.com/googleapis/python-translate/commit/cd70523d9a628684515a8d910e7e5158817b3e61))
+
+## [3.4.0](https://www.github.com/googleapis/python-translate/compare/v3.3.2...v3.4.0) (2021-08-29)
+
+
+### Features
+
+* add translate_document and batch_translate_document ([#234](https://www.github.com/googleapis/python-translate/issues/234)) ([b5962d6](https://www.github.com/googleapis/python-translate/commit/b5962d68051d7dc6e4213c78d21ab3bbea1411f5))
+* **v3beta1:** add format_conversions ([b5962d6](https://www.github.com/googleapis/python-translate/commit/b5962d68051d7dc6e4213c78d21ab3bbea1411f5))
+
+
+### Bug Fixes
+
+* add missing annotation for batch document translation ([#231](https://www.github.com/googleapis/python-translate/issues/231)) ([a1297ba](https://www.github.com/googleapis/python-translate/commit/a1297ba6079524f82588c3fe79ec3f5c433a7606))
+
+### [3.3.2](https://www.github.com/googleapis/python-translate/compare/v3.3.1...v3.3.2) (2021-07-29)
+
+
+### Bug Fixes
+
+* enable self signed jwt for grpc ([#215](https://www.github.com/googleapis/python-translate/issues/215)) ([2f1bc32](https://www.github.com/googleapis/python-translate/commit/2f1bc327fd436f2f7e86c676cbbf1e7d7cc61921))
+
+
+### Documentation
+
+* add Samples section to CONTRIBUTING.rst ([#206](https://www.github.com/googleapis/python-translate/issues/206)) ([6f1df67](https://www.github.com/googleapis/python-translate/commit/6f1df6794394bcbedb18199793aaebb9c095ccf5))
+
+
+### Miscellaneous Chores
+
+* release as 3.3.2 ([#218](https://www.github.com/googleapis/python-translate/issues/218)) ([e14de99](https://www.github.com/googleapis/python-translate/commit/e14de99d9d3480274ba92ef36c93f0b626a2bd91))
+
+### [3.3.1](https://www.github.com/googleapis/python-translate/compare/v3.3.0...v3.3.1) (2021-07-21)
+
+
+### Bug Fixes
+
+* **deps:** pin 'google-{api,cloud}-core', 'google-auth' to allow 2.x versions ([#205](https://www.github.com/googleapis/python-translate/issues/205)) ([3a11025](https://www.github.com/googleapis/python-translate/commit/3a1102560ab70f8a7021f3b4f024e3e9feb134fe))
+
+## [3.3.0](https://www.github.com/googleapis/python-translate/compare/v3.2.1...v3.3.0) (2021-07-19)
+
+
+### Features
+
+* add always_use_jwt_access ([778878d](https://www.github.com/googleapis/python-translate/commit/778878d7aeb70a3da249c91b8a2bd36c675b1e4b))
+
+
+### Bug Fixes
+
+* disable always_use_jwt_access ([#186](https://www.github.com/googleapis/python-translate/issues/186)) ([778878d](https://www.github.com/googleapis/python-translate/commit/778878d7aeb70a3da249c91b8a2bd36c675b1e4b))
+
+### [3.2.1](https://www.github.com/googleapis/python-translate/compare/v3.2.0...v3.2.1) (2021-06-21)
+
+
+### Documentation
+
+* omit mention of Python 2.7 in 'CONTRIBUTING.rst' ([#1127](https://www.github.com/googleapis/python-translate/issues/1127)) ([#175](https://www.github.com/googleapis/python-translate/issues/175)) ([7ef5f04](https://www.github.com/googleapis/python-translate/commit/7ef5f04cdb80198472bdc376364db9cc0a91fd9e))
+
+## [3.2.0](https://www.github.com/googleapis/python-translate/compare/v3.1.0...v3.2.0) (2021-05-28)
+
+
+### Features
+
+* support self-signed JWT flow for service accounts ([959a35c](https://www.github.com/googleapis/python-translate/commit/959a35c85e32867ed63c63d96593a240a5e8a1c4))
+
+
+### Bug Fixes
+
+* add async client to %name_%version/init.py ([959a35c](https://www.github.com/googleapis/python-translate/commit/959a35c85e32867ed63c63d96593a240a5e8a1c4))
+* **deps:** add packaging requirement ([959a35c](https://www.github.com/googleapis/python-translate/commit/959a35c85e32867ed63c63d96593a240a5e8a1c4))
+
+
+### Documentation
+
+* connect Python Translate client library to nebulous serverless example ([#162](https://www.github.com/googleapis/python-translate/issues/162)) ([2986864](https://www.github.com/googleapis/python-translate/commit/2986864db391e5216dbead83eb822fd1fb2c19d0))
+
 ## [3.1.0](https://www.github.com/googleapis/python-translate/compare/v3.0.2...v3.1.0) (2021-03-31)
 
 

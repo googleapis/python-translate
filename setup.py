@@ -22,17 +22,22 @@ import setuptools
 
 name = "google-cloud-translate"
 description = "Google Cloud Translation API client library"
-version = "3.1.0"
+version = "3.6.1"
 # Should be one of:
 # 'Development Status :: 3 - Alpha'
 # 'Development Status :: 4 - Beta'
 # 'Development Status :: 5 - Production/Stable'
 release_status = "Development Status :: 5 - Production/Stable"
 dependencies = [
-    "google-api-core[grpc] >= 1.22.2, < 2.0.0dev",
-    "google-cloud-core >= 1.3.0, < 2.0dev",
+    # NOTE: Maintainers, please do not require google-api-core>=2.x.x
+    # Until this issue is closed
+    # https://github.com/googleapis/google-cloud-python/issues/10566
+    "google-api-core[grpc] >= 1.28.0, <3.0.0dev",
+    # NOTE: Maintainers, please do not require google-api-core>=2.x.x
+    # Until this issue is closed
+    # https://github.com/googleapis/google-cloud-python/issues/10566
+    "google-cloud-core >= 1.3.0, <3.0.0dev",
     "proto-plus >= 0.4.0",
-    "packaging >= 14.3",
 ]
 extras = {}
 
@@ -77,6 +82,8 @@ setuptools.setup(
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
         "Operating System :: OS Independent",
         "Topic :: Internet",
     ],
