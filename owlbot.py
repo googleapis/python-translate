@@ -44,8 +44,8 @@ for library in s.get_staging_dirs(default_version):
     s.replace(library / ".coveragerc",
         """google/cloud/translate/__init__.py""",
         """google/__init__.py
-        google/cloud/__init__.py
-        google/cloud/translate/__init__.py""",
+    google/cloud/__init__.py
+    google/cloud/translate/__init__.py""",
     )
     s.move(library, excludes=excludes)
 
