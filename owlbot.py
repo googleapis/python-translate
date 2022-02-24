@@ -48,7 +48,7 @@ s.remove_staging_dirs()
 s.replace(".coveragerc",
     """omit =
     google/cloud/translate/__init__.py""",
-    """omit = 
+    """omit =
     google/__init__.py
     google/cloud/__init__.py
     google/cloud/translate/__init__.py""",
