@@ -420,8 +420,7 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
     ) -> translation_service.TranslateTextResponse:
         r"""Translates input text and returns translated text.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import translate_v3
 
@@ -610,8 +609,7 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
     ) -> translation_service.DetectLanguageResponse:
         r"""Detects the language of text within a request.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import translate_v3
 
@@ -755,8 +753,7 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
         translation.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import translate_v3
 
@@ -890,8 +887,7 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
     ) -> translation_service.TranslateDocumentResponse:
         r"""Translates documents in synchronous mode.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import translate_v3
 
@@ -973,8 +969,7 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
         of the call.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import translate_v3
 
@@ -1082,8 +1077,7 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
         the call.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import translate_v3
 
@@ -1267,8 +1261,7 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
         Returns NOT_FOUND, if the project doesn't exist.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import translate_v3
 
@@ -1383,8 +1376,7 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
         doesn't exist.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import translate_v3
 
@@ -1485,8 +1477,7 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
         exist.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import translate_v3
 
@@ -1578,8 +1569,7 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
         doesn't exist.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import translate_v3
 

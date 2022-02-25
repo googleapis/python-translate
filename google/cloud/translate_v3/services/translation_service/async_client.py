@@ -222,7 +222,7 @@ class TranslationServiceAsyncClient:
     ) -> translation_service.TranslateTextResponse:
         r"""Translates input text and returns translated text.
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import translate_v3
 
@@ -411,7 +411,7 @@ class TranslationServiceAsyncClient:
     ) -> translation_service.DetectLanguageResponse:
         r"""Detects the language of text within a request.
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import translate_v3
 
@@ -555,7 +555,7 @@ class TranslationServiceAsyncClient:
         translation.
 
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import translate_v3
 
@@ -699,7 +699,7 @@ class TranslationServiceAsyncClient:
     ) -> translation_service.TranslateDocumentResponse:
         r"""Translates documents in synchronous mode.
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import translate_v3
 
@@ -780,7 +780,7 @@ class TranslationServiceAsyncClient:
         of the call.
 
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import translate_v3
 
@@ -887,7 +887,7 @@ class TranslationServiceAsyncClient:
         the call.
 
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import translate_v3
 
@@ -1071,7 +1071,7 @@ class TranslationServiceAsyncClient:
         Returns NOT_FOUND, if the project doesn't exist.
 
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import translate_v3
 
@@ -1186,7 +1186,7 @@ class TranslationServiceAsyncClient:
         doesn't exist.
 
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import translate_v3
 
@@ -1297,7 +1297,7 @@ class TranslationServiceAsyncClient:
         exist.
 
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import translate_v3
 
@@ -1399,7 +1399,7 @@ class TranslationServiceAsyncClient:
         doesn't exist.
 
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import translate_v3
 

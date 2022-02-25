@@ -10,8 +10,8 @@
           "shortName": "BatchTranslateDocument"
         }
       },
-      "file": "translate_generated_translate_v3beta1_translation_service_batch_translate_document_async.py",
-      "regionTag": "translate_generated_translate_v3beta1_TranslationService_BatchTranslateDocument_async",
+      "file": "translate_v3beta1_generated_translation_service_batch_translate_document_async.py",
+      "regionTag": "translate_v3beta1_generated_TranslationService_BatchTranslateDocument_async",
       "segments": [
         {
           "end": 58,
@@ -54,8 +54,8 @@
           "shortName": "BatchTranslateDocument"
         }
       },
-      "file": "translate_generated_translate_v3beta1_translation_service_batch_translate_document_sync.py",
-      "regionTag": "translate_generated_translate_v3beta1_TranslationService_BatchTranslateDocument_sync",
+      "file": "translate_v3beta1_generated_translation_service_batch_translate_document_sync.py",
+      "regionTag": "translate_v3beta1_generated_TranslationService_BatchTranslateDocument_sync",
       "segments": [
         {
           "end": 58,
@@ -99,8 +99,8 @@
           "shortName": "BatchTranslateText"
         }
       },
-      "file": "translate_generated_translate_v3beta1_translation_service_batch_translate_text_async.py",
-      "regionTag": "translate_generated_translate_v3beta1_TranslationService_BatchTranslateText_async",
+      "file": "translate_v3beta1_generated_translation_service_batch_translate_text_async.py",
+      "regionTag": "translate_v3beta1_generated_TranslationService_BatchTranslateText_async",
       "segments": [
         {
           "end": 58,
@@ -143,8 +143,8 @@
           "shortName": "BatchTranslateText"
         }
       },
-      "file": "translate_generated_translate_v3beta1_translation_service_batch_translate_text_sync.py",
-      "regionTag": "translate_generated_translate_v3beta1_TranslationService_BatchTranslateText_sync",
+      "file": "translate_v3beta1_generated_translation_service_batch_translate_text_sync.py",
+      "regionTag": "translate_v3beta1_generated_TranslationService_BatchTranslateText_sync",
       "segments": [
         {
           "end": 58,
@@ -188,8 +188,8 @@
           "shortName": "CreateGlossary"
         }
       },
-      "file": "translate_generated_translate_v3beta1_translation_service_create_glossary_async.py",
-      "regionTag": "translate_generated_translate_v3beta1_TranslationService_CreateGlossary_async",
+      "file": "translate_v3beta1_generated_translation_service_create_glossary_async.py",
+      "regionTag": "translate_v3beta1_generated_TranslationService_CreateGlossary_async",
       "segments": [
         {
           "end": 52,
@@ -232,8 +232,8 @@
           "shortName": "CreateGlossary"
         }
       },
-      "file": "translate_generated_translate_v3beta1_translation_service_create_glossary_sync.py",
-      "regionTag": "translate_generated_translate_v3beta1_TranslationService_CreateGlossary_sync",
+      "file": "translate_v3beta1_generated_translation_service_create_glossary_sync.py",
+      "regionTag": "translate_v3beta1_generated_TranslationService_CreateGlossary_sync",
       "segments": [
         {
           "end": 52,
@@ -277,8 +277,8 @@
           "shortName": "DeleteGlossary"
         }
       },
-      "file": "translate_generated_translate_v3beta1_translation_service_delete_glossary_async.py",
-      "regionTag": "translate_generated_translate_v3beta1_TranslationService_DeleteGlossary_async",
+      "file": "translate_v3beta1_generated_translation_service_delete_glossary_async.py",
+      "regionTag": "translate_v3beta1_generated_TranslationService_DeleteGlossary_async",
       "segments": [
         {
           "end": 48,
@@ -321,8 +321,8 @@
           "shortName": "DeleteGlossary"
         }
       },
-      "file": "translate_generated_translate_v3beta1_translation_service_delete_glossary_sync.py",
-      "regionTag": "translate_generated_translate_v3beta1_TranslationService_DeleteGlossary_sync",
+      "file": "translate_v3beta1_generated_translation_service_delete_glossary_sync.py",
+      "regionTag": "translate_v3beta1_generated_TranslationService_DeleteGlossary_sync",
       "segments": [
         {
           "end": 48,
@@ -366,8 +366,8 @@
           "shortName": "DetectLanguage"
         }
       },
-      "file": "translate_generated_translate_v3beta1_translation_service_detect_language_async.py",
-      "regionTag": "translate_generated_translate_v3beta1_TranslationService_DetectLanguage_async",
+      "file": "translate_v3beta1_generated_translation_service_detect_language_async.py",
+      "regionTag": "translate_v3beta1_generated_TranslationService_DetectLanguage_async",
       "segments": [
         {
           "end": 45,
@@ -410,8 +410,8 @@
           "shortName": "DetectLanguage"
         }
       },
-      "file": "translate_generated_translate_v3beta1_translation_service_detect_language_sync.py",
-      "regionTag": "translate_generated_translate_v3beta1_TranslationService_DetectLanguage_sync",
+      "file": "translate_v3beta1_generated_translation_service_detect_language_sync.py",
+      "regionTag": "translate_v3beta1_generated_TranslationService_DetectLanguage_sync",
       "segments": [
         {
           "end": 45,
@@ -455,8 +455,8 @@
           "shortName": "GetGlossary"
         }
       },
-      "file": "translate_generated_translate_v3beta1_translation_service_get_glossary_async.py",
-      "regionTag": "translate_generated_translate_v3beta1_TranslationService_GetGlossary_async",
+      "file": "translate_v3beta1_generated_translation_service_get_glossary_async.py",
+      "regionTag": "translate_v3beta1_generated_TranslationService_GetGlossary_async",
       "segments": [
         {
           "end": 44,
@@ -499,8 +499,8 @@
           "shortName": "GetGlossary"
         }
       },
-      "file": "translate_generated_translate_v3beta1_translation_service_get_glossary_sync.py",
-      "regionTag": "translate_generated_translate_v3beta1_TranslationService_GetGlossary_sync",
+      "file": "translate_v3beta1_generated_translation_service_get_glossary_sync.py",
+      "regionTag": "translate_v3beta1_generated_TranslationService_GetGlossary_sync",
       "segments": [
         {
           "end": 44,
@@ -544,8 +544,8 @@
           "shortName": "GetSupportedLanguages"
         }
       },
-      "file": "translate_generated_translate_v3beta1_translation_service_get_supported_languages_async.py",
-      "regionTag": "translate_generated_translate_v3beta1_TranslationService_GetSupportedLanguages_async",
+      "file": "translate_v3beta1_generated_translation_service_get_supported_languages_async.py",
+      "regionTag": "translate_v3beta1_generated_TranslationService_GetSupportedLanguages_async",
       "segments": [
         {
           "end": 44,
@@ -588,8 +588,8 @@
           "shortName": "GetSupportedLanguages"
         }
       },
-      "file": "translate_generated_translate_v3beta1_translation_service_get_supported_languages_sync.py",
-      "regionTag": "translate_generated_translate_v3beta1_TranslationService_GetSupportedLanguages_sync",
+      "file": "translate_v3beta1_generated_translation_service_get_supported_languages_sync.py",
+      "regionTag": "translate_v3beta1_generated_TranslationService_GetSupportedLanguages_sync",
       "segments": [
         {
           "end": 44,
@@ -633,8 +633,8 @@
           "shortName": "ListGlossaries"
         }
       },
-      "file": "translate_generated_translate_v3beta1_translation_service_list_glossaries_async.py",
-      "regionTag": "translate_generated_translate_v3beta1_TranslationService_ListGlossaries_async",
+      "file": "translate_v3beta1_generated_translation_service_list_glossaries_async.py",
+      "regionTag": "translate_v3beta1_generated_TranslationService_ListGlossaries_async",
       "segments": [
         {
           "end": 45,
@@ -677,8 +677,8 @@
           "shortName": "ListGlossaries"
         }
       },
-      "file": "translate_generated_translate_v3beta1_translation_service_list_glossaries_sync.py",
-      "regionTag": "translate_generated_translate_v3beta1_TranslationService_ListGlossaries_sync",
+      "file": "translate_v3beta1_generated_translation_service_list_glossaries_sync.py",
+      "regionTag": "translate_v3beta1_generated_TranslationService_ListGlossaries_sync",
       "segments": [
         {
           "end": 45,
@@ -722,8 +722,8 @@
           "shortName": "TranslateDocument"
         }
       },
-      "file": "translate_generated_translate_v3beta1_translation_service_translate_document_async.py",
-      "regionTag": "translate_generated_translate_v3beta1_TranslationService_TranslateDocument_async",
+      "file": "translate_v3beta1_generated_translation_service_translate_document_async.py",
+      "regionTag": "translate_v3beta1_generated_TranslationService_TranslateDocument_async",
       "segments": [
         {
           "end": 49,
@@ -766,8 +766,8 @@
           "shortName": "TranslateDocument"
         }
       },
-      "file": "translate_generated_translate_v3beta1_translation_service_translate_document_sync.py",
-      "regionTag": "translate_generated_translate_v3beta1_TranslationService_TranslateDocument_sync",
+      "file": "translate_v3beta1_generated_translation_service_translate_document_sync.py",
+      "regionTag": "translate_v3beta1_generated_TranslationService_TranslateDocument_sync",
       "segments": [
         {
           "end": 49,
@@ -811,8 +811,8 @@
           "shortName": "TranslateText"
         }
       },
-      "file": "translate_generated_translate_v3beta1_translation_service_translate_text_async.py",
-      "regionTag": "translate_generated_translate_v3beta1_TranslationService_TranslateText_async",
+      "file": "translate_v3beta1_generated_translation_service_translate_text_async.py",
+      "regionTag": "translate_v3beta1_generated_TranslationService_TranslateText_async",
       "segments": [
         {
           "end": 46,
@@ -855,8 +855,8 @@
           "shortName": "TranslateText"
         }
       },
-      "file": "translate_generated_translate_v3beta1_translation_service_translate_text_sync.py",
-      "regionTag": "translate_generated_translate_v3beta1_TranslationService_TranslateText_sync",
+      "file": "translate_v3beta1_generated_translation_service_translate_text_sync.py",
+      "regionTag": "translate_v3beta1_generated_TranslationService_TranslateText_sync",
       "segments": [
         {
           "end": 46,
