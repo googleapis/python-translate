@@ -38,6 +38,7 @@ class TestConnection(unittest.TestCase):
                 "foo",
             ]
         )
+        URI += "?prettyPrint=false"
         self.assertEqual(conn.build_api_url("/foo"), URI)
 
     def test_build_api_url_w_custom_endpoint(self):
@@ -46,6 +47,7 @@ class TestConnection(unittest.TestCase):
         URI = "/".join(
             [custom_endpoint, "language", "translate", conn.API_VERSION, "foo"]
         )
+        URI += "?prettyPrint=false"
         self.assertEqual(conn.build_api_url("/foo"), URI)
 
     def test_build_api_url_w_extra_query_params(self):
@@ -53,7 +55,7 @@ class TestConnection(unittest.TestCase):
         from six.moves.urllib.parse import urlsplit
 
         conn = self._make_one(object())
-        query_params = [("q", "val1"), ("q", "val2")]
+        query_params = [("q", "val1"), ("q", "val2"), ("prettyPrint", "false")]
         uri = conn.build_api_url("/foo", query_params=query_params)
         scheme, netloc, path, qs, _ = urlsplit(uri)
         self.assertEqual("%s://%s" % (scheme, netloc), conn.API_BASE_URL)
