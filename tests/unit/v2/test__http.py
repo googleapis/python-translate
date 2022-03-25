@@ -38,10 +38,8 @@ class TestConnection(unittest.TestCase):
         self.assertEqual(
             path, "/".join(["", "language", "translate", conn.API_VERSION, "foo"])
         )
-        parms = dict(parse_qsl(qs))
-        pretty_print = parms.pop("prettyPrint", "false")
-        self.assertEqual(pretty_print, "false")
-        self.assertEqual(parms, {})
+        URI += "?prettyPrint=false"
+        self.assertEqual(conn.build_api_url("/foo"), URI)
 
     def test_build_api_url_w_custom_endpoint(self):
         from six.moves.urllib.parse import parse_qsl
@@ -55,31 +53,15 @@ class TestConnection(unittest.TestCase):
         self.assertEqual(
             path, "/".join(["", "language", "translate", conn.API_VERSION, "foo"])
         )
-        parms = dict(parse_qsl(qs))
-        pretty_print = parms.pop("prettyPrint", "false")
-        self.assertEqual(pretty_print, "false")
-        self.assertEqual(parms, {})
+        URI += "?prettyPrint=false"
+        self.assertEqual(conn.build_api_url("/foo"), URI)
 
     def test_build_api_url_w_extra_query_params(self):
         from six.moves.urllib.parse import parse_qsl
         from six.moves.urllib.parse import urlsplit
 
         conn = self._make_one(object())
-        uri = conn.build_api_url("/foo", {"bar": "baz"})
-        scheme, netloc, path, qs, _ = urlsplit(uri)
-        self.assertEqual("%s://%s" % (scheme, netloc), conn.API_BASE_URL)
-        self.assertEqual(
-            path, "/".join(["", "language", "translate", conn.API_VERSION, "foo"])
-        )
-        parms = dict(parse_qsl(qs))
-        self.assertEqual(parms["bar"], "baz")
-
-    def test_build_api_url_w_extra_query_params_tuple(self):
-        from six.moves.urllib.parse import parse_qsl
-        from six.moves.urllib.parse import urlsplit
-
-        conn = self._make_one(object())
-        query_params = [("q", "val1"), ("q", "val2")]
+        query_params = [("q", "val1"), ("q", "val2"), ("prettyPrint", "false")]
         uri = conn.build_api_url("/foo", query_params=query_params)
         scheme, netloc, path, qs, _ = urlsplit(uri)
         self.assertEqual("%s://%s" % (scheme, netloc), conn.API_BASE_URL)
