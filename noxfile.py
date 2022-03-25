@@ -23,27 +23,31 @@ import shutil
 import nox
 
 
-LOCAL_DEPS = (os.path.join("..", "api_core"), os.path.join("..", "core"))
 BLACK_VERSION = "black==19.3b0"
 BLACK_PATHS = ["docs", "google", "tests", "noxfile.py", "setup.py"]
 
 if os.path.exists("samples"):
     BLACK_PATHS.append("samples")
 
+DEFAULT_PYTHON_VERSION = "3.8"
 
-@nox.session(python="3.7")
+# Error if a python version is missing
+nox.options.error_on_missing_interpreters = True
+
+
+@nox.session(python=DEFAULT_PYTHON_VERSION)
 def lint(session):
     """Run linters.
 
     Returns a failure if the linters find linting errors or sufficiently
     serious code quality issues.
     """
-    session.install("flake8", BLACK_VERSION, *LOCAL_DEPS)
+    session.install("flake8", BLACK_VERSION)
     session.run("black", "--check", *BLACK_PATHS)
     session.run("flake8", "google", "tests")
 
 
-@nox.session(python="3.6")
+@nox.session(python=DEFAULT_PYTHON_VERSION)
 def blacken(session):
     """Run black.
 
@@ -57,7 +61,7 @@ def blacken(session):
     session.run("black", *BLACK_PATHS)
 
 
-@nox.session(python="3.7")
+@nox.session(python=DEFAULT_PYTHON_VERSION)
 def lint_setup_py(session):
     """Verify that setup.py is valid (including RST check)."""
     session.install("docutils", "pygments")
@@ -67,8 +71,6 @@ def lint_setup_py(session):
 def default(session):
     # Install all test dependencies, then install this package in-place.
     session.install("mock", "pytest", "pytest-cov")
-    for local_dep in LOCAL_DEPS:
-        session.install("-e", local_dep)
     session.install("-e", ".")
 
     # Run py.test against the unit tests.
@@ -86,7 +88,7 @@ def default(session):
     )
 
 
-@nox.session(python=["2.7", "3.5", "3.6", "3.7"])
+@nox.session(python=["2.7", "3.5", "3.6", "3.7", "3.8"])
 def unit(session):
     """Run the unit test suite."""
     default(session)
@@ -113,9 +115,9 @@ def system(session):
     # Install all test dependencies, then install this package into the
     # virtualenv's dist-packages.
     session.install("mock", "pytest")
-    for local_dep in LOCAL_DEPS:
-        session.install("-e", local_dep)
-    session.install("-e", "../test_utils/")
+
+    session.install("google-cloud-storage")
+    session.install("-e", "test_utils")
     session.install("-e", ".")
 
     # Run py.test against the system tests.
@@ -125,7 +127,7 @@ def system(session):
         session.run("py.test", "--quiet", system_test_folder_path, *session.posargs)
 
 
-@nox.session(python="3.7")
+@nox.session(python=DEFAULT_PYTHON_VERSION)
 def cover(session):
     """Run the final coverage report.
 
@@ -133,22 +135,22 @@ def cover(session):
     test runs (not system test runs), and then erases coverage data.
     """
     session.install("coverage", "pytest-cov")
-    session.run("coverage", "report", "--show-missing", "--fail-under=100")
+    session.run("coverage", "report", "--show-missing", "--fail-under=99")
 
     session.run("coverage", "erase")
 
 
-@nox.session(python="3.7")
+@nox.session(python=DEFAULT_PYTHON_VERSION)
 def docs(session):
     """Build the docs for this library."""
 
     session.install("-e", ".")
-    session.install("sphinx", "alabaster", "recommonmark")
+    session.install("sphinx<3.0.0", "alabaster", "recommonmark", "Jinja2<3.1")
 
     shutil.rmtree(os.path.join("docs", "_build"), ignore_errors=True)
     session.run(
         "sphinx-build",
-        "-W",  # warnings as errors
+        "-W",
         "-T",  # show full traceback on exception
         "-N",  # no colors
         "-b",
