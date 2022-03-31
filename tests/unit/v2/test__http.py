@@ -28,30 +28,24 @@ class TestConnection(unittest.TestCase):
         return self._get_target_class()(*args, **kw)
 
     def test_build_api_url_no_extra_query_params(self):
-        from six.moves.urllib.parse import parse_qsl
-        from six.moves.urllib.parse import urlsplit
-
         conn = self._make_one(object())
-        uri = conn.build_api_url("/foo")
-        scheme, netloc, path, qs, _ = urlsplit(uri)
-        self.assertEqual("%s://%s" % (scheme, netloc), conn.API_BASE_URL)
-        self.assertEqual(
-            path, "/".join(["", "language", "translate", conn.API_VERSION, "foo"])
+        URI = "/".join(
+            [
+                conn.DEFAULT_API_ENDPOINT,
+                "language",
+                "translate",
+                conn.API_VERSION,
+                "foo",
+            ]
         )
         URI += "?prettyPrint=false"
         self.assertEqual(conn.build_api_url("/foo"), URI)
 
     def test_build_api_url_w_custom_endpoint(self):
-        from six.moves.urllib.parse import parse_qsl
-        from six.moves.urllib.parse import urlsplit
-
         custom_endpoint = "https://foo-translation.googleapis.com"
         conn = self._make_one(object(), api_endpoint=custom_endpoint)
-        uri = conn.build_api_url("/foo")
-        scheme, netloc, path, qs, _ = urlsplit(uri)
-        self.assertEqual("%s://%s" % (scheme, netloc), custom_endpoint)
-        self.assertEqual(
-            path, "/".join(["", "language", "translate", conn.API_VERSION, "foo"])
+        URI = "/".join(
+            [custom_endpoint, "language", "translate", conn.API_VERSION, "foo"]
         )
         URI += "?prettyPrint=false"
         self.assertEqual(conn.build_api_url("/foo"), URI)

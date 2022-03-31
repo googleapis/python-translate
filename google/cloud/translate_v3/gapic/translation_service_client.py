@@ -183,8 +183,12 @@ class TranslationServiceClient(object):
                     )
                 self.transport = transport
         else:
-            self.transport = translation_service_grpc_transport.TranslationServiceGrpcTransport(
-                address=api_endpoint, channel=channel, credentials=credentials,
+            self.transport = (
+                translation_service_grpc_transport.TranslationServiceGrpcTransport(
+                    address=api_endpoint,
+                    channel=channel,
+                    credentials=credentials,
+                )
             )
 
         if client_info is None:
@@ -444,7 +448,9 @@ class TranslationServiceClient(object):
 
         # Sanity check: We have some fields which are mutually exclusive;
         # raise ValueError if more than one is sent.
-        google.api_core.protobuf_helpers.check_oneof(content=content,)
+        google.api_core.protobuf_helpers.check_oneof(
+            content=content,
+        )
 
         request = translation_service_pb2.DetectLanguageRequest(
             parent=parent,
@@ -553,7 +559,9 @@ class TranslationServiceClient(object):
             )
 
         request = translation_service_pb2.GetSupportedLanguagesRequest(
-            parent=parent, display_language_code=display_language_code, model=model,
+            parent=parent,
+            display_language_code=display_language_code,
+            model=model,
         )
         if metadata is None:
             metadata = []
@@ -811,7 +819,8 @@ class TranslationServiceClient(object):
             )
 
         request = translation_service_pb2.CreateGlossaryRequest(
-            parent=parent, glossary=glossary,
+            parent=parent,
+            glossary=glossary,
         )
         if metadata is None:
             metadata = []
@@ -914,7 +923,9 @@ class TranslationServiceClient(object):
             )
 
         request = translation_service_pb2.ListGlossariesRequest(
-            parent=parent, page_size=page_size, filter=filter_,
+            parent=parent,
+            page_size=page_size,
+            filter=filter_,
         )
         if metadata is None:
             metadata = []
@@ -995,7 +1006,9 @@ class TranslationServiceClient(object):
                 client_info=self._client_info,
             )
 
-        request = translation_service_pb2.GetGlossaryRequest(name=name,)
+        request = translation_service_pb2.GetGlossaryRequest(
+            name=name,
+        )
         if metadata is None:
             metadata = []
         metadata = list(metadata)
@@ -1074,7 +1087,9 @@ class TranslationServiceClient(object):
                 client_info=self._client_info,
             )
 
-        request = translation_service_pb2.DeleteGlossaryRequest(name=name,)
+        request = translation_service_pb2.DeleteGlossaryRequest(
+            name=name,
+        )
         if metadata is None:
             metadata = []
         metadata = list(metadata)

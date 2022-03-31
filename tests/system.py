@@ -46,7 +46,7 @@ class TestTranslate(unittest.TestCase):
         self.assertEqual(lang_map["zu"], "Zulu")
 
     def test_detect_language(self):
-        values = ["takoy", u"fa\xe7ade", "s'il vous plait"]
+        values = ["takoy", "fa\xe7ade", "s'il vous plait"]
         detections = Config.CLIENT.detect_language(values)
         self.assertEqual(len(values), len(detections))
         self.assertEqual(detections[0]["language"], "ru")
@@ -61,16 +61,15 @@ class TestTranslate(unittest.TestCase):
         self.assertEqual(len(values), len(translations))
 
         self.assertEqual(translations[0]["detectedSourceLanguage"].lower(), "hr")
-        self.assertEqual(translations[0]["translatedText"].lower(), u"fünfzehn")
+        self.assertEqual(translations[0]["translatedText"].lower(), "fünfzehn")
 
         self.assertEqual(translations[1]["detectedSourceLanguage"], "eo")
-        self.assertEqual(translations[1]["translatedText"].lower(), u"fünfzehn")
+        self.assertEqual(translations[1]["translatedText"].lower(), "fünfzehn")
 
         self.assertEqual(translations[2]["detectedSourceLanguage"], "es")
         es_translation = translations[2]["translatedText"].lower()
         self.assertTrue(
-            es_translation == u"ich heiße jeff"
-            or es_translation == u"mein name ist jeff"
+            es_translation == "ich heiße jeff" or es_translation == "mein name ist jeff"
         )
 
         self.assertEqual(translations[3]["detectedSourceLanguage"], "en")

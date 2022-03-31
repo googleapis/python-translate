@@ -71,22 +71,19 @@ class TranslationServiceServicer(object):
     """
 
     def TranslateText(self, request, context):
-        """Translates input text and returns translated text.
-        """
+        """Translates input text and returns translated text."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details("Method not implemented!")
         raise NotImplementedError("Method not implemented!")
 
     def DetectLanguage(self, request, context):
-        """Detects the language of text within a request.
-        """
+        """Detects the language of text within a request."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details("Method not implemented!")
         raise NotImplementedError("Method not implemented!")
 
     def GetSupportedLanguages(self, request, context):
-        """Returns a list of supported languages for translation.
-        """
+        """Returns a list of supported languages for translation."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details("Method not implemented!")
         raise NotImplementedError("Method not implemented!")
