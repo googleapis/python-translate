@@ -12,15 +12,15 @@ from google.longrunning import (
 class TranslationServiceStub(object):
     """Proto file for the Cloud Translation API (v3 GA).
 
-  Provides natural language translation operations.
-  """
+    Provides natural language translation operations.
+    """
 
     def __init__(self, channel):
         """Constructor.
 
-    Args:
-      channel: A grpc.Channel.
-    """
+        Args:
+          channel: A grpc.Channel.
+        """
         self.TranslateText = channel.unary_unary(
             "/google.cloud.translation.v3.TranslationService/TranslateText",
             request_serializer=google_dot_cloud_dot_translation__v3_dot_proto_dot_translation__service__pb2.TranslateTextRequest.SerializeToString,
@@ -66,72 +66,69 @@ class TranslationServiceStub(object):
 class TranslationServiceServicer(object):
     """Proto file for the Cloud Translation API (v3 GA).
 
-  Provides natural language translation operations.
-  """
+    Provides natural language translation operations.
+    """
 
     def TranslateText(self, request, context):
-        """Translates input text and returns translated text.
-    """
+        """Translates input text and returns translated text."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details("Method not implemented!")
         raise NotImplementedError("Method not implemented!")
 
     def DetectLanguage(self, request, context):
-        """Detects the language of text within a request.
-    """
+        """Detects the language of text within a request."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details("Method not implemented!")
         raise NotImplementedError("Method not implemented!")
 
     def GetSupportedLanguages(self, request, context):
-        """Returns a list of supported languages for translation.
-    """
+        """Returns a list of supported languages for translation."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details("Method not implemented!")
         raise NotImplementedError("Method not implemented!")
 
     def BatchTranslateText(self, request, context):
         """Translates a large volume of text in asynchronous batch mode.
-    This function provides real-time output as the inputs are being processed.
-    If caller cancels a request, the partial results (for an input file, it's
-    all or nothing) may still be available on the specified output location.
+        This function provides real-time output as the inputs are being processed.
+        If caller cancels a request, the partial results (for an input file, it's
+        all or nothing) may still be available on the specified output location.
 
-    This call returns immediately and you can
-    use google.longrunning.Operation.name to poll the status of the call.
-    """
+        This call returns immediately and you can
+        use google.longrunning.Operation.name to poll the status of the call.
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details("Method not implemented!")
         raise NotImplementedError("Method not implemented!")
 
     def CreateGlossary(self, request, context):
         """Creates a glossary and returns the long-running operation. Returns
-    NOT_FOUND, if the project doesn't exist.
-    """
+        NOT_FOUND, if the project doesn't exist.
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details("Method not implemented!")
         raise NotImplementedError("Method not implemented!")
 
     def ListGlossaries(self, request, context):
         """Lists glossaries in a project. Returns NOT_FOUND, if the project doesn't
-    exist.
-    """
+        exist.
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details("Method not implemented!")
         raise NotImplementedError("Method not implemented!")
 
     def GetGlossary(self, request, context):
         """Gets a glossary. Returns NOT_FOUND, if the glossary doesn't
-    exist.
-    """
+        exist.
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details("Method not implemented!")
         raise NotImplementedError("Method not implemented!")
 
     def DeleteGlossary(self, request, context):
         """Deletes a glossary, or cancels glossary construction
-    if the glossary isn't created yet.
-    Returns NOT_FOUND, if the glossary doesn't exist.
-    """
+        if the glossary isn't created yet.
+        Returns NOT_FOUND, if the glossary doesn't exist.
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details("Method not implemented!")
         raise NotImplementedError("Method not implemented!")
