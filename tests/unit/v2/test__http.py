@@ -61,8 +61,11 @@ class TestConnection(unittest.TestCase):
         self.assertEqual("%s://%s" % (scheme, netloc), conn.API_BASE_URL)
         expected_path = "/".join(["", "language", "translate", conn.API_VERSION, "foo"])
         self.assertEqual(path, expected_path)
-        params = parse_qsl(qs)
-        self.assertEqual(params, query_params)
+        params = list(
+            sorted(param for param in parse_qsl(qs) if param[0] != "prettyPrint")
+        )
+        expected_params = [("q", "val1"), ("q", "val2")]
+        self.assertEqual(params, expected_params)
 
     def test_extra_headers(self):
         import requests
