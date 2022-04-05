@@ -65,9 +65,9 @@ source_suffix = [".rst", ".md"]
 master_doc = "index"
 
 # General information about the project.
-project = u"google-cloud-translate"
-copyright = u"2017, Google"
-author = u"Google APIs"
+project = "google-cloud-translate"
+copyright = "2017, Google"
+author = "Google APIs"
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -259,7 +259,7 @@ latex_documents = [
     (
         master_doc,
         "google-cloud-translate.tex",
-        u"google-cloud-translate Documentation",
+        "google-cloud-translate Documentation",
         author,
         "manual",
     )
@@ -293,7 +293,7 @@ man_pages = [
     (
         master_doc,
         "google-cloud-translate",
-        u"google-cloud-translate Documentation",
+        "google-cloud-translate Documentation",
         [author],
         1,
     )
@@ -311,7 +311,7 @@ texinfo_documents = [
     (
         master_doc,
         "google-cloud-translate",
-        u"google-cloud-translate Documentation",
+        "google-cloud-translate Documentation",
         author,
         "google-cloud-translate",
         "GAPIC library for the {metadata.shortName} v3beta1 service",

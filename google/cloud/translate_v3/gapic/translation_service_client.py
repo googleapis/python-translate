@@ -183,8 +183,10 @@ class TranslationServiceClient(object):
                     )
                 self.transport = transport
         else:
-            self.transport = translation_service_grpc_transport.TranslationServiceGrpcTransport(
-                address=api_endpoint, channel=channel, credentials=credentials
+            self.transport = (
+                translation_service_grpc_transport.TranslationServiceGrpcTransport(
+                    address=api_endpoint, channel=channel, credentials=credentials
+                )
             )
 
         if client_info is None:
