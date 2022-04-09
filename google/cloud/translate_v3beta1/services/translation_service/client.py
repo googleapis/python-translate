@@ -16,7 +16,7 @@
 from collections import OrderedDict
 import os
 import re
-from typing import Dict, Optional, Sequence, Tuple, Type, Union
+from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib
@@ -441,7 +441,7 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import translate_v3beta1
+                    from google.cloud import translate_v3beta1
 
             def sample_translate_text():
                 # Create a client
@@ -518,7 +518,7 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import translate_v3beta1
+                    from google.cloud import translate_v3beta1
 
             def sample_detect_language():
                 # Create a client
@@ -658,7 +658,7 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import translate_v3beta1
+                    from google.cloud import translate_v3beta1
 
             def sample_get_supported_languages():
                 # Create a client
@@ -797,7 +797,7 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import translate_v3beta1
+                    from google.cloud import translate_v3beta1
 
             def sample_translate_document():
                 # Create a client
@@ -884,7 +884,7 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import translate_v3beta1
+                    from google.cloud import translate_v3beta1
 
             def sample_batch_translate_text():
                 # Create a client
@@ -997,7 +997,7 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import translate_v3beta1
+                    from google.cloud import translate_v3beta1
 
             def sample_batch_translate_document():
                 # Create a client
@@ -1186,7 +1186,7 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import translate_v3beta1
+                    from google.cloud import translate_v3beta1
 
             def sample_create_glossary():
                 # Create a client
@@ -1307,7 +1307,7 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import translate_v3beta1
+                    from google.cloud import translate_v3beta1
 
             def sample_list_glossaries():
                 # Create a client
@@ -1452,7 +1452,7 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import translate_v3beta1
+                    from google.cloud import translate_v3beta1
 
             def sample_get_glossary():
                 # Create a client
@@ -1549,7 +1549,7 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import translate_v3beta1
+                    from google.cloud import translate_v3beta1
 
             def sample_delete_glossary():
                 # Create a client
