@@ -16,7 +16,7 @@
 from collections import OrderedDict
 import functools
 import re
-from typing import Dict, Optional, Sequence, Tuple, Type, Union
+from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core.client_options import ClientOptions
@@ -564,7 +564,6 @@ class TranslationServiceAsyncClient:
         r"""Returns a list of supported languages for
         translation.
 
-
         .. code-block:: python
 
             from google.cloud import translate_v3
@@ -678,8 +677,7 @@ class TranslationServiceAsyncClient:
                 maximum=60.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    core_exceptions.DeadlineExceeded,
-                    core_exceptions.ServiceUnavailable,
+                    core_exceptions.GoogleAPICallError,
                 ),
                 deadline=600.0,
             ),
@@ -799,7 +797,6 @@ class TranslationServiceAsyncClient:
         use google.longrunning.Operation.name to poll the status
         of the call.
 
-
         .. code-block:: python
 
             from google.cloud import translate_v3
@@ -910,7 +907,6 @@ class TranslationServiceAsyncClient:
         This call returns immediately and you can use
         google.longrunning.Operation.name to poll the status of
         the call.
-
 
         .. code-block:: python
 
@@ -1100,7 +1096,6 @@ class TranslationServiceAsyncClient:
         r"""Creates a glossary and returns the long-running operation.
         Returns NOT_FOUND, if the project doesn't exist.
 
-
         .. code-block:: python
 
             from google.cloud import translate_v3
@@ -1220,7 +1215,6 @@ class TranslationServiceAsyncClient:
         r"""Lists glossaries in a project. Returns NOT_FOUND, if the project
         doesn't exist.
 
-
         .. code-block:: python
 
             from google.cloud import translate_v3
@@ -1292,8 +1286,7 @@ class TranslationServiceAsyncClient:
                 maximum=60.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    core_exceptions.DeadlineExceeded,
-                    core_exceptions.ServiceUnavailable,
+                    core_exceptions.GoogleAPICallError,
                 ),
                 deadline=600.0,
             ),
@@ -1338,7 +1331,6 @@ class TranslationServiceAsyncClient:
     ) -> translation_service.Glossary:
         r"""Gets a glossary. Returns NOT_FOUND, if the glossary doesn't
         exist.
-
 
         .. code-block:: python
 
@@ -1407,8 +1399,7 @@ class TranslationServiceAsyncClient:
                 maximum=60.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    core_exceptions.DeadlineExceeded,
-                    core_exceptions.ServiceUnavailable,
+                    core_exceptions.GoogleAPICallError,
                 ),
                 deadline=600.0,
             ),
@@ -1445,7 +1436,6 @@ class TranslationServiceAsyncClient:
         r"""Deletes a glossary, or cancels glossary construction if the
         glossary isn't created yet. Returns NOT_FOUND, if the glossary
         doesn't exist.
-
 
         .. code-block:: python
 
@@ -1521,8 +1511,7 @@ class TranslationServiceAsyncClient:
                 maximum=60.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    core_exceptions.DeadlineExceeded,
-                    core_exceptions.ServiceUnavailable,
+                    core_exceptions.GoogleAPICallError,
                 ),
                 deadline=600.0,
             ),
