@@ -3523,7 +3523,6 @@ def test_translation_service_transport_auth_adc(transport_class):
     [
         transports.TranslationServiceGrpcTransport,
         transports.TranslationServiceGrpcAsyncIOTransport,
-        transports.TranslationServiceRestTransport,
     ],
 )
 def test_translation_service_transport_auth_gdch_credentials(transport_class):
