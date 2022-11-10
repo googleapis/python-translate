@@ -16,7 +16,18 @@
 from collections import OrderedDict
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib
@@ -60,7 +71,7 @@ class TranslationServiceClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[TranslationServiceTransport]:
         """Returns an appropriate transport class.
 
@@ -335,7 +346,7 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, TranslationServiceTransport, None] = None,
+        transport: Optional[Union[str, TranslationServiceTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -433,10 +444,10 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
 
     def translate_text(
         self,
-        request: Union[translation_service.TranslateTextRequest, dict] = None,
+        request: Optional[Union[translation_service.TranslateTextRequest, dict]] = None,
         *,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> translation_service.TranslateTextResponse:
         r"""Translates input text and returns translated text.
@@ -514,13 +525,15 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
 
     def detect_language(
         self,
-        request: Union[translation_service.DetectLanguageRequest, dict] = None,
+        request: Optional[
+            Union[translation_service.DetectLanguageRequest, dict]
+        ] = None,
         *,
-        parent: str = None,
-        model: str = None,
-        mime_type: str = None,
+        parent: Optional[str] = None,
+        model: Optional[str] = None,
+        mime_type: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> translation_service.DetectLanguageResponse:
         r"""Detects the language of text within a request.
@@ -659,13 +672,15 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
 
     def get_supported_languages(
         self,
-        request: Union[translation_service.GetSupportedLanguagesRequest, dict] = None,
+        request: Optional[
+            Union[translation_service.GetSupportedLanguagesRequest, dict]
+        ] = None,
         *,
-        parent: str = None,
-        display_language_code: str = None,
-        model: str = None,
+        parent: Optional[str] = None,
+        display_language_code: Optional[str] = None,
+        model: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> translation_service.SupportedLanguages:
         r"""Returns a list of supported languages for
@@ -809,10 +824,12 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
 
     def translate_document(
         self,
-        request: Union[translation_service.TranslateDocumentRequest, dict] = None,
+        request: Optional[
+            Union[translation_service.TranslateDocumentRequest, dict]
+        ] = None,
         *,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> translation_service.TranslateDocumentResponse:
         r"""Translates documents in synchronous mode.
@@ -894,10 +911,12 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
 
     def batch_translate_text(
         self,
-        request: Union[translation_service.BatchTranslateTextRequest, dict] = None,
+        request: Optional[
+            Union[translation_service.BatchTranslateTextRequest, dict]
+        ] = None,
         *,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Translates a large volume of text in asynchronous
@@ -1008,15 +1027,19 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
 
     def batch_translate_document(
         self,
-        request: Union[translation_service.BatchTranslateDocumentRequest, dict] = None,
+        request: Optional[
+            Union[translation_service.BatchTranslateDocumentRequest, dict]
+        ] = None,
         *,
-        parent: str = None,
-        source_language_code: str = None,
-        target_language_codes: Sequence[str] = None,
-        input_configs: Sequence[translation_service.BatchDocumentInputConfig] = None,
-        output_config: translation_service.BatchDocumentOutputConfig = None,
+        parent: Optional[str] = None,
+        source_language_code: Optional[str] = None,
+        target_language_codes: Optional[MutableSequence[str]] = None,
+        input_configs: Optional[
+            MutableSequence[translation_service.BatchDocumentInputConfig]
+        ] = None,
+        output_config: Optional[translation_service.BatchDocumentOutputConfig] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Translates a large volume of documents in
@@ -1099,7 +1122,7 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
                 This corresponds to the ``source_language_code`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            target_language_codes (Sequence[str]):
+            target_language_codes (MutableSequence[str]):
                 Required. The BCP-47 language code to
                 use for translation of the input
                 document. Specify up to 10 language
@@ -1108,7 +1131,7 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
                 This corresponds to the ``target_language_codes`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            input_configs (Sequence[google.cloud.translate_v3beta1.types.BatchDocumentInputConfig]):
+            input_configs (MutableSequence[google.cloud.translate_v3beta1.types.BatchDocumentInputConfig]):
                 Required. Input configurations.
                 The total number of files matched should
                 be <= 100. The total content size to
@@ -1213,12 +1236,14 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
 
     def create_glossary(
         self,
-        request: Union[translation_service.CreateGlossaryRequest, dict] = None,
+        request: Optional[
+            Union[translation_service.CreateGlossaryRequest, dict]
+        ] = None,
         *,
-        parent: str = None,
-        glossary: translation_service.Glossary = None,
+        parent: Optional[str] = None,
+        glossary: Optional[translation_service.Glossary] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Creates a glossary and returns the long-running operation.
@@ -1340,12 +1365,14 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
 
     def list_glossaries(
         self,
-        request: Union[translation_service.ListGlossariesRequest, dict] = None,
+        request: Optional[
+            Union[translation_service.ListGlossariesRequest, dict]
+        ] = None,
         *,
-        parent: str = None,
-        filter: str = None,
+        parent: Optional[str] = None,
+        filter: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListGlossariesPager:
         r"""Lists glossaries in a project. Returns NOT_FOUND, if the project
@@ -1492,11 +1519,11 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
 
     def get_glossary(
         self,
-        request: Union[translation_service.GetGlossaryRequest, dict] = None,
+        request: Optional[Union[translation_service.GetGlossaryRequest, dict]] = None,
         *,
-        name: str = None,
+        name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> translation_service.Glossary:
         r"""Gets a glossary. Returns NOT_FOUND, if the glossary doesn't
@@ -1594,11 +1621,13 @@ class TranslationServiceClient(metaclass=TranslationServiceClientMeta):
 
     def delete_glossary(
         self,
-        request: Union[translation_service.DeleteGlossaryRequest, dict] = None,
+        request: Optional[
+            Union[translation_service.DeleteGlossaryRequest, dict]
+        ] = None,
         *,
-        name: str = None,
+        name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Deletes a glossary, or cancels glossary construction if the
