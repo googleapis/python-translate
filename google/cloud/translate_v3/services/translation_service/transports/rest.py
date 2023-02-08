@@ -40,10 +40,13 @@ except AttributeError:  # pragma: NO COVER
     OptionalRetry = Union[retries.Retry, object]  # type: ignore
 
 
-from google.cloud.translate_v3beta1.types import translation_service
+from google.cloud.translate_v3.types import translation_service
 from google.longrunning import operations_pb2  # type: ignore
 
-from .base import TranslationServiceTransport, DEFAULT_CLIENT_INFO as BASE_DEFAULT_CLIENT_INFO
+from .base import (
+    TranslationServiceTransport,
+    DEFAULT_CLIENT_INFO as BASE_DEFAULT_CLIENT_INFO,
+)
 
 
 DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo(
@@ -153,7 +156,14 @@ class TranslationServiceRestInterceptor:
 
 
     """
-    def pre_batch_translate_document(self, request: translation_service.BatchTranslateDocumentRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[translation_service.BatchTranslateDocumentRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_batch_translate_document(
+        self,
+        request: translation_service.BatchTranslateDocumentRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[
+        translation_service.BatchTranslateDocumentRequest, Sequence[Tuple[str, str]]
+    ]:
         """Pre-rpc interceptor for batch_translate_document
 
         Override in a subclass to manipulate the request or metadata
@@ -161,7 +171,9 @@ class TranslationServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_batch_translate_document(self, response: operations_pb2.Operation) -> operations_pb2.Operation:
+    def post_batch_translate_document(
+        self, response: operations_pb2.Operation
+    ) -> operations_pb2.Operation:
         """Post-rpc interceptor for batch_translate_document
 
         Override in a subclass to manipulate the response
@@ -169,7 +181,14 @@ class TranslationServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_batch_translate_text(self, request: translation_service.BatchTranslateTextRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[translation_service.BatchTranslateTextRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_batch_translate_text(
+        self,
+        request: translation_service.BatchTranslateTextRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[
+        translation_service.BatchTranslateTextRequest, Sequence[Tuple[str, str]]
+    ]:
         """Pre-rpc interceptor for batch_translate_text
 
         Override in a subclass to manipulate the request or metadata
@@ -177,7 +196,9 @@ class TranslationServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_batch_translate_text(self, response: operations_pb2.Operation) -> operations_pb2.Operation:
+    def post_batch_translate_text(
+        self, response: operations_pb2.Operation
+    ) -> operations_pb2.Operation:
         """Post-rpc interceptor for batch_translate_text
 
         Override in a subclass to manipulate the response
@@ -185,7 +206,12 @@ class TranslationServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_create_glossary(self, request: translation_service.CreateGlossaryRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[translation_service.CreateGlossaryRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_create_glossary(
+        self,
+        request: translation_service.CreateGlossaryRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[translation_service.CreateGlossaryRequest, Sequence[Tuple[str, str]]]:
         """Pre-rpc interceptor for create_glossary
 
         Override in a subclass to manipulate the request or metadata
@@ -193,7 +219,9 @@ class TranslationServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_create_glossary(self, response: operations_pb2.Operation) -> operations_pb2.Operation:
+    def post_create_glossary(
+        self, response: operations_pb2.Operation
+    ) -> operations_pb2.Operation:
         """Post-rpc interceptor for create_glossary
 
         Override in a subclass to manipulate the response
@@ -201,7 +229,12 @@ class TranslationServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_delete_glossary(self, request: translation_service.DeleteGlossaryRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[translation_service.DeleteGlossaryRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_delete_glossary(
+        self,
+        request: translation_service.DeleteGlossaryRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[translation_service.DeleteGlossaryRequest, Sequence[Tuple[str, str]]]:
         """Pre-rpc interceptor for delete_glossary
 
         Override in a subclass to manipulate the request or metadata
@@ -209,7 +242,9 @@ class TranslationServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_delete_glossary(self, response: operations_pb2.Operation) -> operations_pb2.Operation:
+    def post_delete_glossary(
+        self, response: operations_pb2.Operation
+    ) -> operations_pb2.Operation:
         """Post-rpc interceptor for delete_glossary
 
         Override in a subclass to manipulate the response
@@ -217,7 +252,12 @@ class TranslationServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_detect_language(self, request: translation_service.DetectLanguageRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[translation_service.DetectLanguageRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_detect_language(
+        self,
+        request: translation_service.DetectLanguageRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[translation_service.DetectLanguageRequest, Sequence[Tuple[str, str]]]:
         """Pre-rpc interceptor for detect_language
 
         Override in a subclass to manipulate the request or metadata
@@ -225,7 +265,9 @@ class TranslationServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_detect_language(self, response: translation_service.DetectLanguageResponse) -> translation_service.DetectLanguageResponse:
+    def post_detect_language(
+        self, response: translation_service.DetectLanguageResponse
+    ) -> translation_service.DetectLanguageResponse:
         """Post-rpc interceptor for detect_language
 
         Override in a subclass to manipulate the response
@@ -233,7 +275,12 @@ class TranslationServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_get_glossary(self, request: translation_service.GetGlossaryRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[translation_service.GetGlossaryRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_get_glossary(
+        self,
+        request: translation_service.GetGlossaryRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[translation_service.GetGlossaryRequest, Sequence[Tuple[str, str]]]:
         """Pre-rpc interceptor for get_glossary
 
         Override in a subclass to manipulate the request or metadata
@@ -241,7 +288,9 @@ class TranslationServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_get_glossary(self, response: translation_service.Glossary) -> translation_service.Glossary:
+    def post_get_glossary(
+        self, response: translation_service.Glossary
+    ) -> translation_service.Glossary:
         """Post-rpc interceptor for get_glossary
 
         Override in a subclass to manipulate the response
@@ -249,7 +298,14 @@ class TranslationServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_get_supported_languages(self, request: translation_service.GetSupportedLanguagesRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[translation_service.GetSupportedLanguagesRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_get_supported_languages(
+        self,
+        request: translation_service.GetSupportedLanguagesRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[
+        translation_service.GetSupportedLanguagesRequest, Sequence[Tuple[str, str]]
+    ]:
         """Pre-rpc interceptor for get_supported_languages
 
         Override in a subclass to manipulate the request or metadata
@@ -257,7 +313,9 @@ class TranslationServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_get_supported_languages(self, response: translation_service.SupportedLanguages) -> translation_service.SupportedLanguages:
+    def post_get_supported_languages(
+        self, response: translation_service.SupportedLanguages
+    ) -> translation_service.SupportedLanguages:
         """Post-rpc interceptor for get_supported_languages
 
         Override in a subclass to manipulate the response
@@ -265,7 +323,12 @@ class TranslationServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_list_glossaries(self, request: translation_service.ListGlossariesRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[translation_service.ListGlossariesRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_list_glossaries(
+        self,
+        request: translation_service.ListGlossariesRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[translation_service.ListGlossariesRequest, Sequence[Tuple[str, str]]]:
         """Pre-rpc interceptor for list_glossaries
 
         Override in a subclass to manipulate the request or metadata
@@ -273,7 +336,9 @@ class TranslationServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_list_glossaries(self, response: translation_service.ListGlossariesResponse) -> translation_service.ListGlossariesResponse:
+    def post_list_glossaries(
+        self, response: translation_service.ListGlossariesResponse
+    ) -> translation_service.ListGlossariesResponse:
         """Post-rpc interceptor for list_glossaries
 
         Override in a subclass to manipulate the response
@@ -281,7 +346,12 @@ class TranslationServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_translate_document(self, request: translation_service.TranslateDocumentRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[translation_service.TranslateDocumentRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_translate_document(
+        self,
+        request: translation_service.TranslateDocumentRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[translation_service.TranslateDocumentRequest, Sequence[Tuple[str, str]]]:
         """Pre-rpc interceptor for translate_document
 
         Override in a subclass to manipulate the request or metadata
@@ -289,7 +359,9 @@ class TranslationServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_translate_document(self, response: translation_service.TranslateDocumentResponse) -> translation_service.TranslateDocumentResponse:
+    def post_translate_document(
+        self, response: translation_service.TranslateDocumentResponse
+    ) -> translation_service.TranslateDocumentResponse:
         """Post-rpc interceptor for translate_document
 
         Override in a subclass to manipulate the response
@@ -297,7 +369,12 @@ class TranslationServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_translate_text(self, request: translation_service.TranslateTextRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[translation_service.TranslateTextRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_translate_text(
+        self,
+        request: translation_service.TranslateTextRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[translation_service.TranslateTextRequest, Sequence[Tuple[str, str]]]:
         """Pre-rpc interceptor for translate_text
 
         Override in a subclass to manipulate the request or metadata
@@ -305,7 +382,9 @@ class TranslationServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_translate_text(self, response: translation_service.TranslateTextResponse) -> translation_service.TranslateTextResponse:
+    def post_translate_text(
+        self, response: translation_service.TranslateTextResponse
+    ) -> translation_service.TranslateTextResponse:
         """Post-rpc interceptor for translate_text
 
         Override in a subclass to manipulate the response
@@ -335,20 +414,21 @@ class TranslationServiceRestTransport(TranslationServiceTransport):
 
     """
 
-    def __init__(self, *,
-            host: str = 'translate.googleapis.com',
-            credentials: Optional[ga_credentials.Credentials] = None,
-            credentials_file: Optional[str] = None,
-            scopes: Optional[Sequence[str]] = None,
-            client_cert_source_for_mtls: Optional[Callable[[
-                ], Tuple[bytes, bytes]]] = None,
-            quota_project_id: Optional[str] = None,
-            client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
-            always_use_jwt_access: Optional[bool] = False,
-            url_scheme: str = 'https',
-            interceptor: Optional[TranslationServiceRestInterceptor] = None,
-            api_audience: Optional[str] = None,
-            ) -> None:
+    def __init__(
+        self,
+        *,
+        host: str = "translate.googleapis.com",
+        credentials: Optional[ga_credentials.Credentials] = None,
+        credentials_file: Optional[str] = None,
+        scopes: Optional[Sequence[str]] = None,
+        client_cert_source_for_mtls: Optional[Callable[[], Tuple[bytes, bytes]]] = None,
+        quota_project_id: Optional[str] = None,
+        client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
+        always_use_jwt_access: Optional[bool] = False,
+        url_scheme: str = "https",
+        interceptor: Optional[TranslationServiceRestInterceptor] = None,
+        api_audience: Optional[str] = None,
+    ) -> None:
         """Instantiate the transport.
 
         Args:
@@ -387,7 +467,9 @@ class TranslationServiceRestTransport(TranslationServiceTransport):
         # credentials object
         maybe_url_match = re.match("^(?P<scheme>http(?:s)?://)?(?P<host>.*)$", host)
         if maybe_url_match is None:
-            raise ValueError(f"Unexpected hostname structure: {host}")  # pragma: NO COVER
+            raise ValueError(
+                f"Unexpected hostname structure: {host}"
+            )  # pragma: NO COVER
 
         url_match_items = maybe_url_match.groupdict()
 
@@ -398,10 +480,11 @@ class TranslationServiceRestTransport(TranslationServiceTransport):
             credentials=credentials,
             client_info=client_info,
             always_use_jwt_access=always_use_jwt_access,
-            api_audience=api_audience
+            api_audience=api_audience,
         )
         self._session = AuthorizedSession(
-            self._credentials, default_host=self.DEFAULT_HOST)
+            self._credentials, default_host=self.DEFAULT_HOST
+        )
         self._operations_client: Optional[operations_v1.AbstractOperationsClient] = None
         if client_cert_source_for_mtls:
             self._session.configure_mtls_channel(client_cert_source_for_mtls)
@@ -417,18 +500,20 @@ class TranslationServiceRestTransport(TranslationServiceTransport):
         """
         # Only create a new client if we do not already have one.
         if self._operations_client is None:
-            http_options: Dict[str, List[Dict[str, str]]] = {
-            }
+            http_options: Dict[str, List[Dict[str, str]]] = {}
 
             rest_transport = operations_v1.OperationsRestTransport(
-                    host=self._host,
-                    # use the credentials which are saved
-                    credentials=self._credentials,
-                    scopes=self._scopes,
-                    http_options=http_options,
-                    path_prefix="v3beta1")
+                host=self._host,
+                # use the credentials which are saved
+                credentials=self._credentials,
+                scopes=self._scopes,
+                http_options=http_options,
+                path_prefix="v3",
+            )
 
-            self._operations_client = operations_v1.AbstractOperationsClient(transport=rest_transport)
+            self._operations_client = operations_v1.AbstractOperationsClient(
+                transport=rest_transport
+            )
 
         # Return the client from cache.
         return self._operations_client
@@ -437,19 +522,24 @@ class TranslationServiceRestTransport(TranslationServiceTransport):
         def __hash__(self):
             return hash("BatchTranslateDocument")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: translation_service.BatchTranslateDocumentRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> operations_pb2.Operation:
+        def __call__(
+            self,
+            request: translation_service.BatchTranslateDocumentRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> operations_pb2.Operation:
             r"""Call the batch translate document method over HTTP.
 
             Args:
@@ -469,46 +559,51 @@ class TranslationServiceRestTransport(TranslationServiceTransport):
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'post',
-                'uri': '/v3beta1/{parent=projects/*/locations/*}:batchTranslateDocument',
-                'body': '*',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "post",
+                    "uri": "/v3/{parent=projects/*/locations/*}:batchTranslateDocument",
+                    "body": "*",
+                },
             ]
-            request, metadata = self._interceptor.pre_batch_translate_document(request, metadata)
+            request, metadata = self._interceptor.pre_batch_translate_document(
+                request, metadata
+            )
             pb_request = translation_service.BatchTranslateDocumentRequest.pb(request)
             transcoded_request = path_template.transcode(http_options, pb_request)
 
             # Jsonify the request body
 
             body = json_format.MessageToJson(
-                transcoded_request['body'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True
-            )
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
-
-            # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
+                transcoded_request["body"],
                 including_default_value_fields=False,
                 use_integers_for_enums=True,
-            ))
+            )
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
+
+            # Jsonify the query params
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
                 data=body,
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -525,19 +620,24 @@ class TranslationServiceRestTransport(TranslationServiceTransport):
         def __hash__(self):
             return hash("BatchTranslateText")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: translation_service.BatchTranslateTextRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> operations_pb2.Operation:
+        def __call__(
+            self,
+            request: translation_service.BatchTranslateTextRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> operations_pb2.Operation:
             r"""Call the batch translate text method over HTTP.
 
             Args:
@@ -557,46 +657,51 @@ class TranslationServiceRestTransport(TranslationServiceTransport):
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'post',
-                'uri': '/v3beta1/{parent=projects/*/locations/*}:batchTranslateText',
-                'body': '*',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "post",
+                    "uri": "/v3/{parent=projects/*/locations/*}:batchTranslateText",
+                    "body": "*",
+                },
             ]
-            request, metadata = self._interceptor.pre_batch_translate_text(request, metadata)
+            request, metadata = self._interceptor.pre_batch_translate_text(
+                request, metadata
+            )
             pb_request = translation_service.BatchTranslateTextRequest.pb(request)
             transcoded_request = path_template.transcode(http_options, pb_request)
 
             # Jsonify the request body
 
             body = json_format.MessageToJson(
-                transcoded_request['body'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True
-            )
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
-
-            # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
+                transcoded_request["body"],
                 including_default_value_fields=False,
                 use_integers_for_enums=True,
-            ))
+            )
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
+
+            # Jsonify the query params
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
                 data=body,
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -613,19 +718,24 @@ class TranslationServiceRestTransport(TranslationServiceTransport):
         def __hash__(self):
             return hash("CreateGlossary")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: translation_service.CreateGlossaryRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> operations_pb2.Operation:
+        def __call__(
+            self,
+            request: translation_service.CreateGlossaryRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> operations_pb2.Operation:
             r"""Call the create glossary method over HTTP.
 
             Args:
@@ -645,11 +755,12 @@ class TranslationServiceRestTransport(TranslationServiceTransport):
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'post',
-                'uri': '/v3beta1/{parent=projects/*/locations/*}/glossaries',
-                'body': 'glossary',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "post",
+                    "uri": "/v3/{parent=projects/*/locations/*}/glossaries",
+                    "body": "glossary",
+                },
             ]
             request, metadata = self._interceptor.pre_create_glossary(request, metadata)
             pb_request = translation_service.CreateGlossaryRequest.pb(request)
@@ -658,33 +769,35 @@ class TranslationServiceRestTransport(TranslationServiceTransport):
             # Jsonify the request body
 
             body = json_format.MessageToJson(
-                transcoded_request['body'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True
-            )
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
-
-            # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
+                transcoded_request["body"],
                 including_default_value_fields=False,
                 use_integers_for_enums=True,
-            ))
+            )
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
+
+            # Jsonify the query params
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
                 data=body,
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -701,19 +814,24 @@ class TranslationServiceRestTransport(TranslationServiceTransport):
         def __hash__(self):
             return hash("DeleteGlossary")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: translation_service.DeleteGlossaryRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> operations_pb2.Operation:
+        def __call__(
+            self,
+            request: translation_service.DeleteGlossaryRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> operations_pb2.Operation:
             r"""Call the delete glossary method over HTTP.
 
             Args:
@@ -733,37 +851,40 @@ class TranslationServiceRestTransport(TranslationServiceTransport):
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'delete',
-                'uri': '/v3beta1/{name=projects/*/locations/*/glossaries/*}',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "delete",
+                    "uri": "/v3/{name=projects/*/locations/*/glossaries/*}",
+                },
             ]
             request, metadata = self._interceptor.pre_delete_glossary(request, metadata)
             pb_request = translation_service.DeleteGlossaryRequest.pb(request)
             transcoded_request = path_template.transcode(http_options, pb_request)
 
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
 
             # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True,
-            ))
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -780,19 +901,24 @@ class TranslationServiceRestTransport(TranslationServiceTransport):
         def __hash__(self):
             return hash("DetectLanguage")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: translation_service.DetectLanguageRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> translation_service.DetectLanguageResponse:
+        def __call__(
+            self,
+            request: translation_service.DetectLanguageRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> translation_service.DetectLanguageResponse:
             r"""Call the detect language method over HTTP.
 
             Args:
@@ -813,16 +939,17 @@ class TranslationServiceRestTransport(TranslationServiceTransport):
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'post',
-                'uri': '/v3beta1/{parent=projects/*/locations/*}:detectLanguage',
-                'body': '*',
-            },
-{
-                'method': 'post',
-                'uri': '/v3beta1/{parent=projects/*}:detectLanguage',
-                'body': '*',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "post",
+                    "uri": "/v3/{parent=projects/*/locations/*}:detectLanguage",
+                    "body": "*",
+                },
+                {
+                    "method": "post",
+                    "uri": "/v3/{parent=projects/*}:detectLanguage",
+                    "body": "*",
+                },
             ]
             request, metadata = self._interceptor.pre_detect_language(request, metadata)
             pb_request = translation_service.DetectLanguageRequest.pb(request)
@@ -831,33 +958,35 @@ class TranslationServiceRestTransport(TranslationServiceTransport):
             # Jsonify the request body
 
             body = json_format.MessageToJson(
-                transcoded_request['body'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True
-            )
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
-
-            # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
+                transcoded_request["body"],
                 including_default_value_fields=False,
                 use_integers_for_enums=True,
-            ))
+            )
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
+
+            # Jsonify the query params
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
                 data=body,
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -876,19 +1005,24 @@ class TranslationServiceRestTransport(TranslationServiceTransport):
         def __hash__(self):
             return hash("GetGlossary")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: translation_service.GetGlossaryRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> translation_service.Glossary:
+        def __call__(
+            self,
+            request: translation_service.GetGlossaryRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> translation_service.Glossary:
             r"""Call the get glossary method over HTTP.
 
             Args:
@@ -907,37 +1041,40 @@ class TranslationServiceRestTransport(TranslationServiceTransport):
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'get',
-                'uri': '/v3beta1/{name=projects/*/locations/*/glossaries/*}',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "get",
+                    "uri": "/v3/{name=projects/*/locations/*/glossaries/*}",
+                },
             ]
             request, metadata = self._interceptor.pre_get_glossary(request, metadata)
             pb_request = translation_service.GetGlossaryRequest.pb(request)
             transcoded_request = path_template.transcode(http_options, pb_request)
 
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
 
             # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True,
-            ))
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -956,19 +1093,24 @@ class TranslationServiceRestTransport(TranslationServiceTransport):
         def __hash__(self):
             return hash("GetSupportedLanguages")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: translation_service.GetSupportedLanguagesRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> translation_service.SupportedLanguages:
+        def __call__(
+            self,
+            request: translation_service.GetSupportedLanguagesRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> translation_service.SupportedLanguages:
             r"""Call the get supported languages method over HTTP.
 
             Args:
@@ -989,41 +1131,46 @@ class TranslationServiceRestTransport(TranslationServiceTransport):
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'get',
-                'uri': '/v3beta1/{parent=projects/*/locations/*}/supportedLanguages',
-            },
-{
-                'method': 'get',
-                'uri': '/v3beta1/{parent=projects/*}/supportedLanguages',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "get",
+                    "uri": "/v3/{parent=projects/*/locations/*}/supportedLanguages",
+                },
+                {
+                    "method": "get",
+                    "uri": "/v3/{parent=projects/*}/supportedLanguages",
+                },
             ]
-            request, metadata = self._interceptor.pre_get_supported_languages(request, metadata)
+            request, metadata = self._interceptor.pre_get_supported_languages(
+                request, metadata
+            )
             pb_request = translation_service.GetSupportedLanguagesRequest.pb(request)
             transcoded_request = path_template.transcode(http_options, pb_request)
 
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
 
             # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True,
-            ))
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -1042,19 +1189,24 @@ class TranslationServiceRestTransport(TranslationServiceTransport):
         def __hash__(self):
             return hash("ListGlossaries")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: translation_service.ListGlossariesRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> translation_service.ListGlossariesResponse:
+        def __call__(
+            self,
+            request: translation_service.ListGlossariesRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> translation_service.ListGlossariesResponse:
             r"""Call the list glossaries method over HTTP.
 
             Args:
@@ -1071,37 +1223,40 @@ class TranslationServiceRestTransport(TranslationServiceTransport):
                     Response message for ListGlossaries.
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'get',
-                'uri': '/v3beta1/{parent=projects/*/locations/*}/glossaries',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "get",
+                    "uri": "/v3/{parent=projects/*/locations/*}/glossaries",
+                },
             ]
             request, metadata = self._interceptor.pre_list_glossaries(request, metadata)
             pb_request = translation_service.ListGlossariesRequest.pb(request)
             transcoded_request = path_template.transcode(http_options, pb_request)
 
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
 
             # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True,
-            ))
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -1120,19 +1275,24 @@ class TranslationServiceRestTransport(TranslationServiceTransport):
         def __hash__(self):
             return hash("TranslateDocument")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: translation_service.TranslateDocumentRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> translation_service.TranslateDocumentResponse:
+        def __call__(
+            self,
+            request: translation_service.TranslateDocumentRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> translation_service.TranslateDocumentResponse:
             r"""Call the translate document method over HTTP.
 
             Args:
@@ -1151,46 +1311,51 @@ class TranslationServiceRestTransport(TranslationServiceTransport):
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'post',
-                'uri': '/v3beta1/{parent=projects/*/locations/*}:translateDocument',
-                'body': '*',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "post",
+                    "uri": "/v3/{parent=projects/*/locations/*}:translateDocument",
+                    "body": "*",
+                },
             ]
-            request, metadata = self._interceptor.pre_translate_document(request, metadata)
+            request, metadata = self._interceptor.pre_translate_document(
+                request, metadata
+            )
             pb_request = translation_service.TranslateDocumentRequest.pb(request)
             transcoded_request = path_template.transcode(http_options, pb_request)
 
             # Jsonify the request body
 
             body = json_format.MessageToJson(
-                transcoded_request['body'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True
-            )
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
-
-            # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
+                transcoded_request["body"],
                 including_default_value_fields=False,
                 use_integers_for_enums=True,
-            ))
+            )
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
+
+            # Jsonify the query params
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
                 data=body,
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -1209,19 +1374,24 @@ class TranslationServiceRestTransport(TranslationServiceTransport):
         def __hash__(self):
             return hash("TranslateText")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: translation_service.TranslateTextRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> translation_service.TranslateTextResponse:
+        def __call__(
+            self,
+            request: translation_service.TranslateTextRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> translation_service.TranslateTextResponse:
             r"""Call the translate text method over HTTP.
 
             Args:
@@ -1240,16 +1410,17 @@ class TranslationServiceRestTransport(TranslationServiceTransport):
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'post',
-                'uri': '/v3beta1/{parent=projects/*/locations/*}:translateText',
-                'body': '*',
-            },
-{
-                'method': 'post',
-                'uri': '/v3beta1/{parent=projects/*}:translateText',
-                'body': '*',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "post",
+                    "uri": "/v3/{parent=projects/*/locations/*}:translateText",
+                    "body": "*",
+                },
+                {
+                    "method": "post",
+                    "uri": "/v3/{parent=projects/*}:translateText",
+                    "body": "*",
+                },
             ]
             request, metadata = self._interceptor.pre_translate_text(request, metadata)
             pb_request = translation_service.TranslateTextRequest.pb(request)
@@ -1258,33 +1429,35 @@ class TranslationServiceRestTransport(TranslationServiceTransport):
             # Jsonify the request body
 
             body = json_format.MessageToJson(
-                transcoded_request['body'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True
-            )
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
-
-            # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
+                transcoded_request["body"],
                 including_default_value_fields=False,
                 use_integers_for_enums=True,
-            ))
+            )
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
+
+            # Jsonify the query params
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
                 data=body,
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -1300,84 +1473,109 @@ class TranslationServiceRestTransport(TranslationServiceTransport):
             return resp
 
     @property
-    def batch_translate_document(self) -> Callable[
-            [translation_service.BatchTranslateDocumentRequest],
-            operations_pb2.Operation]:
+    def batch_translate_document(
+        self,
+    ) -> Callable[
+        [translation_service.BatchTranslateDocumentRequest], operations_pb2.Operation
+    ]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._BatchTranslateDocument(self._session, self._host, self._interceptor) # type: ignore
+        return self._BatchTranslateDocument(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def batch_translate_text(self) -> Callable[
-            [translation_service.BatchTranslateTextRequest],
-            operations_pb2.Operation]:
+    def batch_translate_text(
+        self,
+    ) -> Callable[
+        [translation_service.BatchTranslateTextRequest], operations_pb2.Operation
+    ]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._BatchTranslateText(self._session, self._host, self._interceptor) # type: ignore
+        return self._BatchTranslateText(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def create_glossary(self) -> Callable[
-            [translation_service.CreateGlossaryRequest],
-            operations_pb2.Operation]:
+    def create_glossary(
+        self,
+    ) -> Callable[
+        [translation_service.CreateGlossaryRequest], operations_pb2.Operation
+    ]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._CreateGlossary(self._session, self._host, self._interceptor) # type: ignore
+        return self._CreateGlossary(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def delete_glossary(self) -> Callable[
-            [translation_service.DeleteGlossaryRequest],
-            operations_pb2.Operation]:
+    def delete_glossary(
+        self,
+    ) -> Callable[
+        [translation_service.DeleteGlossaryRequest], operations_pb2.Operation
+    ]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._DeleteGlossary(self._session, self._host, self._interceptor) # type: ignore
+        return self._DeleteGlossary(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def detect_language(self) -> Callable[
-            [translation_service.DetectLanguageRequest],
-            translation_service.DetectLanguageResponse]:
+    def detect_language(
+        self,
+    ) -> Callable[
+        [translation_service.DetectLanguageRequest],
+        translation_service.DetectLanguageResponse,
+    ]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._DetectLanguage(self._session, self._host, self._interceptor) # type: ignore
+        return self._DetectLanguage(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def get_glossary(self) -> Callable[
-            [translation_service.GetGlossaryRequest],
-            translation_service.Glossary]:
+    def get_glossary(
+        self,
+    ) -> Callable[
+        [translation_service.GetGlossaryRequest], translation_service.Glossary
+    ]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._GetGlossary(self._session, self._host, self._interceptor) # type: ignore
+        return self._GetGlossary(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def get_supported_languages(self) -> Callable[
-            [translation_service.GetSupportedLanguagesRequest],
-            translation_service.SupportedLanguages]:
+    def get_supported_languages(
+        self,
+    ) -> Callable[
+        [translation_service.GetSupportedLanguagesRequest],
+        translation_service.SupportedLanguages,
+    ]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._GetSupportedLanguages(self._session, self._host, self._interceptor) # type: ignore
+        return self._GetSupportedLanguages(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def list_glossaries(self) -> Callable[
-            [translation_service.ListGlossariesRequest],
-            translation_service.ListGlossariesResponse]:
+    def list_glossaries(
+        self,
+    ) -> Callable[
+        [translation_service.ListGlossariesRequest],
+        translation_service.ListGlossariesResponse,
+    ]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._ListGlossaries(self._session, self._host, self._interceptor) # type: ignore
+        return self._ListGlossaries(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def translate_document(self) -> Callable[
-            [translation_service.TranslateDocumentRequest],
-            translation_service.TranslateDocumentResponse]:
+    def translate_document(
+        self,
+    ) -> Callable[
+        [translation_service.TranslateDocumentRequest],
+        translation_service.TranslateDocumentResponse,
+    ]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._TranslateDocument(self._session, self._host, self._interceptor) # type: ignore
+        return self._TranslateDocument(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def translate_text(self) -> Callable[
-            [translation_service.TranslateTextRequest],
-            translation_service.TranslateTextResponse]:
+    def translate_text(
+        self,
+    ) -> Callable[
+        [translation_service.TranslateTextRequest],
+        translation_service.TranslateTextResponse,
+    ]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._TranslateText(self._session, self._host, self._interceptor) # type: ignore
+        return self._TranslateText(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
     def kind(self) -> str:
@@ -1387,6 +1585,4 @@ class TranslationServiceRestTransport(TranslationServiceTransport):
         self._session.close()
 
 
-__all__=(
-    'TranslationServiceRestTransport',
-)
+__all__ = ("TranslationServiceRestTransport",)
