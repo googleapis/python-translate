@@ -2872,6 +2872,7 @@ def test_get_glossary(request_type, transport: str = "grpc"):
         call.return_value = translation_service.Glossary(
             name="name_value",
             entry_count=1210,
+            display_name="display_name_value",
             language_pair=translation_service.Glossary.LanguageCodePair(
                 source_language_code="source_language_code_value"
             ),
@@ -2887,6 +2888,7 @@ def test_get_glossary(request_type, transport: str = "grpc"):
     assert isinstance(response, translation_service.Glossary)
     assert response.name == "name_value"
     assert response.entry_count == 1210
+    assert response.display_name == "display_name_value"
 
 
 def test_get_glossary_empty_call():
@@ -2925,6 +2927,7 @@ async def test_get_glossary_async(
             translation_service.Glossary(
                 name="name_value",
                 entry_count=1210,
+                display_name="display_name_value",
             )
         )
         response = await client.get_glossary(request)
@@ -2938,6 +2941,7 @@ async def test_get_glossary_async(
     assert isinstance(response, translation_service.Glossary)
     assert response.name == "name_value"
     assert response.entry_count == 1210
+    assert response.display_name == "display_name_value"
 
 
 @pytest.mark.asyncio
@@ -4964,6 +4968,7 @@ def test_create_glossary_rest(request_type):
         "entry_count": 1210,
         "submit_time": {"seconds": 751, "nanos": 543},
         "end_time": {},
+        "display_name": "display_name_value",
     }
     request = request_type(**request_init)
 
@@ -5160,6 +5165,7 @@ def test_create_glossary_rest_bad_request(
         "entry_count": 1210,
         "submit_time": {"seconds": 751, "nanos": 543},
         "end_time": {},
+        "display_name": "display_name_value",
     }
     request = request_type(**request_init)
 
@@ -5603,6 +5609,7 @@ def test_get_glossary_rest(request_type):
         return_value = translation_service.Glossary(
             name="name_value",
             entry_count=1210,
+            display_name="display_name_value",
             language_pair=translation_service.Glossary.LanguageCodePair(
                 source_language_code="source_language_code_value"
             ),
@@ -5622,6 +5629,7 @@ def test_get_glossary_rest(request_type):
     assert isinstance(response, translation_service.Glossary)
     assert response.name == "name_value"
     assert response.entry_count == 1210
+    assert response.display_name == "display_name_value"
 
 
 def test_get_glossary_rest_required_fields(

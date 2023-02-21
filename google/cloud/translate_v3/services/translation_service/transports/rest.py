@@ -1069,8 +1069,8 @@ class TranslationServiceRestTransport(TranslationServiceTransport):
 
             Returns:
                 ~.translation_service.Glossary:
-                    Represents a glossary built from user
-                provided data.
+                    Represents a glossary built from
+                user-provided data.
 
             """
 
