@@ -31,7 +31,7 @@ from google.api_core import operations_v1
 from requests import __version__ as requests_version
 import dataclasses
 import re
-from typing import Callable, Dict, List, Optional, Sequence, Tuple, Union
+from typing import Any, Callable, Dict, List, Optional, Sequence, Tuple, Union
 import warnings
 
 try:
@@ -555,7 +555,7 @@ class TranslationServiceRestTransport(TranslationServiceTransport):
         def __hash__(self):
             return hash("BatchTranslateDocument")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
@@ -653,7 +653,7 @@ class TranslationServiceRestTransport(TranslationServiceTransport):
         def __hash__(self):
             return hash("BatchTranslateText")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
@@ -751,7 +751,7 @@ class TranslationServiceRestTransport(TranslationServiceTransport):
         def __hash__(self):
             return hash("CreateGlossary")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
@@ -847,7 +847,7 @@ class TranslationServiceRestTransport(TranslationServiceTransport):
         def __hash__(self):
             return hash("DeleteGlossary")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
@@ -934,7 +934,7 @@ class TranslationServiceRestTransport(TranslationServiceTransport):
         def __hash__(self):
             return hash("DetectLanguage")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
@@ -1038,7 +1038,7 @@ class TranslationServiceRestTransport(TranslationServiceTransport):
         def __hash__(self):
             return hash("GetGlossary")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
@@ -1126,7 +1126,7 @@ class TranslationServiceRestTransport(TranslationServiceTransport):
         def __hash__(self):
             return hash("GetSupportedLanguages")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
@@ -1222,7 +1222,7 @@ class TranslationServiceRestTransport(TranslationServiceTransport):
         def __hash__(self):
             return hash("ListGlossaries")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
@@ -1308,7 +1308,7 @@ class TranslationServiceRestTransport(TranslationServiceTransport):
         def __hash__(self):
             return hash("TranslateDocument")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
@@ -1407,7 +1407,7 @@ class TranslationServiceRestTransport(TranslationServiceTransport):
         def __hash__(self):
             return hash("TranslateText")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
