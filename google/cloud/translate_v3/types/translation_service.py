@@ -659,10 +659,10 @@ class OutputConfig(proto.Message):
             directly written to the output file. If glossary is
             requested, a separate glossary_translations_file has format
             of
-            gs://translation_test/a_b_c\_'trg'_glossary_translations.[extension]
+            ``gs://translation_test/a_b_c\_'trg'_glossary_translations.[extension]``
 
             The format of errors file (for target language code 'trg')
-            is: gs://translation_test/a_b_c\_'trg'_errors.[extension]
+            is: ``gs://translation_test/a_b_c\_'trg'_errors.[extension]``
 
             If the input file extension is tsv, errors_file contains the
             following: Column 1: ID of the request provided in the
@@ -675,7 +675,7 @@ class OutputConfig(proto.Message):
             If the input file extension is txt or html,
             glossary_error_file will be generated that contains error
             details. glossary_error_file has format of
-            gs://translation_test/a_b_c\_'trg'_glossary_errors.[extension]
+            ``gs://translation_test/a_b_c\_'trg'_glossary_errors.[extension]``
 
             This field is a member of `oneof`_ ``destination``.
     """
